@@ -19,11 +19,11 @@ const allProjects = {
         measurements: { area: '3.5 Acres', plotSizes: '400 Sq.Yards', features: 'Private Automation', bedrooms: '4/5 Suites per Villa' }
     },
     '3': {
-        title: 'The Lotus Plots', subtitle: 'Premium Gated Community', location: 'Vrindavan, UP',
-        image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
+        title: 'The Girdhar Valley Farms', subtitle: 'Exclusive Farm Retreat', location: 'Vrindavan, UP',
+        image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
         plot: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-        desc: 'The perfect foundation for your legacy. The Lotus Plots are meticulously leveled, Vastu-verified land parcels enclosed in a highly secure, verdant gated community. An idyllic canvas combining massive aesthetic investment with unmatched spatial freedom near the ISKCON temple.',
-        measurements: { area: '15 Acres', plotSizes: '500+ Sq.Yards', roads: '60ft Wide Avenues', amenities: 'Clubhouse & Pool' }
+        desc: 'Escape to a serene agricultural haven. The Girdhar Valley Farms offer expansive, verdant estates perfect for weekend getaways or permanent retreats. Reconnect with nature in a meticulously maintained environment that celebrates both high-end living and organic, sustainable farm life near the heart of Vrindavan.',
+        measurements: { area: '25 Acres', plotSizes: '1000+ Sq.Yards', landscaping: 'Organic Orchards', amenities: 'Farmhouse & Stable' }
     },
     '4': {
         title: 'Govardhan Greens', subtitle: 'Resort-Style Plot Development', location: 'Govardhan, UP',

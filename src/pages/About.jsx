@@ -292,7 +292,7 @@ const About = () => {
                         variants={textVars}
                         style={{ gridColumn: 'span 6', paddingLeft: '2rem' }}
                     >
-                        <h3 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontFamily: 'var(--font-heading)', color: 'blue' }}>
+                        <h3 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontFamily: 'var(--font-heading)', color: 'black' }}>
                             Obsessive Craftsmanship
                         </h3>
                         <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--color-text)', marginBottom: '1.5rem' }}>
