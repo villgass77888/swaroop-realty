@@ -45,33 +45,7 @@ const Contact = () => {
                 }}
             />
 
-            {/* Scroll Indicator / Redirect */}
-            <motion.a
-                href="#contact-form"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1, duration: 1 }}
-                style={{
-                    position: 'absolute',
-                    bottom: '5%',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    color: 'var(--color-white)',
-                    textDecoration: 'none',
-                    gap: '10px',
-                    zIndex: 10
-                }}
-            >
-                <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 500 }}>Reach Out</span>
-                <motion.div
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-                    style={{ height: '40px', width: '1px', backgroundColor: 'var(--color-white)' }}
-                />
-            </motion.a>
+            {/* Scroll Indicator / Redirect Removed */}
 
             <div id="contact-form" className="container" style={{ position: 'relative', zIndex: 2 }}>
                 <div style={{
@@ -100,25 +74,25 @@ const Contact = () => {
                             <div>
                                 <h5 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--color-accent)', marginBottom: '1rem' }}>Global Headquarters</h5>
                                 <p style={{ fontSize: '1.2rem', lineHeight: 1.6, color: 'rgba(255,255,255,0.8)' }}>
-                                    The Orion Tower, Level 84<br />
-                                    Mumbai, India
+                                    Near Jait Police Station,<br />
+                                    Vrindavan - 281003
                                 </p>
                             </div>
 
                             <div>
                                 <h5 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--color-accent)', marginBottom: '1rem' }}>Private Consultation</h5>
-                                <a href="mailto:vision@swaroop.realty" style={{
+                                <a href="mailto:contact@swarooprealty.com" style={{
                                     fontSize: '1.2rem',
                                     color: 'rgba(255,255,255,0.8)',
                                     textDecoration: 'none',
                                     borderBottom: '1px solid rgba(255,255,255,0.3)',
                                     paddingBottom: '5px'
                                 }}>
-                                    vision@swaroop.realty
+                                    contact@swarooprealty.com
                                 </a>
                                 <br /><br />
                                 <span style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.8)' }}>
-                                    +91 800 555 0199
+                                    +91 83839 28784
                                 </span>
                             </div>
                         </div>

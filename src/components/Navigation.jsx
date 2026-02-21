@@ -26,8 +26,8 @@ const Navigation = () => {
         { label: 'Contact Us', path: '/contact' }
     ];
 
-    const isDarkHeroPage = location.pathname === '/' || location.pathname === '/about';
-    // If we are on Home/About page and not scrolled, text is White (over dark hero)
+    const isDarkHeroPage = location.pathname === '/' || location.pathname === '/about' || location.pathname === '/contact';
+    // If we are on Home/About/Contact page and not scrolled, text is White (over dark hero)
     // Otherwise, if scrolled, header is dark blue, so text is White.
     // If we are on a white page (Projects, Contact) and NOT scrolled, text is Dark Blue.
     const textColor = (isScrolled || (isDarkHeroPage && !isScrolled)) ? 'var(--color-white)' : 'var(--color-primary)';

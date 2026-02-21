@@ -24,9 +24,9 @@ const Footer = () => {
                 <div>
                     <h5 style={{ color: 'var(--color-white)', marginBottom: '1.5rem', fontFamily: 'var(--font-body)', fontWeight: 500, letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.85rem' }}>Contact Us</h5>
                     <ul style={{ listStyle: 'none', color: 'rgba(255, 255, 255, 0.7)', lineHeight: 2.2 }}>
-                        <li><a href="mailto:vision@swaroop.realty" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.3s' }}>vision@swaroop.realty</a></li>
-                        <li>+91 800 555 0199</li>
-                        <li>The Orion Tower, Mumbai, India</li>
+                        <li><a href="mailto:contact@swarooprealty.com" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.3s' }}>contact@swarooprealty.com</a></li>
+                        <li>+91 83839 28784</li>
+                        <li>Near Jait Police Station, Vrindavan - 281003</li>
                     </ul>
                 </div>
 
