@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+:root {
+  /* The "Clean White" Visual Identity */
+  --color-primary: #0A1128;
+  /* Deep Midnight Blue */
+  --color-secondary: #F8FAFC;
+  /* Off-white */
+  --color-bg: #FFFFFF;
+  /* Pure White */
+  --color-bg-alt: #F1F5F9;
+  /* Faint Ice */
+  --color-accent: #E2E8F0;
+  /* Metallic Silver */
+  --color-border: #E2E8F0;
+  /* Soft thin border */
+  --color-white: #FFFFFF;
+  --color-text: #0F172A;
+  /* Slate 900 */
+
+  /* Typography */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Outfit', sans-serif;
+
+  /* Layout */
+  --spacing-section: 200px;
+  --max-width: 1440px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0V0zm2 2v96h96V2H2zm20 0v96h2V2h-2zm20 0v96h2V2h-2zm20 0v96h2V2h-2zm20 0v96h2V2h-2zM0 20h100v2H0v-2zm0 20h100v2H0v-2zm0 20h100v2H0v-2zm0 20h100v2H0v-2z' fill='%23000000' fill-opacity='0.02' fill-rule='evenodd'/%3E");
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color 0.8s ease, color 0.8s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* Base styles for dark mode context */
+body.dark-mode {
+  background-color: var(--color-primary);
+  color: var(--color-bg-alt);
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: var(--color-white);
+}
+
+/* Custom Selection */
+::selection {
+  background: #bae6fd;
+  /* Light Blue (Tailwind sky-200) */
+  color: var(--color-primary);
+}
+
+/* Utility classes */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.section-padding {
+  padding: var(--spacing-section) 0;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --spacing-section: 120px;
+  }
+}
