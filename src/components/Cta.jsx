@@ -8,8 +8,8 @@ const Cta = () => {
 
     return (
         <section ref={ref} style={{
-            backgroundColor: 'var(--color-primary)',
-            color: 'var(--color-white)',
+            backgroundColor: 'var(--color-bg)',
+            color: 'var(--color-primary)',
             padding: '120px 0',
             textAlign: 'center',
             position: 'relative',
@@ -25,9 +25,9 @@ const Cta = () => {
                 backgroundImage: 'url("https://images.unsplash.com/photo-1626241908709-34b22306fe36?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80")', // Architectural/Map style image
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                opacity: 0.05,
+                opacity: 0.03,
                 zIndex: 0,
-                mixBlendMode: 'overlay'
+                mixBlendMode: 'multiply'
             }} />
 
             <div className="container" style={{ position: 'relative', zIndex: 1 }}>
@@ -36,16 +36,16 @@ const Cta = () => {
                     animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                 >
-                    <h2 style={{ fontSize: 'clamp(3rem, 5vw, 5rem)', marginBottom: '1.5rem', fontFamily: 'var(--font-heading)', letterSpacing: '-0.02em' }}>
-                        Ready to elevate <br /> your living?
+                    <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', marginBottom: '1.5rem', fontFamily: 'var(--font-heading)', letterSpacing: '-0.02em', color: 'var(--color-primary)' }}>
+                        Ready to elevate <span style={{ fontStyle: 'italic', fontWeight: 'normal' }}>your living?</span>
                     </h2>
                     <p style={{
-                        fontSize: 'clamp(2rem, 3vw, 3rem)',
+                        fontSize: 'clamp(1.2rem, 2vw, 1.8rem)',
                         fontFamily: 'var(--font-heading)',
-                        color: 'var(--color-white)',
+                        color: 'var(--color-text)',
                         marginBottom: '4rem',
                         maxWidth: '900px',
-                        margin: '0 auto 4rem auto',
+                        margin: '4rem auto 4rem auto',
                         lineHeight: 1.4
                     }}>
                         Connect with our private advisory team to discuss bespoke acquisitions and off-market opportunities.
@@ -57,8 +57,8 @@ const Cta = () => {
                             align-items: center;
                             gap: 10px;
                             padding-bottom: 10px;
-                            border-bottom: 1px solid var(--color-white);
-                            color: var(--color-white);
+                            border-bottom: 1px solid var(--color-primary);
+                            color: var(--color-primary);
                             text-decoration: none;
                             text-transform: uppercase;
                             letter-spacing: 2px;

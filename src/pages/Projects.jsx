@@ -16,7 +16,7 @@ const allProjects = [
         title: 'Radha Kunj Villas',
         subtitle: 'Exclusive Smart Villas',
         location: 'Vrindavan, UP',
-        image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
+        image: 'https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80', // Greenery luxury villa
         year: '2023'
     },
     {
@@ -109,7 +109,7 @@ const ProjectPanel = ({ project, index }) => {
                 </div>
 
                 <Link
-                    to={`/projects/${project.id}`}
+                    to={`/projects/${project.title.toLowerCase().replace(/\s+/g, '-')}`}
                     style={{
                         display: 'inline-block',
                         marginTop: '3rem',
@@ -250,94 +250,140 @@ const Projects = () => {
                     <h2 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', color: 'var(--color-white)', fontFamily: 'var(--font-heading)', margin: 0, textShadow: '0 0 40px rgba(255,255,255,0.1)' }}>Concealed Masterpieces</h2>
                 </motion.div>
 
-                <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '3rem', width: '100%', maxWidth: '1000px' }}>
-
-                    {/* Project 1 */}
-                    <div className="upcoming-project" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '3rem' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
-                            <div className="upcoming-content">
-                                <h3 style={{ fontSize: '2.5rem', color: 'var(--color-white)', margin: '0 0 0.5rem 0', fontFamily: 'var(--font-heading)' }}>
-                                    <span className="gloom-wrap">
-                                        {"Project [REDACTED]".split('').map((char, i) => (
-                                            <span key={i} className="gloom-char" style={{ animationDelay: `${(i * 0.17) % 2}s`, animationDuration: `${3 + (i * 0.3) % 2}s` }}>
-                                                {char === ' ' ? '\u00A0' : char}
-                                            </span>
-                                        ))}
-                                    </span>
-                                </h3>
-                                <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '3px', textTransform: 'uppercase', margin: 0 }}>Vrindavan &mdash; 100+ Acre Mega-Township</p>
+                <div className="projects-wrapper" style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', width: '100%', maxWidth: '1200px' }}>
+                    {[
+                        { title: "Project [REDACTED]", subtitle: "Vrindavan \u2014 100+ Acre Mega-Township", badge: "Revealing Q4 2026", animBase: 3 },
+                        { title: "The Elysian Expanse", subtitle: "Govardhan \u2014 Ultra-Private Estates", badge: "By Invitation Only", animBase: 4 }
+                    ].map((proj, idx) => (
+                        <div key={idx} className="upcoming-project">
+                            <div className="upcoming-bg-glow"></div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem', position: 'relative', zIndex: 2 }}>
+                                <div className="upcoming-content">
+                                    <h3 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', color: 'var(--color-white)', margin: '0 0 1rem 0', fontFamily: 'var(--font-heading)' }}>
+                                        <span className="gloom-wrap">
+                                            {proj.title.split('').map((char, i) => (
+                                                <span key={i} className="gloom-char" style={{ animationDelay: `${(i * 0.15) % 2}s`, animationDuration: `${proj.animBase + (i * 0.2) % 2}s` }}>
+                                                    {char === ' ' ? '\u00A0' : char}
+                                                </span>
+                                            ))}
+                                        </span>
+                                    </h3>
+                                    <p className="upcoming-subtitle" style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '4px', textTransform: 'uppercase', margin: 0 }}>
+                                        {proj.subtitle}
+                                    </p>
+                                </div>
+                                <span className="upcoming-badge">{proj.badge}</span>
                             </div>
-                            <span className="upcoming-badge" style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '4px', padding: '10px 20px', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '30px', backdropFilter: 'blur(5px)' }}>Revealing Q4 2026</span>
                         </div>
-                    </div>
-
-                    {/* Project 2 */}
-                    <div className="upcoming-project" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '3rem' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
-                            <div className="upcoming-content">
-                                <h3 style={{ fontSize: '2.5rem', color: 'var(--color-white)', margin: '0 0 0.5rem 0', fontFamily: 'var(--font-heading)' }}>
-                                    <span className="gloom-wrap">
-                                        {"The Elysian Expanse".split('').map((char, i) => (
-                                            <span key={i} className="gloom-char" style={{ animationDelay: `${(i * 0.17) % 2}s`, animationDuration: `${3 + (i * 0.4) % 2}s` }}>
-                                                {char === ' ' ? '\u00A0' : char}
-                                            </span>
-                                        ))}
-                                    </span>
-                                </h3>
-                                <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '3px', textTransform: 'uppercase', margin: 0 }}>Govardhan &mdash; Ultra-Private Estates</p>
-                            </div>
-                            <span className="upcoming-badge" style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '4px', padding: '10px 20px', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '30px', backdropFilter: 'blur(5px)' }}>By Invitation Only</span>
-                        </div>
-                    </div>
+                    ))}
                 </div>
 
                 <style>{`
+                    .projects-wrapper {
+                        /* Container to detect overall hover hierarchy */
+                    }
                     .upcoming-project {
-                        opacity: 0.6;
+                        position: relative;
+                        padding: 4rem 2rem;
+                        border-bottom: 1px solid rgba(255,255,255,0.05);
+                        opacity: 0.4;
                         transform: scale(0.98);
-                        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-                        filter: grayscale(100%) blur(2px);
+                        /* Apple-esque buttery spring */
+                        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+                        filter: blur(6px) grayscale(100%);
                         cursor: pointer;
+                        border-radius: 16px;
                     }
-                    .upcoming-project:hover {
+                    
+                    /* The peer dimming effect (Dim all others when container is hovered) */
+                    .projects-wrapper:hover .upcoming-project {
+                        opacity: 0.1;
+                        filter: blur(12px) grayscale(100%);
+                        transform: scale(0.95);
+                    }
+                    
+                    /* The focus effect (Restore and elevate the exact hovered item) */
+                    .projects-wrapper .upcoming-project:hover {
                         opacity: 1;
-                        transform: scale(1) translateX(20px);
-                        filter: grayscale(0%) blur(0px);
+                        filter: blur(0px) grayscale(0%);
+                        transform: scale(1) translateX(2rem);
+                        background: radial-gradient(circle at left, rgba(255,255,255,0.03) 0%, transparent 60%);
+                        border-bottom-color: rgba(255,255,255,0.2);
+                        z-index: 10;
                     }
+
+                    .upcoming-bg-glow {
+                        position: absolute;
+                        top: 0; left: 0; right: 0; bottom: 0;
+                        background: linear-gradient(90deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+                        opacity: 0;
+                        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+                        pointer-events: none;
+                        z-index: 1;
+                        border-radius: 16px;
+                    }
+                    
+                    .upcoming-project:hover .upcoming-bg-glow {
+                        opacity: 1;
+                    }
+
+                    .upcoming-badge {
+                        font-size: 0.85rem;
+                        color: rgba(255,255,255,0.3);
+                        text-transform: uppercase;
+                        letter-spacing: 4px;
+                        padding: 12px 24px;
+                        border: 1px solid rgba(255,255,255,0.1);
+                        border-radius: 30px;
+                        backdrop-filter: blur(5px);
+                        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+                        font-weight: 500;
+                    }
+
                     .upcoming-project:hover .upcoming-badge {
-                        color: var(--color-white) !important;
-                        border-color: rgba(255,255,255,0.5) !important;
-                        box-shadow: 0 0 20px rgba(255,255,255,0.1);
+                        color: var(--color-primary);
+                        background-color: var(--color-white);
+                        border-color: var(--color-white);
+                        box-shadow: 0 10px 30px rgba(255,255,255,0.2);
+                        transform: translateY(-2px);
                     }
+
+                    .upcoming-subtitle {
+                        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+                    }
+                    .upcoming-project:hover .upcoming-subtitle {
+                        color: rgba(255,255,255,0.9) !important;
+                        letter-spacing: 6px !important;
+                    }
+
                     @keyframes gloomyChar {
-                        0% { opacity: 0.15; transform: translate3d(0, 0, 0) scale(0.95); filter: blur(6px); }
-                        50% { opacity: 0.6; transform: translate3d(-3px, -5px, 0) scale(1.05); filter: blur(3px); }
-                        100% { opacity: 0.15; transform: translate3d(4px, 4px, 0) scale(0.95); filter: blur(6px); }
+                        0% { opacity: 0.1; transform: translateY(0px) scale(0.95); filter: blur(8px); }
+                        50% { opacity: 0.5; transform: translateY(-3px) scale(1.05); filter: blur(3px); }
+                        100% { opacity: 0.1; transform: translateY(3px) scale(0.95); filter: blur(8px); }
                     }
+                    
                     .gloom-wrap {
                         display: inline-flex;
                     }
+                    
                     .gloom-char {
                         display: inline-block;
-                        /* Use GPU hardware acceleration */
-                        transform: translateZ(0);
+                        transform: translateZ(0); /* Hardware accel */
                         will-change: transform, opacity, filter;
-                        /* Idle animation */
-                        animation: gloomyChar 3s infinite alternate ease-in-out;
-                        /* Highly cinematic smooth transition when settling down */
-                        transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
-                                    opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
-                                    filter 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-                        letter-spacing: 2px;
+                        animation: gloomyChar 4s infinite alternate ease-in-out;
+                        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+                        letter-spacing: 4px;
                     }
+                    
                     .upcoming-project:hover .gloom-char {
-                        /* Freezing animation and snapping to default values smoothly */
+                        /* Force default styles aggressively on hover */
                         animation: none !important;
                         opacity: 1 !important;
                         filter: blur(0px) !important;
-                        transform: translate3d(0, 0, 0) scale(1) !important;
-                        letter-spacing: 1px;
-                        color: var(--color-white);
+                        transform: translateY(0) scale(1) !important;
+                        letter-spacing: 1px !important;
+                        color: var(--color-white) !important;
+                        text-shadow: 0 0 25px rgba(255,255,255,0.4);
                     }
                 `}</style>
             </div>

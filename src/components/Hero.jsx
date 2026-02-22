@@ -14,6 +14,7 @@ const Hero = () => {
         const timer = setTimeout(() => {
             if (vidRef.current) {
                 // Ensure the video plays forward initially after 0.3s
+                vidRef.current.playbackRate = 2.0; // Play at 2x speed
                 vidRef.current.play().catch(e => console.log('Autoplay blocked', e));
             }
         }, 300);
@@ -123,57 +124,98 @@ const Hero = () => {
                     zIndex: 2,
                     opacity: useTransform(scrollYProgress, [0, 0.8], [1, 0])
                 }}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                initial={{ opacity: 0, x: 300, scale: 0.9 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ duration: 1.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
                 <video
                     ref={vidRef}
                     muted
                     playsInline
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(1.05) grayscale(10%)' }}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        filter: 'brightness(1.05) grayscale(10%)',
+                        opacity: 0.9,
+                        transform: 'scale(1.15)', // Added zoom effect
+                        maskImage: 'linear-gradient(to left, black 85%, transparent 100%)',
+                        WebkitMaskImage: 'linear-gradient(to left, black 85%, transparent 100%)'
+                    }}
                     src="/hero.mp4"
                 />
             </motion.div>
 
+            {/* 60% Left Side Background Image overlayed with blue tint and fade to right */}
             <motion.div
-                style={{ position: 'relative', zIndex: 3, y: textY, opacity }}
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '60vw',
+                    height: '100%',
+                    backgroundImage: 'url("/hero bg.png")',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'left center',
+                    backgroundRepeat: 'no-repeat',
+                    opacity: 0.6,
+                    maskImage: 'linear-gradient(to right, black 20%, transparent 100%)',
+                    WebkitMaskImage: 'linear-gradient(to right, black 20%, transparent 100%)',
+                    zIndex: 2,
+                    pointerEvents: 'none'
+                }}
+            >
+                {/* Blue Tint Overlay inside the masked background */}
+                <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundColor: 'var(--color-primary)',
+                    mixBlendMode: 'multiply',
+                    opacity: 0.5
+                }} />
+            </motion.div>
+
+            <motion.div
+                style={{ position: 'relative', zIndex: 3, y: textY, opacity, width: '100%', display: 'flex' }}
                 variants={containerVars}
                 initial="hidden"
                 animate="show"
             >
-                <h1 style={{ color: 'var(--color-white)', fontSize: 'clamp(4rem, 8vw, 8rem)', lineHeight: 1.1, marginBottom: '2rem', letterSpacing: '-0.02em', textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
-                    <motion.span variants={itemVars} style={{ display: 'block' }}>Where</motion.span>
-                    <motion.span variants={itemVars} style={{ display: 'block', fontStyle: 'italic', fontFamily: 'var(--font-heading)' }}>Spirituality</motion.span>
-                    <motion.span variants={itemVars} style={{ display: 'block' }}>Meets Luxury.</motion.span>
-                </h1>
+                <div style={{ position: 'relative', zIndex: 1, left: '-3vw' }}>
+                    <h1 style={{ color: 'var(--color-white)', fontSize: 'clamp(3.5rem, 6vw, 6.5rem)', lineHeight: 1.1, marginBottom: '2rem', letterSpacing: '-0.02em', textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
+                        <motion.span variants={itemVars} style={{ display: 'block' }}>Where</motion.span>
+                        <motion.span variants={itemVars} style={{ display: 'block', fontStyle: 'italic', fontFamily: 'var(--font-heading)' }}>Spirituality</motion.span>
+                        <motion.span variants={itemVars} style={{ display: 'block' }}>Meets Luxury.</motion.span>
+                    </h1>
 
-                <motion.div variants={itemVars} style={{ display: 'flex', gap: '30px', marginTop: '3.5rem', alignItems: 'center' }}>
-                    <a href="#projects" style={{
-                        padding: '15px 40px',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        backgroundColor: 'transparent',
-                        color: 'var(--color-white)',
-                        textDecoration: 'none',
-                        fontSize: '0.9rem',
-                        textTransform: 'uppercase',
-                        letterSpacing: '2px',
-                        transition: 'all 0.4s ease',
-                        fontFamily: 'var(--font-body)',
-                        fontWeight: 500,
-                        backdropFilter: 'blur(10px)'
-                    }}
-                        onMouseOver={(e) => {
-                            e.currentTarget.style.backgroundColor = 'var(--color-white)';
-                            e.currentTarget.style.color = 'var(--color-primary)';
+                    <motion.div variants={itemVars} style={{ display: 'flex', gap: '30px', marginTop: '3.5rem', alignItems: 'center' }}>
+                        <a href="#projects" style={{
+                            padding: '15px 40px',
+                            border: '1px solid rgba(255, 255, 255, 0.3)',
+                            backgroundColor: 'transparent',
+                            color: 'var(--color-white)',
+                            textDecoration: 'none',
+                            fontSize: '0.9rem',
+                            textTransform: 'uppercase',
+                            letterSpacing: '2px',
+                            transition: 'all 0.4s ease',
+                            fontFamily: 'var(--font-body)',
+                            fontWeight: 500,
+                            backdropFilter: 'blur(10px)',
+                            WebkitBackdropFilter: 'blur(10px)' // Add WebKit support so blur persists reliably across states
                         }}
-                        onMouseOut={(e) => {
-                            e.currentTarget.style.backgroundColor = 'transparent';
-                            e.currentTarget.style.color = 'var(--color-white)';
-                        }}>
-                        Enter Portfolio
-                    </a>
-                </motion.div>
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.backgroundColor = 'var(--color-white)';
+                                e.currentTarget.style.color = 'var(--color-primary)';
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.backgroundColor = 'transparent';
+                                e.currentTarget.style.color = 'var(--color-white)';
+                            }}>
+                            Explore Projects
+                        </a>
+                    </motion.div>
+                </div>
             </motion.div>
         </div>
     );

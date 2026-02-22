@@ -7,40 +7,44 @@ const allProjects = {
     '1': {
         title: 'Krishna Valley Estates', subtitle: '50-Acre Luxury Villa Community', location: 'Vrindavan, UP',
         image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-        plot: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+        plot: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         desc: 'An unparalleled sprawling community set amidst the holy land of Vrindavan. Krishna Valley Estates offers ready-to-move custom villas and massive premium plots. Integrated with world-class landscaping, clubhouses, and serene walking paths designed entirely in accordance with Vastu Shastra.',
         measurements: { area: '50 Acres Total', plotSizes: '200 - 1000 Sq.Yards', parks: '12 Themed Gardens', security: '3-Tier Smart Security' }
     },
     '2': {
         title: 'Radha Kunj Villas', subtitle: 'Exclusive Smart Villas', location: 'Vrindavan, UP',
-        image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-        plot: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+        image: 'https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
+        plot: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         desc: 'Situated walking distance from Prem Mandir, Radha Kunj Villas represent the ultimate boutique enclave. Featuring completely automated smart-home ecosystems, private plunge pools, and rare Italian marble flooring, this project blends divine tranquility with uncompromised modern opulence.',
         measurements: { area: '3.5 Acres', plotSizes: '400 Sq.Yards', features: 'Private Automation', bedrooms: '4/5 Suites per Villa' }
     },
     '3': {
         title: 'The Girdhar Valley Farms', subtitle: 'Exclusive Farm Retreat', location: 'Vrindavan, UP',
         image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-        plot: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+        plot: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         desc: 'Escape to a serene agricultural haven. The Girdhar Valley Farms offer expansive, verdant estates perfect for weekend getaways or permanent retreats. Reconnect with nature in a meticulously maintained environment that celebrates both high-end living and organic, sustainable farm life near the heart of Vrindavan.',
         measurements: { area: '25 Acres', plotSizes: '1000+ Sq.Yards', landscaping: 'Organic Orchards', amenities: 'Farmhouse & Stable' }
     },
     '4': {
         title: 'Govardhan Greens', subtitle: 'Resort-Style Plot Development', location: 'Govardhan, UP',
         image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-        plot: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+        plot: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         desc: 'An investment like no other. Nestled peacefully in the holy precinct of Govardhan, this green-tech enabled plot development focuses on holistic living, organic community farming, and lush scenic beauty. Create a weekend getaway farm-villa or a permanent serene residence.',
         measurements: { area: '30 Acres', plotSizes: '1000 - 5000 Sq.Yards', lifestyle: 'Organic Farm Zones', luxury: 'Resort Living' }
     }
 };
 
 const ProjectDetail = () => {
-    const { id } = useParams();
-    const project = allProjects[id];
+    const { slug } = useParams();
+
+    // Find the project whose slugified title matches the URL slug
+    const project = Object.values(allProjects).find(
+        p => p.title.toLowerCase().replace(/\s+/g, '-') === slug
+    );
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, [id]);
+    }, [slug]);
 
     if (!project) return <div style={{ paddingTop: '200px', textAlign: 'center' }}>Project Not Found</div>;
 
@@ -93,33 +97,89 @@ const ProjectDetail = () => {
                             {project.desc}
                         </p>
 
-                        {/* Plot Map Area */}
-                        <div style={{ marginTop: '4rem' }}>
-                            <h3 style={{ fontSize: '1.5rem', fontFamily: 'var(--font-heading)', marginBottom: '2rem' }}>Master Plot Array</h3>
-                            <div style={{ border: '1px solid var(--color-border)', padding: '1rem', backgroundColor: 'var(--color-bg-alt)' }}>
-                                <img
-                                    src={project.plot}
-                                    alt="Plot Map Blueprint"
-                                    style={{ width: '100%', height: 'auto', filter: 'grayscale(100%) contrast(1.2)' }}
-                                />
-                            </div>
-                        </div>
+
 
                         <div style={{ marginTop: '4rem' }}>
-                            <Link to="/projects" style={{
-                                display: 'inline-block',
-                                padding: '15px 40px',
-                                border: '1px solid var(--color-primary)',
-                                color: 'var(--color-primary)',
-                                textDecoration: 'none',
-                                textTransform: 'uppercase',
-                                letterSpacing: '2px',
-                                fontWeight: 500
-                            }}>
-                                Return to Portfolio
-                            </Link>
+                            {/* Removed internal Return Link to place it at the absolute bottom */}
                         </div>
                     </div>
+                </div>
+
+                {/* Master Plot Area (Full Width, 2 Column) */}
+                <div style={{ marginTop: '8rem', display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '4rem', alignItems: 'center' }}>
+                    {/* Left Column (Span 4) */}
+                    <div style={{ gridColumn: 'span 4' }}>
+                        <h3 style={{ fontSize: '2.5rem', fontFamily: 'var(--font-heading)', marginBottom: '1.5rem', color: 'var(--color-primary)', lineHeight: 1.1 }}>
+                            Master <br />
+                            <span style={{ fontStyle: 'italic', fontWeight: 'normal' }}>Plot Array</span>
+                        </h3>
+                        <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--color-text)', marginBottom: '2.5rem' }}>
+                            A meticulously mapped sanctuary designed with precision and Vastu principles. Discover the intricate spatial flow connecting private estates with expansive community organic reserves.
+                        </p>
+                        <ul style={{ listStyle: 'none', padding: 0 }}>
+                            {['Strategic Zoning', 'Holistic Landscaping', 'Seamless Connectivity', 'Private & Secure'].map(feature => (
+                                <li key={feature} style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '1.2rem', color: 'var(--color-primary)', fontWeight: 500, fontSize: '1.05rem' }}>
+                                    <span style={{ width: '6px', height: '6px', backgroundColor: 'var(--color-primary)', borderRadius: '50%', opacity: 0.5 }}></span>
+                                    {feature}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Right Column (Span 8) */}
+                    <div style={{ gridColumn: 'span 8' }}>
+                        <div style={{
+                            padding: '1.5rem',
+                            backgroundColor: 'var(--color-bg-alt)',
+                            border: '1px solid rgba(10,17,40,0.05)',
+                            borderRadius: '24px',
+                            overflow: 'hidden',
+                            boxShadow: '0 20px 50px rgba(0,0,0,0.05)'
+                        }}>
+                            <motion.img
+                                initial={{ opacity: 0, scale: 0.98 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8, ease: "easeOut" }}
+                                src={project.plot}
+                                alt="Plot Map Blueprint"
+                                style={{
+                                    width: '100%',
+                                    height: 'auto',
+                                    display: 'block',
+                                    borderRadius: '12px',
+                                    filter: 'sepia(0.1) contrast(1.15) brightness(0.95)',
+                                    mixBlendMode: 'multiply'
+                                }}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Return Container */}
+                <div style={{ marginTop: '8rem', textAlign: 'center', borderTop: '1px solid var(--color-border)', paddingTop: '4rem' }}>
+                    <Link to="/projects" style={{
+                        display: 'inline-block',
+                        padding: '15px 40px',
+                        border: '1px solid var(--color-primary)',
+                        color: 'var(--color-primary)',
+                        textDecoration: 'none',
+                        textTransform: 'uppercase',
+                        letterSpacing: '2px',
+                        fontWeight: 500,
+                        transition: 'all 0.3s ease'
+                    }}
+                        onMouseOver={(e) => {
+                            e.target.style.backgroundColor = 'var(--color-primary)';
+                            e.target.style.color = 'var(--color-white)';
+                        }}
+                        onMouseOut={(e) => {
+                            e.target.style.backgroundColor = 'transparent';
+                            e.target.style.color = 'var(--color-primary)';
+                        }}
+                    >
+                        Return to Portfolio
+                    </Link>
                 </div>
             </div>
         </div>

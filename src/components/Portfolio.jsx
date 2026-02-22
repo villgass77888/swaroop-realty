@@ -14,7 +14,7 @@ const projects = [
         id: 2,
         title: 'Radha Kunj Villas',
         subtitle: 'Exclusive Smart Villas',
-        image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80', // Greenery luxury villa
         type: 'tall'
     },
     {
@@ -61,7 +61,7 @@ const PortfolioItem = ({ project, index }) => {
             }}
             className="portfolio-item"
         >
-            <Link to={`/projects/${project.id}`} style={{ display: 'block', width: '100%', height: '100%', textDecoration: 'none' }}>
+            <Link to={`/projects/${project.title.toLowerCase().replace(/\s+/g, '-')}`} style={{ display: 'block', width: '100%', height: '100%', textDecoration: 'none' }}>
                 <style>{`
                     .portfolio-item .img-wrapper img {
                         transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
