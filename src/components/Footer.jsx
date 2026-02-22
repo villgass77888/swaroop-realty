@@ -15,7 +15,7 @@ const Footer = () => {
                 marginBottom: '4rem'
             }}>
                 <div>
-                    <h4 style={{ color: 'var(--color-white)', fontSize: '1.5rem', marginBottom: '1.5rem', letterSpacing: '1px' }}>SWAROOP</h4>
+                    <img src="/logo-white.png" alt="Swaroop Realty Logo" style={{ height: '120px', width: 'auto', marginBottom: '1.5rem', objectFit: 'contain' }} />
                     <p style={{ color: 'rgba(255, 255, 255, 0.7)', lineHeight: 1.8, maxWidth: '300px' }}>
                         Defining luxury across skylines with unmatched architectural rigor and prestigious estates.
                     </p>

@@ -19,9 +19,9 @@ const projects = [
     },
     {
         id: 3,
-        title: 'The Lotus Plots',
-        subtitle: 'Premium Gated Community',
-        image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+        title: 'The Girdhar Valley Farms',
+        subtitle: 'Exclusive Farm Retreat',
+        image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
         type: 'wide'
     }
 ];
@@ -218,7 +218,8 @@ const Portfolio = () => {
                         textAlign: 'center'
                     }}
                 >
-                    Featured Developments
+                    <span>Featured </span>
+                    <span style={{ fontStyle: 'italic', fontFamily: 'var(--font-heading)' }}>Developments</span>
                 </motion.h2>
 
                 <div

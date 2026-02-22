@@ -35,42 +35,34 @@ const ServiceRow = ({ svc, idx }) => {
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="service-row"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            style={{
-                position: 'relative'
-            }}
         >
             <span className="svc-num">
                 [ {svc.num} ]
             </span>
-            <div style={{ position: 'relative' }}>
-                <h4 className="svc-title" style={{ opacity: isHovered ? 0.3 : 1, transition: 'opacity 0.5s ease' }}>
+            <div
+                className="title-wrapper"
+                style={{ position: 'relative' }}
+            // onMouseEnter and onMouseLeave are removed as they were only for the liquid glass overlay.
+            >
+                <h4 className="svc-title">
                     {svc.title}
                 </h4>
-                {/* Glow Overlay */}
-                <h4
-                    className="svc-title glow-overlay"
+
+                <div
+                    className="svc-content-wrapper"
                     style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        opacity: isHovered ? 1 : 0,
-                        color: '#bae6fd', /* Light blue glow */
-                        filter: 'blur(2px) drop-shadow(0 0 10px rgba(186, 230, 253, 0.4))',
-                        transition: 'opacity 0.4s ease',
-                        WebkitMaskImage: isHovered ? `radial-gradient(circle 60px at ${mousePos.x - 80}px ${mousePos.y}px, black 0%, transparent 100%)` : 'none',
-                        maskImage: isHovered ? `radial-gradient(circle 60px at ${mousePos.x - 80}px ${mousePos.y}px, black 0%, transparent 100%)` : 'none',
-                        pointerEvents: 'none',
-                        zIndex: 2
+                        ...(idx === 0 ? { top: '2rem', transform: 'translateY(5%)' } :
+                            idx === 1 ? { top: '25%', transform: 'translateY(-25%)' } :
+                                idx === 2 ? { top: '75%', transform: 'translateY(-75%)' } :
+                                    idx === 3 ? { top: 'auto', bottom: '2rem', transform: 'translateY(-10%)' } : {})
                     }}
                 >
-                    {svc.title}
-                </h4>
+                    <img src={svc.img} alt={svc.title} className="svc-img" />
+                    <p className="svc-desc">
+                        {svc.title}— {svc.desc}
+                    </p>
+                </div>
             </div>
-            <p className="svc-desc">
-                {svc.desc}
-            </p>
         </motion.div>
     );
 };
@@ -95,22 +87,26 @@ const Services = () => {
         {
             num: '01',
             title: 'Premium Plots',
-            desc: 'Curated parcels of prime land in Vrindavan, offering maximum appreciation and the perfect canvas for your dream home.'
+            desc: 'We secure and curate the most exclusive parcels of prime real estate in Vrindavan, guaranteeing maximum appreciation potential. Every plot undergoes rigorous legal vetting and environmental assessment to ensure it serves as the perfect uncompromised canvas for your dream home or investment portfolio. Our properties offer unparalleled access to local thoroughfares while maintaining an ambiance of absolute peace and serenity away from the bustle of the city center.',
+            img: 'https://images.unsplash.com/photo-1588880331179-bc9b93a8cb65?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
         },
         {
             num: '02',
             title: 'Bespoke Villas',
-            desc: 'Custom-built luxury villas blending traditional aesthetics with ultra-modern amenities and absolute privacy.'
+            desc: 'Our flagship architectural offering focuses on custom-built luxury villas that seamlessly blend traditional Indian aesthetics with ultra-modern smart-home amenities. We prioritize absolute privacy, integrating high walls, lush foliage, and private courtyards into every design. From sprawling living spaces optimized for natural light to climate-controlled master suites and personalized infinity pools, our bespoke villas define the pinnacle of opulent personalized living.',
+            img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
         },
         {
             num: '03',
             title: 'Vastu Architecture',
-            desc: 'Every plot layout and villa design is strictly governed by ancient Vastu Shastra for peace, health, and prosperity.'
+            desc: 'We believe a truly luxurious home must be deeply aligned with cosmic principles. Every single plot layout, villa blueprint, and interior spatial design is strictly governed by ancient Vastu Shastra principles. By optimizing the flow of elemental energies, our master architects ensure that your sanctuary invites unparalleled peace, vibrant health, and unbroken prosperity into your daily life and family lineage.',
+            img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
         },
         {
             num: '04',
             title: 'Turnkey Execution',
-            desc: 'From land acquisition to handing over the keys to your fully furnished spiritual sanctuary, we handle everything.'
+            desc: 'Our end-to-end execution service is designed to completely insulate our clients from the stress of real estate development. From initial land acquisition and legal registration to architectural planning, construction, premium outfitting, and final landscaping—we handle every single detail. We simply hand over the keys to a fully furnished, immaculate spiritual sanctuary that is ready for you to step into.',
+            img: 'https://images.unsplash.com/photo-1628624747186-a941c476b7ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
         }
     ];
 
@@ -120,10 +116,27 @@ const Services = () => {
             style={{
                 padding: 'var(--spacing-section) 0',
                 backgroundColor: bgColor,
-                transition: 'background-color 0.8s ease'
+                transition: 'background-color 0.8s ease',
+                position: 'relative',
+                overflow: 'hidden'
             }}
         >
-            <div className="container">
+            {/* Blueprint Background Wrapper */}
+            <div style={{
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                width: '50vw',
+                height: '100%',
+                backgroundImage: 'url(/blueprint-bg.png)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'left center',
+                opacity: 1.0,
+                pointerEvents: 'none',
+                zIndex: 0
+            }} />
+
+            <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                 <motion.h2
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -135,7 +148,8 @@ const Services = () => {
                         color: 'var(--color-primary)'
                     }}
                 >
-                    Our Expertise
+                    <span>Our </span>
+                    <span style={{ fontStyle: 'italic', fontFamily: 'var(--font-heading)' }}>Expertise</span>
                 </motion.h2>
 
                 <div style={{
@@ -144,18 +158,20 @@ const Services = () => {
                     width: '100%',
                     maxWidth: '1200px',
                     margin: '0 auto',
-                    gap: '1rem'
+                    gap: '1rem',
+                    position: 'relative' /* Anchor position for absolute children */
                 }}>
                     <style>{`
                         .service-row {
                             display: grid;
-                            grid-template-columns: 80px 1fr 2fr;
+                            grid-template-columns: 80px 1fr;
                             align-items: center;
-                            gap: 2rem;
-                            padding: 3rem 0;
-                            border-bottom: 1px solid var(--color-border);
+                            gap: 1rem;
+                            padding: 2rem 0;
+                            border: none;
                             cursor: pointer;
                             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+                            /* Removed relative positioning to allow children to escape */
                         }
                         .service-row .svc-num {
                             font-size: 1.2rem;
@@ -166,29 +182,63 @@ const Services = () => {
                         }
                         /* Cinematic Glow Base */
                         .service-row .svc-title {
-                            font-size: clamp(2rem, 3.5vw, 4rem);
+                            font-size: clamp(1.5rem, 2.5vw, 3rem); /* Reduced from 4rem */
                             font-family: var(--font-heading);
                             color: var(--color-primary);
                             white-space: nowrap;
                             position: relative;
+                            transform-origin: left center;
+                            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
                         }
                         
+                        .service-row .svc-content-wrapper {
+                            position: absolute;
+                            right: 0;
+                            top: 50%; /* Center vertically within the list */
+                            transform: translateY(-50%); 
+                            display: flex;
+                            align-items: stretch; /* Stretch image to match text height */
+                            gap: 2rem;
+                            width: 45vw; /* Roughly half the screen */
+                            max-width: 600px;
+                            pointer-events: none;
+                            z-index: 10;
+                        }
+
+                        .service-row .svc-img {
+                            width: 45%; /* Slightly less than half */
+                            object-fit: cover;
+                            border-radius: 4px;
+                            opacity: 0;
+                            transform: translateX(-50px) scale(0.95); /* Adjusted slide */
+                            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+                            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+                        }
+
                         .service-row .svc-desc {
-                            font-size: 1.1rem;
+                            font-size: 1.05rem; /* Slightly smaller to fit with image */
                             line-height: 1.6;
                             color: var(--color-text);
-                            opacity: 0.6;
-                            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-                            max-width: 500px;
-                            justify-self: end;
+                            opacity: 0;
+                            transform: translateX(-100px) scale(0.95); /* Adjusted slide */
+                            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+                            flex: 1;
                         }
 
                         /* Hover States */
                         .service-row:hover .svc-num {
                             opacity: 1;
                         }
-                        .service-row:hover .svc-desc {
+                        .title-wrapper:hover .svc-title {
+                            transform: translateX(-15px) scale(1.05); /* Zoom and shift left */
+                        }
+                        .title-wrapper:hover .svc-img {
                             opacity: 1;
+                            transform: translateX(0px) scale(1);
+                        }
+                        .title-wrapper:hover .svc-desc {
+                            opacity: 1;
+                            transform: translateX(0px) scale(1);
                         }
 
                         @media (max-width: 1000px) {

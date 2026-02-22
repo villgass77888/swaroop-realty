@@ -256,7 +256,15 @@ const Projects = () => {
                     <div className="upcoming-project" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '3rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
                             <div className="upcoming-content">
-                                <h3 style={{ fontSize: '2.5rem', color: 'var(--color-white)', margin: '0 0 0.5rem 0', fontFamily: 'var(--font-heading)', letterSpacing: '1px' }}>Project [REDACTED]</h3>
+                                <h3 style={{ fontSize: '2.5rem', color: 'var(--color-white)', margin: '0 0 0.5rem 0', fontFamily: 'var(--font-heading)' }}>
+                                    <span className="gloom-wrap">
+                                        {"Project [REDACTED]".split('').map((char, i) => (
+                                            <span key={i} className="gloom-char" style={{ animationDelay: `${(i * 0.17) % 2}s`, animationDuration: `${3 + (i * 0.3) % 2}s` }}>
+                                                {char === ' ' ? '\u00A0' : char}
+                                            </span>
+                                        ))}
+                                    </span>
+                                </h3>
                                 <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '3px', textTransform: 'uppercase', margin: 0 }}>Vrindavan &mdash; 100+ Acre Mega-Township</p>
                             </div>
                             <span className="upcoming-badge" style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '4px', padding: '10px 20px', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '30px', backdropFilter: 'blur(5px)' }}>Revealing Q4 2026</span>
@@ -267,7 +275,15 @@ const Projects = () => {
                     <div className="upcoming-project" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '3rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
                             <div className="upcoming-content">
-                                <h3 style={{ fontSize: '2.5rem', color: 'var(--color-white)', margin: '0 0 0.5rem 0', fontFamily: 'var(--font-heading)', letterSpacing: '1px' }}>The Elysian Expanse</h3>
+                                <h3 style={{ fontSize: '2.5rem', color: 'var(--color-white)', margin: '0 0 0.5rem 0', fontFamily: 'var(--font-heading)' }}>
+                                    <span className="gloom-wrap">
+                                        {"The Elysian Expanse".split('').map((char, i) => (
+                                            <span key={i} className="gloom-char" style={{ animationDelay: `${(i * 0.17) % 2}s`, animationDuration: `${3 + (i * 0.4) % 2}s` }}>
+                                                {char === ' ' ? '\u00A0' : char}
+                                            </span>
+                                        ))}
+                                    </span>
+                                </h3>
                                 <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '3px', textTransform: 'uppercase', margin: 0 }}>Govardhan &mdash; Ultra-Private Estates</p>
                             </div>
                             <span className="upcoming-badge" style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '4px', padding: '10px 20px', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '30px', backdropFilter: 'blur(5px)' }}>By Invitation Only</span>
@@ -293,11 +309,35 @@ const Projects = () => {
                         border-color: rgba(255,255,255,0.5) !important;
                         box-shadow: 0 0 20px rgba(255,255,255,0.1);
                     }
-                    .upcoming-content h3 {
-                        transition: text-shadow 0.6s ease;
+                    @keyframes gloomyChar {
+                        0% { opacity: 0.15; transform: translate3d(0, 0, 0) scale(0.95); filter: blur(6px); }
+                        50% { opacity: 0.6; transform: translate3d(-3px, -5px, 0) scale(1.05); filter: blur(3px); }
+                        100% { opacity: 0.15; transform: translate3d(4px, 4px, 0) scale(0.95); filter: blur(6px); }
                     }
-                    .upcoming-project:hover .upcoming-content h3 {
-                        text-shadow: 0 0 30px rgba(255,255,255,0.3);
+                    .gloom-wrap {
+                        display: inline-flex;
+                    }
+                    .gloom-char {
+                        display: inline-block;
+                        /* Use GPU hardware acceleration */
+                        transform: translateZ(0);
+                        will-change: transform, opacity, filter;
+                        /* Idle animation */
+                        animation: gloomyChar 3s infinite alternate ease-in-out;
+                        /* Highly cinematic smooth transition when settling down */
+                        transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
+                                    opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
+                                    filter 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+                        letter-spacing: 2px;
+                    }
+                    .upcoming-project:hover .gloom-char {
+                        /* Freezing animation and snapping to default values smoothly */
+                        animation: none !important;
+                        opacity: 1 !important;
+                        filter: blur(0px) !important;
+                        transform: translate3d(0, 0, 0) scale(1) !important;
+                        letter-spacing: 1px;
+                        color: var(--color-white);
                     }
                 `}</style>
             </div>

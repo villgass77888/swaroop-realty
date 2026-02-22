@@ -1,12 +1,39 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useRef, useEffect } from 'react';
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 
 const Hero = () => {
     const containerRef = useRef(null);
+    const vidRef = useRef(null);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end start"]
+    });
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (vidRef.current) {
+                // Ensure the video plays forward initially after 0.3s
+                vidRef.current.play().catch(e => console.log('Autoplay blocked', e));
+            }
+        }, 300);
+        return () => clearTimeout(timer);
+    }, []);
+
+    useMotionValueEvent(scrollYProgress, "change", (latest) => {
+        const video = vidRef.current;
+        if (!video || Number.isNaN(video.duration)) return;
+
+        // Pause automated playback as soon as user scrolls down
+        if (latest > 0.01 && !video.paused) {
+            video.pause();
+        }
+
+        // Scrub video backward (deconstruct) as user scrolls down
+        if (latest > 0.01) {
+            const reverseTime = video.duration * (1 - latest);
+            video.currentTime = Math.max(0, Math.min(reverseTime, video.duration));
+        }
     });
 
     const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
@@ -85,28 +112,27 @@ const Hero = () => {
                 zIndex: 2
             }} />
 
-            {/* Masked Right Layout Image */}
+            {/* Right Cropped Video Element */}
             <motion.div
                 style={{
                     position: 'absolute',
-                    top: '15vh',
-                    right: '5vw',
-                    width: '35vw',
-                    height: '70vh',
+                    top: 0,
+                    right: 0,
+                    width: '45vw',
+                    height: '100vh',
                     zIndex: 2,
-                    opacity: useTransform(scrollYProgress, [0, 0.5], [1, 0]),
-                    y: useTransform(scrollYProgress, [0, 1], ["0%", "50%"]),
-                    clipPath: 'polygon(10% 0, 100% 0, 90% 100%, 0% 100%)', // Elegant angle mask
-                    boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
+                    opacity: useTransform(scrollYProgress, [0, 0.8], [1, 0])
                 }}
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
-                <img
-                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                    alt="Vrindavan Luxury Elevation"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(1.1) grayscale(10%)' }}
+                <video
+                    ref={vidRef}
+                    muted
+                    playsInline
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(1.05) grayscale(10%)' }}
+                    src="/hero.mp4"
                 />
             </motion.div>
 
@@ -116,34 +142,6 @@ const Hero = () => {
                 initial="hidden"
                 animate="show"
             >
-                <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '20px',
-                    marginBottom: '2rem'
-                }}>
-                    <motion.div
-                        variants={itemVars}
-                        style={{
-                            height: '1px',
-                            width: '40px',
-                            backgroundColor: 'var(--color-accent)'
-                        }}
-                    />
-                    <motion.span
-                        variants={itemVars}
-                        style={{
-                            textTransform: 'uppercase',
-                            letterSpacing: '4px',
-                            fontSize: '0.9rem',
-                            color: 'var(--color-accent)',
-                            fontFamily: 'var(--font-body)'
-                        }}
-                    >
-                        Swaroop Realty
-                    </motion.span>
-                </div>
-
                 <h1 style={{ color: 'var(--color-white)', fontSize: 'clamp(4rem, 8vw, 8rem)', lineHeight: 1.1, marginBottom: '2rem', letterSpacing: '-0.02em', textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
                     <motion.span variants={itemVars} style={{ display: 'block' }}>Where</motion.span>
                     <motion.span variants={itemVars} style={{ display: 'block', fontStyle: 'italic', fontFamily: 'var(--font-heading)' }}>Spirituality</motion.span>
@@ -176,31 +174,6 @@ const Hero = () => {
                         Enter Portfolio
                     </a>
                 </motion.div>
-
-                {/* Magnetic Scroll Indicator */}
-                <motion.a
-                    href="#ethos"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.5, duration: 1 }}
-                    style={{
-                        position: 'absolute',
-                        bottom: '-15vh',
-                        left: '0',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        color: 'var(--color-white)',
-                        textDecoration: 'none',
-                        gap: '10px'
-                    }}
-                >
-                    <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 500 }}>Scroll</span>
-                    <motion.div
-                        animate={{ height: ['0px', '40px', '0px'], y: [0, 20, 40] }}
-                        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                        style={{ width: '1px', backgroundColor: 'var(--color-white)' }}
-                    />
-                </motion.a>
             </motion.div>
         </div>
     );

@@ -58,29 +58,21 @@ const Navigation = () => {
             {/* Logo Area */}
             <Link to="/" style={{ textDecoration: 'none' }}>
                 <div style={{
-                    fontFamily: 'var(--font-heading)',
-                    color: textColor,
-                    fontSize: '1.5rem',
-                    letterSpacing: '4px',
-                    textTransform: 'uppercase',
+                    position: 'absolute',
+                    top: '50%',
+                    transform: 'translateY(-45%)',
+                    left: '5%',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '15px',
-                    transition: 'color 0.4s ease'
+                    height: '100px', /* Increased size further */
+                    zIndex: 101,
+                    transition: 'all 0.4s ease'
                 }}>
-                    <div style={{
-                        width: '30px',
-                        height: '30px',
-                        border: `1px solid ${textColor}`,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        transform: 'rotate(45deg)',
-                        transition: 'border-color 0.4s ease'
-                    }}>
-                        <div style={{ width: '10px', height: '10px', backgroundColor: textColor, transition: 'background-color 0.4s ease' }} />
-                    </div>
-                    Swaroop.
+                    <img
+                        src={textColor === 'var(--color-primary)' ? '/logo-dark.png' : '/logo-white.png'}
+                        alt="Swaroop Realty Logo"
+                        style={{ height: '100%', width: 'auto', objectFit: 'contain' }}
+                    />
                 </div>
             </Link>
 
