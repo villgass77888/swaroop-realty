@@ -94,3 +94,20 @@ body.dark-mode h6 {
     --spacing-section: 120px;
   }
 }
+
+@media (max-width: 768px) {
+  :root {
+    --spacing-section: 80px;
+  }
+
+  .container {
+    padding: 0 4%;
+  }
+}
+
+/* Restore native cursor on touch devices — custom cursor is JS-disabled there */
+@media (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+}

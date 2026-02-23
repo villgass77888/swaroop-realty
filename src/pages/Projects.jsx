@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import useIsMobile from '../hooks/useIsMobile';
 
 const allProjects = [
     {
@@ -39,11 +40,8 @@ const allProjects = [
 
 const ProjectPanel = ({ project, index }) => {
     const ref = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: ref,
-        offset: ["start end", "end start"]
-    });
-
+    const { isMobile } = useIsMobile();
+    const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
     const imgY = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
     const textY = useTransform(scrollYProgress, [0, 1], ["40%", "-40%"]);
 
@@ -53,7 +51,8 @@ const ProjectPanel = ({ project, index }) => {
             style={{
                 position: 'relative',
                 width: '100vw',
-                height: '100vh',
+                height: isMobile ? '70vh' : '100vh',
+                minHeight: isMobile ? '400px' : 'auto',
                 overflow: 'hidden',
                 display: 'flex',
                 alignItems: 'center',
@@ -95,12 +94,8 @@ const ProjectPanel = ({ project, index }) => {
                     {project.location} &mdash; {project.year}
                 </div>
                 <h2 style={{
-                    fontSize: 'clamp(4rem, 8vw, 8rem)',
-                    margin: 0,
-                    lineHeight: 1,
-                    color: '#ffffff',
-                    mixBlendMode: 'overlay',
-                    opacity: 0.9
+                    fontSize: isMobile ? 'clamp(2rem, 7vw, 3.5rem)' : 'clamp(4rem, 8vw, 8rem)',
+                    margin: 0, lineHeight: 1, color: '#ffffff', mixBlendMode: 'overlay', opacity: 0.9
                 }}>
                     {project.title}
                 </h2>
@@ -141,37 +136,32 @@ const ProjectPanel = ({ project, index }) => {
 };
 
 const Projects = () => {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    const { isMobile } = useIsMobile();
+    useEffect(() => { window.scrollTo(0, 0); }, []);
 
     return (
         <div style={{ backgroundColor: 'var(--color-primary)' }}>
-            {/* Intro Section */}
+            {/* Intro */}
             <div style={{
                 position: 'relative',
-                height: '100vh',
+                height: isMobile ? 'auto' : '100vh',
+                minHeight: isMobile ? '60vh' : 'auto',
                 width: '100vw',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'var(--color-bg)',
-                color: 'var(--color-primary)',
-                flexDirection: 'column'
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                backgroundColor: 'var(--color-bg)', color: 'var(--color-primary)',
+                flexDirection: 'column', padding: isMobile ? '130px 5% 80px' : '0'
             }}>
                 <motion.h1
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ fontSize: 'clamp(4rem, 8vw, 8rem)', marginBottom: '1rem', textAlign: 'center' }}
+                    style={{ fontSize: isMobile ? 'clamp(2.8rem, 11vw, 5rem)' : 'clamp(4rem, 8vw, 8rem)', marginBottom: '1rem', textAlign: 'center' }}
                 >
                     Signature Works
                 </motion.h1>
                 <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '4px' }}
+                    style={{ fontSize: isMobile ? '0.8rem' : '1.2rem', textTransform: 'uppercase', letterSpacing: '4px', textAlign: 'center' }}
                 >
                     A curated portfolio
                 </motion.p>
@@ -233,9 +223,9 @@ const Projects = () => {
                     ].map((proj, idx) => (
                         <div key={idx} className="upcoming-project">
                             <div className="upcoming-bg-glow"></div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem', position: 'relative', zIndex: 2 }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.5rem', position: 'relative', zIndex: 2 }}>
                                 <div className="upcoming-content">
-                                    <h3 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', color: 'var(--color-white)', margin: '0 0 1rem 0', fontFamily: 'var(--font-heading)' }}>
+                                    <h3 style={{ fontSize: isMobile ? 'clamp(1.5rem, 6vw, 2.5rem)' : 'clamp(2rem, 4vw, 3.5rem)', color: 'var(--color-white)', margin: '0 0 1rem 0', fontFamily: 'var(--font-heading)' }}>
                                         <span className="gloom-wrap">
                                             {proj.title.split('').map((char, i) => (
                                                 <span key={i} className="gloom-char" style={{ animationDelay: `${(i * 0.15) % 2}s`, animationDuration: `${proj.animBase + (i * 0.2) % 2}s` }}>
@@ -244,9 +234,7 @@ const Projects = () => {
                                             ))}
                                         </span>
                                     </h3>
-                                    <p className="upcoming-subtitle" style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '4px', textTransform: 'uppercase', margin: 0 }}>
-                                        {proj.subtitle}
-                                    </p>
+                                    <p className="upcoming-subtitle" style={{ fontSize: isMobile ? '0.8rem' : '1.1rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '4px', textTransform: 'uppercase', margin: 0 }}>{proj.subtitle}</p>
                                 </div>
                                 <span className="upcoming-badge">{proj.badge}</span>
                             </div>
@@ -360,6 +348,13 @@ const Projects = () => {
                         letter-spacing: 1px !important;
                         color: var(--color-white) !important;
                         text-shadow: 0 0 25px rgba(255,255,255,0.4);
+                    }
+                    @media (max-width: 768px) {
+                        .upcoming-project { padding:2.5rem 1rem; opacity:1; filter:none; transform:none; }
+                        .projects-wrapper:hover .upcoming-project { opacity:1; filter:none; transform:none; }
+                        .projects-wrapper .upcoming-project:hover { transform:none; }
+                        .upcoming-badge { font-size:0.75rem; letter-spacing:2px; padding:10px 16px; }
+                        .gloom-char { animation:none; opacity:0.7; filter:blur(4px); }
                     }
                 `}</style>
             </div>

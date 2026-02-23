@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+// Disable on touch / pointer:coarse devices
+const isTouch = typeof window !== 'undefined'
+    && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+
 // ── Colour helpers ─────────────────────────────────────────────────────────
 function parseBg(str) {
     const m = str.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
@@ -30,11 +34,12 @@ function distFromRect(px, py, rect) {
 const LENS = 175;
 const MAGNIFY = 1.65;
 const RING_SZ = 44;
-const COLLAPSED_SCL = RING_SZ / LENS;  // ~0.251 → starts looking like the ring
+const COLLAPSED_SCL = RING_SZ / LENS;
 const LERP_T = 0.22;
-const LINGER_PX = 80; // px past the element edge before lens dismisses
+const LINGER_PX = 80;
 
 const CustomCursor = () => {
+    if (isTouch) return null; // No custom cursor on touch devices
     const mouseRef = useRef({ x: -300, y: -300 });
     const ringPosRef = useRef({ x: -300, y: -300 });
     const rafRef = useRef(null);

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import useIsMobile from '../hooks/useIsMobile';
 
 // Mock DB matching Projects array
 const allProjects = {
@@ -36,121 +37,75 @@ const allProjects = {
 
 const ProjectDetail = () => {
     const { slug } = useParams();
+    const { isMobile } = useIsMobile();
 
-    // Find the project whose slugified title matches the URL slug
     const project = Object.values(allProjects).find(
         p => p.title.toLowerCase().replace(/\s+/g, '-') === slug
     );
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [slug]);
+    useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
     if (!project) return <div style={{ paddingTop: '200px', textAlign: 'center' }}>Project Not Found</div>;
 
     return (
         <div style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh', color: 'var(--color-primary)' }}>
             {/* Hero Header */}
-            <div style={{ position: 'relative', width: '100vw', height: '80vh', overflow: 'hidden' }}>
-                <motion.div
-                    initial={{ scale: 1.1 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 2, ease: "easeOut" }}
-                    style={{ width: '100%', height: '100%' }}
-                >
+            <div style={{ position: 'relative', width: '100vw', height: isMobile ? '55vh' : '80vh', overflow: 'hidden' }}>
+                <motion.div initial={{ scale: 1.1 }} animate={{ scale: 1 }} transition={{ duration: 2, ease: "easeOut" }} style={{ width: '100%', height: '100%' }}>
                     <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </motion.div>
                 <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(to top, rgba(10,17,40,0.9), transparent)' }} />
-                <div style={{ position: 'absolute', bottom: '10%', left: '5%', color: 'var(--color-white)' }}>
+                <div style={{ position: 'absolute', bottom: '10%', left: '5%', color: 'var(--color-white)', maxWidth: isMobile ? '90%' : 'none' }}>
                     <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 1 }}>
-                        <h1 style={{ fontSize: 'clamp(3rem, 6vw, 6rem)', lineHeight: 1, color: 'var(--color-white)' }}>{project.title}</h1>
-                        <p style={{ fontSize: '1.2rem', letterSpacing: '2px', textTransform: 'uppercase', marginTop: '1rem' }}>{project.location}</p>
+                        <h1 style={{ fontSize: isMobile ? 'clamp(1.8rem,8vw,3rem)' : 'clamp(3rem,6vw,6rem)', lineHeight: 1, color: 'var(--color-white)' }}>{project.title}</h1>
+                        <p style={{ fontSize: isMobile ? '0.8rem' : '1.2rem', letterSpacing: '2px', textTransform: 'uppercase', marginTop: '1rem' }}>{project.location}</p>
                     </motion.div>
                 </div>
             </div>
 
             {/* Details Container */}
             <div className="container" style={{ padding: 'var(--spacing-section) 5%' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '4rem' }}>
-
-                    {/* Left Column: Stats & Measurements */}
-                    <div style={{ gridColumn: 'span 4' }}>
-                        <h3 style={{ fontSize: '1.5rem', fontFamily: 'var(--font-heading)', marginBottom: '2rem', borderBottom: '1px solid var(--color-border)', paddingBottom: '1rem' }}>
-                            Project Specifications
-                        </h3>
+                <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(12, 1fr)', gap: isMobile ? '2rem' : '4rem' }}>
+                    {/* Specs */}
+                    <div style={{ gridColumn: isMobile ? undefined : 'span 4' }}>
+                        <h3 style={{ fontSize: isMobile ? '1.3rem' : '1.5rem', fontFamily: 'var(--font-heading)', marginBottom: '1.5rem', borderBottom: '1px solid var(--color-border)', paddingBottom: '1rem' }}>Project Specifications</h3>
                         <ul style={{ listStyle: 'none', padding: 0 }}>
                             {Object.entries(project.measurements).map(([key, value]) => (
-                                <li key={key} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '1px solid rgba(10,17,40,0.1)' }}>
+                                <li key={key} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1px solid rgba(10,17,40,0.1)' }}>
                                     <span style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--color-text)' }}>{key}</span>
-                                    <span style={{ fontWeight: 500, fontFamily: 'var(--font-heading)', fontSize: '1.1rem' }}>{value}</span>
+                                    <span style={{ fontWeight: 500, fontFamily: 'var(--font-heading)', fontSize: '1rem' }}>{value}</span>
                                 </li>
                             ))}
                         </ul>
                     </div>
-
-                    {/* Right Column: In Depth Description & Plot */}
-                    <div style={{ gridColumn: 'span 8' }}>
-                        <h2 style={{ fontSize: '3rem', fontFamily: 'var(--font-heading)', marginBottom: '2rem' }}>
-                            The Ultimate <br /> {project.subtitle}
-                        </h2>
-                        <p style={{ fontSize: '1.2rem', lineHeight: 2, color: 'var(--color-text)', marginBottom: '4rem' }}>
-                            {project.desc}
-                        </p>
-
-
-
-                        <div style={{ marginTop: '4rem' }}>
-                            {/* Removed internal Return Link to place it at the absolute bottom */}
-                        </div>
+                    {/* Description */}
+                    <div style={{ gridColumn: isMobile ? undefined : 'span 8' }}>
+                        <h2 style={{ fontSize: isMobile ? 'clamp(1.8rem,7vw,2.5rem)' : '3rem', fontFamily: 'var(--font-heading)', marginBottom: '2rem' }}>The Ultimate <br />{project.subtitle}</h2>
+                        <p style={{ fontSize: isMobile ? '1rem' : '1.2rem', lineHeight: 2, color: 'var(--color-text)', marginBottom: '4rem' }}>{project.desc}</p>
                     </div>
                 </div>
 
-                {/* Master Plot Area (Full Width, 2 Column) */}
-                <div style={{ marginTop: '8rem', display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '4rem', alignItems: 'center' }}>
-                    {/* Left Column (Span 4) */}
-                    <div style={{ gridColumn: 'span 4' }}>
-                        <h3 style={{ fontSize: '2.5rem', fontFamily: 'var(--font-heading)', marginBottom: '1.5rem', color: 'var(--color-primary)', lineHeight: 1.1 }}>
-                            Master <br />
-                            <span style={{ fontStyle: 'italic', fontWeight: 'normal' }}>Plot Array</span>
-                        </h3>
-                        <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--color-text)', marginBottom: '2.5rem' }}>
-                            A meticulously mapped sanctuary designed with precision and Vastu principles. Discover the intricate spatial flow connecting private estates with expansive community organic reserves.
-                        </p>
+                {/* Master Plot Area */}
+                <div style={{ marginTop: isMobile ? '4rem' : '8rem', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(12, 1fr)', gap: isMobile ? '2rem' : '4rem', alignItems: 'center' }}>
+                    <div style={{ gridColumn: isMobile ? undefined : 'span 4' }}>
+                        <h3 style={{ fontSize: isMobile ? '1.8rem' : '2.5rem', fontFamily: 'var(--font-heading)', marginBottom: '1.5rem', color: 'var(--color-primary)', lineHeight: 1.1 }}>Master <br /><span style={{ fontStyle: 'italic', fontWeight: 'normal' }}>Plot Array</span></h3>
+                        <p style={{ fontSize: isMobile ? '0.95rem' : '1.1rem', lineHeight: 1.8, color: 'var(--color-text)', marginBottom: '2.5rem' }}>A meticulously mapped sanctuary designed with precision and Vastu principles. Discover the intricate spatial flow connecting private estates with expansive community organic reserves.</p>
                         <ul style={{ listStyle: 'none', padding: 0 }}>
                             {['Strategic Zoning', 'Holistic Landscaping', 'Seamless Connectivity', 'Private & Secure'].map(feature => (
-                                <li key={feature} style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '1.2rem', color: 'var(--color-primary)', fontWeight: 500, fontSize: '1.05rem' }}>
-                                    <span style={{ width: '6px', height: '6px', backgroundColor: 'var(--color-primary)', borderRadius: '50%', opacity: 0.5 }}></span>
+                                <li key={feature} style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '1.2rem', color: 'var(--color-primary)', fontWeight: 500, fontSize: '1rem' }}>
+                                    <span style={{ width: '6px', height: '6px', backgroundColor: 'var(--color-primary)', borderRadius: '50%', opacity: 0.5, flexShrink: 0 }}></span>
                                     {feature}
                                 </li>
                             ))}
                         </ul>
                     </div>
-
-                    {/* Right Column (Span 8) */}
-                    <div style={{ gridColumn: 'span 8' }}>
-                        <div style={{
-                            padding: '1.5rem',
-                            backgroundColor: 'var(--color-bg-alt)',
-                            border: '1px solid rgba(10,17,40,0.05)',
-                            borderRadius: '24px',
-                            overflow: 'hidden',
-                            boxShadow: '0 20px 50px rgba(0,0,0,0.05)'
-                        }}>
+                    <div style={{ gridColumn: isMobile ? undefined : 'span 8' }}>
+                        <div style={{ padding: '1.5rem', backgroundColor: 'var(--color-bg-alt)', border: '1px solid rgba(10,17,40,0.05)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 50px rgba(0,0,0,0.05)' }}>
                             <motion.img
-                                initial={{ opacity: 0, scale: 0.98 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.8, ease: "easeOut" }}
-                                src={project.plot}
-                                alt="Plot Map Blueprint"
-                                style={{
-                                    width: '100%',
-                                    height: 'auto',
-                                    display: 'block',
-                                    borderRadius: '12px',
-                                    filter: 'sepia(0.1) contrast(1.15) brightness(0.95)',
-                                    mixBlendMode: 'multiply'
-                                }}
+                                initial={{ opacity: 0, scale: 0.98 }} whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }} transition={{ duration: 0.8, ease: "easeOut" }}
+                                src={project.plot} alt="Plot Map Blueprint"
+                                style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '12px', filter: 'sepia(0.1) contrast(1.15) brightness(0.95)', mixBlendMode: 'multiply' }}
                             />
                         </div>
                     </div>

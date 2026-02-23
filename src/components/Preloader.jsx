@@ -42,13 +42,13 @@ const Preloader = ({ onLoadingComplete }) => {
                     left: 0,
                     width: '100vw',
                     height: '100vh',
-                    backgroundColor: '#0a1128', // Dark Navy / Primary Color
+                    backgroundColor: '#ffffff', // White / Secondary Color
                     zIndex: 9999,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#ffffff'
+                    color: '#0a1128'      // Dark Navy / Primary Color
                 }}
             >
                 {/* Logo / Brand Name */}

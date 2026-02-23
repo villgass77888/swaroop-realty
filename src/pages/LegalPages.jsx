@@ -1,97 +1,97 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import useIsMobile from '../hooks/useIsMobile';
 
-const LegalPageShell = ({ title, lastUpdated, children }) => (
-    <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.8 }}
-        style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh', color: 'var(--color-primary)' }}
-    >
-        {/* Full-viewport cinematic Hero */}
-        <div style={{
-            position: 'relative',
-            height: '100vh',
-            width: '100vw',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            overflow: 'hidden',
-            backgroundColor: 'var(--color-primary)'
-        }}>
-            {/* Background image */}
-            <motion.div
-                initial={{ scale: 1.1 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 2, ease: 'easeOut' }}
-                style={{ position: 'absolute', inset: 0, zIndex: 0 }}
-            >
-                <img
-                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
-                    alt=""
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.35) grayscale(15%)' }}
-                />
-            </motion.div>
-
-            {/* Gradient overlay */}
+const LegalPageShell = ({ title, lastUpdated, children }) => {
+    const { isMobile } = useIsMobile();
+    return (
+        <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+            style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh', color: 'var(--color-primary)' }}
+        >
+            {/* Hero */}
             <div style={{
-                position: 'absolute', inset: 0, zIndex: 1,
-                background: 'linear-gradient(to bottom, rgba(10,17,40,0.3) 0%, transparent 40%, rgba(10,17,40,0.95) 100%)'
-            }} />
-
-            {/* Ambient glow */}
-            <motion.div
-                animate={{ opacity: [0.2, 0.5, 0.2], scale: [1, 1.15, 1] }}
-                transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut' }}
-                style={{
-                    position: 'absolute', top: '50%', left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: '60vw', height: '60vw',
-                    background: 'radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)',
-                    filter: 'blur(60px)', zIndex: 1, pointerEvents: 'none'
-                }}
-            />
-
-            {/* Text */}
-            <motion.div
-                style={{ position: 'relative', zIndex: 2, textAlign: 'center', color: 'var(--color-white)', padding: '0 5%' }}
-                initial="hidden"
-                animate="show"
-                variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.3 } } }}
-            >
-                <motion.p
-                    variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.8 } } }}
-                    style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '6px', opacity: 0.5, marginBottom: '1.5rem' }}
+                position: 'relative',
+                height: isMobile ? 'auto' : '100vh',
+                minHeight: isMobile ? '60vh' : 'auto',
+                width: '100vw',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                overflow: 'hidden', backgroundColor: 'var(--color-primary)'
+            }}>
+                {/* Background image */}
+                <motion.div
+                    initial={{ scale: 1.1 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 2, ease: 'easeOut' }}
+                    style={{ position: 'absolute', inset: 0, zIndex: 0 }}
                 >
-                    Legal
-                </motion.p>
-                <motion.h1
-                    variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] } } }}
-                    style={{ fontSize: 'clamp(3rem, 7vw, 6rem)', lineHeight: 1.05, letterSpacing: '-0.02em', marginBottom: '2rem', textShadow: '0 10px 40px rgba(0,0,0,0.5)', color: '#ffffff' }}
-                >
-                    {title}
-                </motion.h1>
-            </motion.div>
-        </div>
+                    <img
+                        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+                        alt=""
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.35) grayscale(15%)' }}
+                    />
+                </motion.div>
 
-        {/* Content */}
-        <div style={{ maxWidth: '800px', margin: '0 auto', padding: '80px 5%' }}>
-            {children}
-            <div style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '1px solid var(--color-border)' }}>
-                <Link to="/" style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '8px',
-                    color: 'var(--color-primary)', textDecoration: 'none',
-                    fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px',
-                    borderBottom: '1px solid var(--color-primary)', paddingBottom: '4px'
-                }}>
-                    ← Back to Home
-                </Link>
+                {/* Gradient overlay */}
+                <div style={{
+                    position: 'absolute', inset: 0, zIndex: 1,
+                    background: 'linear-gradient(to bottom, rgba(10,17,40,0.3) 0%, transparent 40%, rgba(10,17,40,0.95) 100%)'
+                }} />
+
+                {/* Ambient glow */}
+                <motion.div
+                    animate={{ opacity: [0.2, 0.5, 0.2], scale: [1, 1.15, 1] }}
+                    transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut' }}
+                    style={{
+                        position: 'absolute', top: '50%', left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: '60vw', height: '60vw',
+                        background: 'radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)',
+                        filter: 'blur(60px)', zIndex: 1, pointerEvents: 'none'
+                    }}
+                />
+
+                {/* Text */}
+                <motion.div
+                    style={{ position: 'relative', zIndex: 2, textAlign: 'center', color: 'var(--color-white)', padding: '0 5%' }}
+                    initial="hidden"
+                    animate="show"
+                    variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.3 } } }}
+                >
+                    <motion.p
+                        variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.8 } } }}
+                        style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '6px', opacity: 0.5, marginBottom: '1.5rem' }}
+                    >
+                        Legal
+                    </motion.p>
+                    <motion.h1
+                        variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] } } }}
+                        style={{ fontSize: 'clamp(3rem, 7vw, 6rem)', lineHeight: 1.05, letterSpacing: '-0.02em', marginBottom: '2rem', textShadow: '0 10px 40px rgba(0,0,0,0.5)', color: '#ffffff' }}
+                    >
+                        {title}
+                    </motion.h1>
+                </motion.div>
             </div>
-        </div>
-    </motion.div>
-);
+
+            {/* Content */}
+            <div style={{ maxWidth: '800px', margin: '0 auto', padding: '80px 5%' }}>
+                {children}
+                <div style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '1px solid var(--color-border)' }}>
+                    <Link to="/" style={{
+                        display: 'inline-flex', alignItems: 'center', gap: '8px',
+                        color: 'var(--color-primary)', textDecoration: 'none',
+                        fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px',
+                        borderBottom: '1px solid var(--color-primary)', paddingBottom: '4px'
+                    }}>
+                        ← Back to Home
+                    </Link>
+                </div>
+            </div>
+        </motion.div>
+    );
+};
 
 const Section = ({ title, children }) => (
     <div style={{ marginBottom: '3rem' }}>
@@ -174,3 +174,4 @@ export const Disclaimer = () => (
         </Section>
     </LegalPageShell>
 );
+
