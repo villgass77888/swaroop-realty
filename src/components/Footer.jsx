@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -12,7 +13,8 @@ const Footer = () => {
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
                 gap: '3rem',
-                marginBottom: '4rem'
+                marginBottom: '4rem',
+                alignItems: 'start'
             }}>
                 <div>
                     <img src="/logo-white.png" alt="Swaroop Realty Logo" style={{ height: '120px', width: 'auto', marginBottom: '1.5rem', objectFit: 'contain' }} />
@@ -21,7 +23,7 @@ const Footer = () => {
                     </p>
                 </div>
 
-                <div>
+                <div style={{ paddingTop: '35px' }}>
                     <h5 style={{ color: 'var(--color-white)', marginBottom: '1.5rem', fontFamily: 'var(--font-body)', fontWeight: 500, letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.85rem' }}>Contact Us</h5>
                     <ul style={{ listStyle: 'none', color: 'rgba(255, 255, 255, 0.7)', lineHeight: 2.2 }}>
                         <li><a href="mailto:contact@swarooprealty.com" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.3s' }}>contact@swarooprealty.com</a></li>
@@ -30,12 +32,12 @@ const Footer = () => {
                     </ul>
                 </div>
 
-                <div>
+                <div style={{ paddingTop: '35px' }}>
                     <h5 style={{ color: 'var(--color-white)', marginBottom: '1.5rem', fontFamily: 'var(--font-body)', fontWeight: 500, letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.85rem' }}>Legal</h5>
                     <ul style={{ listStyle: 'none', color: 'rgba(255, 255, 255, 0.7)', lineHeight: 2.2 }}>
-                        <li><a href="#" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.3s' }}>Privacy Policy</a></li>
-                        <li><a href="#" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.3s' }}>Terms of Service</a></li>
-                        <li><a href="#" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.3s' }}>Disclaimer</a></li>
+                        <li><Link to="/privacy-policy" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.3s' }}>Privacy Policy</Link></li>
+                        <li><Link to="/terms-of-service" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.3s' }}>Terms of Service</Link></li>
+                        <li><Link to="/disclaimer" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.3s' }}>Disclaimer</Link></li>
                     </ul>
                 </div>
             </div>

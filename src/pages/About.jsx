@@ -107,31 +107,6 @@ const About = () => {
                     </motion.p>
                 </motion.div>
 
-                {/* Scroll Indicator / Redirect */}
-                <motion.a
-                    href="#philosophy"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.5, duration: 1 }}
-                    style={{
-                        position: 'absolute',
-                        bottom: '5%',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        color: 'var(--color-white)',
-                        textDecoration: 'none',
-                        gap: '10px',
-                        zIndex: 2
-                    }}
-                >
-                    <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 500 }}>The Philosophy</span>
-                    <motion.div
-                        animate={{ y: [0, 10, 0] }}
-                        transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-                        style={{ height: '40px', width: '1px', backgroundColor: 'var(--color-white)' }}
-                    />
-                </motion.a>
             </div>
 
             <div id="philosophy" className="container" style={{ padding: 'var(--spacing-section) 5%', paddingTop: '160px' }}>
@@ -244,7 +219,7 @@ const About = () => {
                             <h4 style={{ fontSize: '2rem', fontFamily: 'var(--font-heading)', color: 'var(--color-primary)', marginBottom: '1.5rem' }}>
                                 Redefining Spiritual Luxury
                             </h4>
-                            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--color-text)', opacity: 0.8 }}>
+                            <p data-cursor-magnify style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--color-text)', opacity: 0.8 }}>
                                 To create a paradigm shift in how luxury real estate is perceived in holy cities. We envision Vrindavan not just as a pilgrimage destination, but as a premier global sanctuary where the world's most discerning individuals retreat to find ultimate peace, without ever compromising on world-class living standards.
                             </p>
                         </motion.div>
@@ -262,7 +237,7 @@ const About = () => {
                             <h4 style={{ fontSize: '2rem', fontFamily: 'var(--font-heading)', color: 'var(--color-primary)', marginBottom: '1.5rem' }}>
                                 Uncompromising Excellence
                             </h4>
-                            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--color-text)', opacity: 0.8 }}>
+                            <p data-cursor-magnify style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--color-text)', opacity: 0.8 }}>
                                 To meticulously acquire, design, and construct exclusive estates that seamlessly blend ancient architectural wisdom with modern bespoke amenities. Every Swaroop Realty project is an uncompromising commitment to quality, Vastu adherence, and delivering a breathtaking living experience.
                             </p>
                         </motion.div>

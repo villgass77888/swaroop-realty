@@ -1,9 +1,11 @@
 import React, { useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useLoading } from '../context/LoadingContext';
 
 const Hero = () => {
     const containerRef = useRef(null);
     const vidRef = useRef(null);
+    const { isLoading } = useLoading();
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -11,31 +13,17 @@ const Hero = () => {
     });
 
     useEffect(() => {
+        if (isLoading) return; // Don't play until preloader is done
         const timer = setTimeout(() => {
             if (vidRef.current) {
-                // Ensure the video plays forward initially after 0.3s
-                vidRef.current.playbackRate = 2.0; // Play at 2x speed
+                vidRef.current.playbackRate = 2.0;
                 vidRef.current.play().catch(e => console.log('Autoplay blocked', e));
             }
-        }, 300);
+        }, 600); // Small delay after reveal
         return () => clearTimeout(timer);
-    }, []);
+    }, [isLoading]);
 
-    useMotionValueEvent(scrollYProgress, "change", (latest) => {
-        const video = vidRef.current;
-        if (!video || Number.isNaN(video.duration)) return;
 
-        // Pause automated playback as soon as user scrolls down
-        if (latest > 0.01 && !video.paused) {
-            video.pause();
-        }
-
-        // Scrub video backward (deconstruct) as user scrolls down
-        if (latest > 0.01) {
-            const reverseTime = video.duration * (1 - latest);
-            video.currentTime = Math.max(0, Math.min(reverseTime, video.duration));
-        }
-    });
 
     const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
     const textY = useTransform(scrollYProgress, [0, 1], ["0%", "80%"]);
@@ -125,7 +113,7 @@ const Hero = () => {
                     opacity: useTransform(scrollYProgress, [0, 0.8], [1, 0])
                 }}
                 initial={{ opacity: 0, x: 300, scale: 0.9 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
+                animate={isLoading ? { opacity: 0, x: 300, scale: 0.9 } : { opacity: 1, x: 0, scale: 1 }}
                 transition={{ duration: 1.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
                 <video
@@ -179,7 +167,7 @@ const Hero = () => {
                 style={{ position: 'relative', zIndex: 3, y: textY, opacity, width: '100%', display: 'flex' }}
                 variants={containerVars}
                 initial="hidden"
-                animate="show"
+                animate={isLoading ? 'hidden' : 'show'}
             >
                 <div style={{ position: 'relative', zIndex: 1, left: '-3vw' }}>
                     <h1 style={{ color: 'var(--color-white)', fontSize: 'clamp(3.5rem, 6vw, 6.5rem)', lineHeight: 1.1, marginBottom: '2rem', letterSpacing: '-0.02em', textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
@@ -191,8 +179,8 @@ const Hero = () => {
                     <motion.div variants={itemVars} style={{ display: 'flex', gap: '30px', marginTop: '3.5rem', alignItems: 'center' }}>
                         <a href="#projects" style={{
                             padding: '15px 40px',
-                            border: '1px solid rgba(255, 255, 255, 0.3)',
-                            backgroundColor: 'transparent',
+                            border: '1px solid rgba(255, 255, 255, 0.35)',
+                            backgroundColor: 'rgba(255, 255, 255, 0.1)',
                             color: 'var(--color-white)',
                             textDecoration: 'none',
                             fontSize: '0.9rem',
@@ -200,16 +188,14 @@ const Hero = () => {
                             letterSpacing: '2px',
                             transition: 'all 0.4s ease',
                             fontFamily: 'var(--font-body)',
-                            fontWeight: 500,
-                            backdropFilter: 'blur(10px)',
-                            WebkitBackdropFilter: 'blur(10px)' // Add WebKit support so blur persists reliably across states
+                            fontWeight: 500
                         }}
                             onMouseOver={(e) => {
                                 e.currentTarget.style.backgroundColor = 'var(--color-white)';
                                 e.currentTarget.style.color = 'var(--color-primary)';
                             }}
                             onMouseOut={(e) => {
-                                e.currentTarget.style.backgroundColor = 'transparent';
+                                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
                                 e.currentTarget.style.color = 'var(--color-white)';
                             }}>
                             Explore Projects

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
+import { useLoading } from '../context/LoadingContext';
 
 const Navigation = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isHovered, setIsHovered] = useState(null);
     const location = useLocation();
+    const { isLoading } = useLoading();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -26,17 +28,18 @@ const Navigation = () => {
         { label: 'Contact Us', path: '/contact' }
     ];
 
-    const isDarkHeroPage = location.pathname === '/' || location.pathname === '/about' || location.pathname === '/contact';
-    // If we are on Home/About/Contact page and not scrolled, text is White (over dark hero)
+    const legalPages = ['/privacy-policy', '/terms-of-service', '/disclaimer'];
+    const isDarkHeroPage = location.pathname === '/' || location.pathname === '/about' || location.pathname === '/contact' || legalPages.includes(location.pathname);
+    // If we are on Home/About/Contact/Legal page and not scrolled, text is White (over dark hero)
     // Otherwise, if scrolled, header is dark blue, so text is White.
-    // If we are on a white page (Projects, Contact) and NOT scrolled, text is Dark Blue.
+    // If we are on a light page (Projects) and NOT scrolled, text is Dark Blue.
     const textColor = (isScrolled || (isDarkHeroPage && !isScrolled)) ? 'var(--color-white)' : 'var(--color-primary)';
     const borderColor = textColor === 'var(--color-white)' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(10, 17, 40, 0.3)';
 
     return (
         <motion.header
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
+            initial={{ y: -100, opacity: 0 }}
+            animate={isLoading ? { y: -100, opacity: 0 } : { y: 0, opacity: 1 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             style={{
                 position: 'fixed',

@@ -176,30 +176,6 @@ const Projects = () => {
                     A curated portfolio
                 </motion.p>
 
-                {/* Scroll Indicator / Redirect */}
-                <motion.a
-                    href="#projects-list"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1, duration: 1 }}
-                    style={{
-                        position: 'absolute',
-                        bottom: '10%',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        color: 'var(--color-primary)',
-                        textDecoration: 'none',
-                        gap: '10px'
-                    }}
-                >
-                    <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 500 }}>Discover</span>
-                    <motion.div
-                        animate={{ y: [0, 10, 0] }}
-                        transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-                        style={{ height: '40px', width: '1px', backgroundColor: 'var(--color-primary)' }}
-                    />
-                </motion.a>
             </div>
 
             <div id="projects-list">
