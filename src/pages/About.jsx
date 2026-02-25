@@ -8,6 +8,7 @@ const Counter = ({ value, label, suffix = "" }) => {
     const [isInView, setIsInView] = useState(false);
     const spring = useSpring(0, { bounce: 0, duration: 2500 });
     const display = useTransform(spring, (current) => Math.round(current));
+    const { isMobile } = useIsMobile();
 
     useEffect(() => {
         if (isInView) {
@@ -24,12 +25,12 @@ const Counter = ({ value, label, suffix = "" }) => {
             transition={{ duration: 1 }}
         >
             <div style={{ display: 'flex', alignItems: 'baseline', fontFamily: 'var(--font-heading)', color: 'var(--color-primary)' }}>
-                <motion.span style={{ fontSize: '4rem', display: 'block' }}>
+                <motion.span style={{ fontSize: isMobile ? '2.5rem' : '4rem', display: 'block' }}>
                     {display}
                 </motion.span>
-                <span style={{ fontSize: '3rem' }}>{suffix}</span>
+                <span style={{ fontSize: isMobile ? '2rem' : '3rem' }}>{suffix}</span>
             </div>
-            <span style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--color-text)', fontWeight: 500 }}>
+            <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: isMobile ? '1px' : '2px', color: 'var(--color-text)', fontWeight: 500, display: 'block', lineHeight: 1.3 }}>
                 {label}
             </span>
         </motion.div>
@@ -183,8 +184,8 @@ const About = () => {
                 {/* Statistics */}
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
-                    gap: '2rem', padding: '3rem 0',
+                    gridTemplateColumns: isMobile ? 'repeat(3, 1fr)' : 'repeat(4, 1fr)',
+                    gap: isMobile ? '1rem' : '2rem', padding: '3rem 0',
                     borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)',
                     marginBottom: isMobile ? '4rem' : '8rem'
                 }}>
@@ -236,6 +237,19 @@ const About = () => {
 
                 {/* Section 2: Craftsmanship */}
                 <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(12, 1fr)', gap: isMobile ? '2rem' : '4rem', alignItems: 'center' }}>
+
+                    {/* On mobile: title comes first (order 1), image second (order 2), text/button third (order 3) */}
+                    {/* Title — mobile only, rendered before image */}
+                    {isMobile && (
+                        <motion.h3
+                            initial="hidden" whileInView="show" viewport={{ once: true }} variants={textVars}
+                            style={{ fontSize: '1.8rem', fontFamily: 'var(--font-heading)', color: 'black' }}
+                        >
+                            Obsessive Craftsmanship
+                        </motion.h3>
+                    )}
+
+                    {/* Image */}
                     <motion.div
                         initial={{ opacity: 0, x: isMobile ? 0 : -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                         transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
@@ -248,11 +262,15 @@ const About = () => {
                         />
                     </motion.div>
 
+                    {/* Text + Button */}
                     <motion.div
                         initial="hidden" whileInView="show" viewport={{ once: true }} variants={textVars}
                         style={{ gridColumn: isMobile ? undefined : 'span 6', paddingLeft: isMobile ? '0' : '2rem' }}
                     >
-                        <h3 style={{ fontSize: isMobile ? '1.8rem' : '2.5rem', marginBottom: '1.5rem', fontFamily: 'var(--font-heading)', color: 'black' }}>Obsessive Craftsmanship</h3>
+                        {/* Desktop only title */}
+                        {!isMobile && (
+                            <h3 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontFamily: 'var(--font-heading)', color: 'black' }}>Obsessive Craftsmanship</h3>
+                        )}
                         <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--color-text)', marginBottom: '1.5rem' }}>
                             Every plot selected, every angle considered, and every villa designed is meticulously crafted to create spaces of profound elegance and enduring value. We partner with elite architects to build sprawling estates that respect the holy environment of Govardhan and Vrindavan.
                         </p>

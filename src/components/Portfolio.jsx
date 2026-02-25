@@ -202,6 +202,15 @@ const Portfolio = () => {
           .portfolio-item {
             height: 400px !important;
           }
+          /* On mobile: always show the title/subtitle/button — no hover needed */
+          .portfolio-item .overlay-content {
+            transform: translateY(0) !important;
+            opacity: 1 !important;
+          }
+          .portfolio-item .view-btn {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+          }
         }
       `}</style>
             <div className="container">

@@ -258,8 +258,9 @@ const Testimonials = () => {
                     .testimonial-card {
                         min-width: 85vw;
                     }
-                    .control-btn.left-btn { left: 0.5rem; }
-                    .control-btn.right-btn { right: 0.5rem; }
+                    .control-btn {
+                        display: none;
+                    }
                 }
             `}</style>
 

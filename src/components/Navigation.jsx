@@ -160,7 +160,10 @@ const Navigation = () => {
                             background: 'none', border: 'none',
                             padding: '8px', marginLeft: 'auto',
                             display: 'flex', flexDirection: 'column',
+                            alignItems: 'center',
                             gap: '5px', cursor: 'pointer', zIndex: 1001,
+                            width: '40px', height: '40px',
+                            justifyContent: 'center',
                         }}
                     >
                         {[0, 1, 2].map(i => (
@@ -168,9 +171,9 @@ const Navigation = () => {
                                 key={i}
                                 animate={
                                     menuOpen
-                                        ? i === 0 ? { rotate: 45, y: 10, width: 24 }
+                                        ? i === 0 ? { rotate: 45, y: 7, width: 24 }
                                             : i === 1 ? { opacity: 0, scaleX: 0 }
-                                                : { rotate: -45, y: -10, width: 24 }
+                                                : { rotate: -45, y: -7, width: 24 }
                                         : { rotate: 0, y: 0, opacity: 1, width: i === 1 ? 16 : 24 }
                                 }
                                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -207,7 +210,7 @@ const Navigation = () => {
                             gap: '2.5rem',
                         }}
                     >
-                        {menuItems.map((item, i) => (
+                        {menuItems.filter(item => item.label !== 'Contact Us').map((item, i) => (
                             <motion.div
                                 key={item.label}
                                 initial={{ opacity: 0, y: 30 }}

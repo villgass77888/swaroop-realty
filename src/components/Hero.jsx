@@ -99,6 +99,26 @@ const Hero = () => {
                 </motion.div>
             )}
 
+            {/* Mobile-only: hero bg image — bottom-to-top fade */}
+            {isMobile && (
+                <motion.div
+                    style={{
+                        position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+                        backgroundImage: 'url("/hero bg.png")',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        opacity: 0.45,
+                        maskImage: 'linear-gradient(to top, black 40%, transparent 100%)',
+                        WebkitMaskImage: 'linear-gradient(to top, black 40%, transparent 100%)',
+                        zIndex: 1, pointerEvents: 'none'
+                    }}
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={isLoading ? { opacity: 0, y: 40 } : { opacity: 0.45, y: 0 }}
+                    transition={{ duration: 1.4, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                />
+            )}
+
             {/* Left bg overlay — desktop only */}
             {!isMobile && (
                 <motion.div style={{

@@ -46,42 +46,30 @@ const Contact = () => {
                     gap: isMobile ? '2.5rem' : '4rem',
                     paddingBottom: 'var(--spacing-section)'
                 }}>
-                    {/* Info side */}
-                    <motion.div
-                        initial={{ opacity: 0, x: isMobile ? 0 : -50, y: isMobile ? 20 : 0 }}
-                        animate={{ opacity: 1, x: 0, y: 0 }}
-                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                        style={{ gridColumn: isMobile ? undefined : 'span 5' }}
-                    >
-                        <h1 style={{
-                            fontSize: isMobile ? 'clamp(2.4rem, 9vw, 3.5rem)' : 'clamp(3rem,5vw,4.5rem)',
-                            lineHeight: 1.1, marginBottom: '2.5rem', color: 'var(--color-white)'
-                        }}>
+                    {/* Mobile-only: Title rendered first (order 0) */}
+                    {isMobile && (
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                            style={{
+                                order: 0,
+                                fontSize: 'clamp(2.4rem, 9vw, 3.5rem)',
+                                lineHeight: 1.1, marginBottom: '0.5rem', color: 'var(--color-white)'
+                            }}
+                        >
                             Initiate <br /> a dialogue.
-                        </h1>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-                            <div>
-                                <h5 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--color-accent)', marginBottom: '0.8rem' }}>Global Headquarters</h5>
-                                <p style={{ fontSize: '1.1rem', lineHeight: 1.6, color: 'rgba(255,255,255,0.8)' }}>Near Jait Police Station,<br />Vrindavan - 281003</p>
-                            </div>
-                            <div>
-                                <h5 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--color-accent)', marginBottom: '0.8rem' }}>Private Consultation</h5>
-                                <a href="mailto:contact@swarooprealty.com" style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.8)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: '4px', display: 'inline-block' }}>
-                                    contact@swarooprealty.com
-                                </a>
-                                <br /><br />
-                                <a href="tel:+918383928784" style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.8)', textDecoration: 'none' }}>+91 83839 28784</a>
-                            </div>
-                        </div>
-                    </motion.div>
+                        </motion.h1>
+                    )}
 
-                    {/* Form side */}
+                    {/* Form side — order 1 on mobile */}
                     <motion.div
                         initial={{ opacity: 0, x: isMobile ? 0 : 50, y: isMobile ? 20 : 0 }}
                         animate={{ opacity: 1, x: 0, y: 0 }}
                         transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                         style={{
                             gridColumn: isMobile ? undefined : 'span 7',
+                            order: isMobile ? 1 : 0,
                             backgroundColor: 'rgba(255,255,255,0.05)',
                             backdropFilter: 'blur(24px)',
                             WebkitBackdropFilter: 'blur(24px)',
@@ -106,7 +94,7 @@ const Contact = () => {
                             <textarea placeholder="How may we assist you?" rows="4" style={{ ...inputStyle, resize: 'none' }} />
                             <motion.button
                                 type="button"
-                                whileTap={{ scale: 0.95 }}
+                                whileTap={{ scale: 0.93, opacity: 0.85 }}
                                 style={{
                                     marginTop: '1rem',
                                     padding: isMobile ? '1.3rem 0' : '1.5rem 4rem',
@@ -129,6 +117,38 @@ const Contact = () => {
                                 Submit Inquiry
                             </motion.button>
                         </form>
+                    </motion.div>
+
+                    {/* Info side — order 2 on mobile (after form), desktop: left column */}
+                    <motion.div
+                        initial={{ opacity: 0, x: isMobile ? 0 : -50, y: isMobile ? 20 : 0 }}
+                        animate={{ opacity: 1, x: 0, y: 0 }}
+                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                        style={{ gridColumn: isMobile ? undefined : 'span 5', order: isMobile ? 2 : 0 }}
+                    >
+                        {/* Desktop: show title here; mobile: title already rendered above */}
+                        {!isMobile && (
+                            <h1 style={{
+                                fontSize: 'clamp(3rem,5vw,4.5rem)',
+                                lineHeight: 1.1, marginBottom: '2.5rem', color: 'var(--color-white)'
+                            }}>
+                                Initiate <br /> a dialogue.
+                            </h1>
+                        )}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+                            <div>
+                                <h5 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--color-accent)', marginBottom: '0.8rem' }}>Global Headquarters</h5>
+                                <p style={{ fontSize: '1.1rem', lineHeight: 1.6, color: 'rgba(255,255,255,0.8)' }}>Near Jait Police Station,<br />Vrindavan - 281003</p>
+                            </div>
+                            <div>
+                                <h5 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--color-accent)', marginBottom: '0.8rem' }}>Private Consultation</h5>
+                                <a href="mailto:contact@swarooprealty.com" style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.8)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: '4px', display: 'inline-block' }}>
+                                    contact@swarooprealty.com
+                                </a>
+                                <br /><br />
+                                <a href="tel:+918383928784" style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.8)', textDecoration: 'none' }}>+91 83839 28784</a>
+                            </div>
+                        </div>
                     </motion.div>
                 </div>
             </div>

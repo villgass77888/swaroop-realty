@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import useIsMobile from '../hooks/useIsMobile';
@@ -137,6 +137,7 @@ const ProjectPanel = ({ project, index }) => {
 
 const Projects = () => {
     const { isMobile } = useIsMobile();
+    const [revealedIdx, setRevealedIdx] = useState(null);
     useEffect(() => { window.scrollTo(0, 0); }, []);
 
     return (
@@ -187,9 +188,9 @@ const Projects = () => {
                 overflow: 'hidden',
                 padding: '10rem 5%'
             }}>
-                {/* Background ambient glow */}
+                {/* Background ambient glow — opacity-only animation, blur is static CSS */}
                 <motion.div
-                    animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.2, 1] }}
+                    animate={{ opacity: [0.4, 0.7, 0.4] }}
                     transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
                     style={{
                         position: 'absolute',
@@ -198,7 +199,7 @@ const Projects = () => {
                         transform: 'translate(-50%, -50%)',
                         width: '70vw',
                         height: '70vw',
-                        background: 'radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 60%)',
+                        background: 'radial-gradient(circle, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0) 60%)',
                         filter: 'blur(80px)',
                         pointerEvents: 'none',
                         zIndex: 0
@@ -221,7 +222,11 @@ const Projects = () => {
                         { title: "Project [REDACTED]", subtitle: "Vrindavan \u2014 100+ Acre Mega-Township", badge: "Revealing Q4 2026", animBase: 3 },
                         { title: "The Elysian Expanse", subtitle: "Govardhan \u2014 Ultra-Private Estates", badge: "By Invitation Only", animBase: 4 }
                     ].map((proj, idx) => (
-                        <div key={idx} className="upcoming-project">
+                        <div
+                            key={idx}
+                            className={`upcoming-project${revealedIdx === idx ? ' revealed' : ''}`}
+                            onClick={() => setRevealedIdx(prev => prev === idx ? null : idx)}
+                        >
                             <div className="upcoming-bg-glow"></div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.5rem', position: 'relative', zIndex: 2 }}>
                                 <div className="upcoming-content">
@@ -321,9 +326,9 @@ const Projects = () => {
                     }
 
                     @keyframes gloomyChar {
-                        0% { opacity: 0.1; transform: translateY(0px) scale(0.95); filter: blur(8px); }
-                        50% { opacity: 0.5; transform: translateY(-3px) scale(1.05); filter: blur(3px); }
-                        100% { opacity: 0.1; transform: translateY(3px) scale(0.95); filter: blur(8px); }
+                        0%   { opacity: 0.1; transform: translateY(0px)   scale(0.95); letter-spacing: 4px; }
+                        50%  { opacity: 0.5; transform: translateY(-3px) scale(1.05);  letter-spacing: 6px; }
+                        100% { opacity: 0.1; transform: translateY(3px)  scale(0.95);  letter-spacing: 3px; }
                     }
                     
                     .gloom-wrap {
@@ -332,29 +337,33 @@ const Projects = () => {
                     
                     .gloom-char {
                         display: inline-block;
-                        transform: translateZ(0); /* Hardware accel */
-                        will-change: transform, opacity, filter;
+                        transform: translateZ(0);
+                        will-change: transform, opacity;
                         animation: gloomyChar 4s infinite alternate ease-in-out;
                         transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
                         letter-spacing: 4px;
                     }
                     
                     .upcoming-project:hover .gloom-char {
-                        /* Force default styles aggressively on hover */
                         animation: none !important;
                         opacity: 1 !important;
-                        filter: blur(0px) !important;
                         transform: translateY(0) scale(1) !important;
                         letter-spacing: 1px !important;
                         color: var(--color-white) !important;
                         text-shadow: 0 0 25px rgba(255,255,255,0.4);
                     }
                     @media (max-width: 768px) {
-                        .upcoming-project { padding:2.5rem 1rem; opacity:1; filter:none; transform:none; }
+                        .upcoming-project { padding:2.5rem 1rem; opacity:1; filter:none; transform:none; cursor:pointer; }
                         .projects-wrapper:hover .upcoming-project { opacity:1; filter:none; transform:none; }
                         .projects-wrapper .upcoming-project:hover { transform:none; }
-                        .upcoming-badge { font-size:0.75rem; letter-spacing:2px; padding:10px 16px; }
-                        .gloom-char { animation:none; opacity:0.7; filter:blur(4px); }
+                        /* Lightweight static blur on all 3 elements — no continuous animation */
+                        .gloom-char { animation:none; opacity:0.65; filter:blur(5px); will-change:auto; transition: filter 0.5s ease, opacity 0.5s ease; }
+                        .upcoming-subtitle { filter:blur(8px); opacity:0.5; transition: filter 0.5s ease, opacity 0.5s ease, color 0.5s ease; }
+                        .upcoming-badge { font-size:0.75rem; letter-spacing:2px; padding:10px 16px; filter:blur(6px); opacity:0.4; transition: filter 0.5s ease, opacity 0.5s ease, background-color 0.5s ease, color 0.5s ease; }
+                        /* Tap to reveal — all blur fades out smoothly together */
+                        .upcoming-project.revealed .gloom-char { filter:blur(0px) !important; opacity:1 !important; letter-spacing:1px; color:var(--color-white); text-shadow: 0 0 20px rgba(255,255,255,0.3); }
+                        .upcoming-project.revealed .upcoming-subtitle { filter:blur(0px) !important; opacity:1 !important; color:rgba(255,255,255,0.9) !important; }
+                        .upcoming-project.revealed .upcoming-badge { filter:blur(0px) !important; opacity:1 !important; color:var(--color-primary); background-color:var(--color-white); border-color:var(--color-white); }
                     }
                 `}</style>
             </div>
