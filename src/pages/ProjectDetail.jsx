@@ -6,18 +6,18 @@ import useIsMobile from '../hooks/useIsMobile';
 // Mock DB matching Projects array
 const allProjects = {
     '1': {
-        title: 'Krishna Valley Estates', subtitle: '50-Acre Luxury Villa Community', location: 'Vrindavan, UP',
+        title: 'Brij Garden Vrindavan', subtitle: '10-Acre Land Plot Project', location: 'Jait, Vrindavan',
         image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
         plot: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        desc: 'An unparalleled sprawling community set amidst the holy land of Vrindavan. Krishna Valley Estates offers ready-to-move custom villas and massive premium plots. Integrated with world-class landscaping, clubhouses, and serene walking paths designed entirely in accordance with Vastu Shastra.',
-        measurements: { area: '50 Acres Total', plotSizes: '200 - 1000 Sq.Yards', parks: '12 Themed Gardens', security: '3-Tier Smart Security' }
+        desc: 'Brij Garden Vrindavan is a thoughtfully planned 10-acre land plot development situated in Jait, on the outskirts of sacred Vrindavan. Conceived with Vastu-aligned master planning, the layout offers residentially zoned plots within a community shaped by discipline, green corridors, and the spiritual character of the Braj land. Each plot has been carefully demarcated to allow homeowners to build with intention — honouring both the sanctity of the soil and the practical needs of long-term living. With clear titles, direct approach roads, and phased infrastructure development, Brij Garden is designed for families who value land with roots.',
+        measurements: { area: '10 Acres Total', plotSizes: 'On Request', location: 'Jait, Vrindavan', status: 'Active Development' }
     },
     '2': {
-        title: 'Radha Kunj Villas', subtitle: 'Exclusive Smart Villas', location: 'Vrindavan, UP',
+        title: 'Radha Kunj Villas', subtitle: 'Vastu Villas — VIP Road, Vrindavan', location: 'VIP Road, Vrindavan',
         image: 'https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
         plot: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        desc: 'Situated walking distance from Prem Mandir, Radha Kunj Villas represent the ultimate boutique enclave. Featuring completely automated smart-home ecosystems, private plunge pools, and rare Italian marble flooring, this project blends divine tranquility with uncompromised modern opulence.',
-        measurements: { area: '3.5 Acres', plotSizes: '400 Sq.Yards', features: 'Private Automation', bedrooms: '4/5 Suites per Villa' }
+        desc: 'Set on VIP Road — one of Vrindavan\'s most sought-after addresses — Radha Kunj Villas is a 4.5-acre boutique villa community built around vastu-compliant design and refined Indian craftsmanship. Each villa has been oriented and planned to maximise light, airflow, and spiritual alignment with the sacred geography of Braj. The development is structured for families who seek both permanence and proximity to the divine — walking distance from the major temples and the Yamuna ghats, yet discreetly set within a gated, landscaped enclave. An enduring residence designed not merely to impress, but to belong.',
+        measurements: { area: '4.5 Acres', location: 'VIP Road, Vrindavan', planning: 'Vastu-Aligned', status: 'Active Development' }
     },
     '3': {
         title: 'The Girdhar Valley Farms', subtitle: 'Exclusive Farm Retreat', location: 'Vrindavan, UP',

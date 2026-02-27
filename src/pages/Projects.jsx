@@ -1,23 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import useIsMobile from '../hooks/useIsMobile';
 
 const allProjects = [
     {
         id: 1,
-        title: 'Krishna Valley Estates',
-        subtitle: '50-Acre Luxury Villa Community',
-        location: 'Vrindavan, UP',
+        title: 'Brij Garden Vrindavan',
+        subtitle: '10-Acre Land Plot Project',
+        location: 'Jait, Vrindavan',
         image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
         year: '2024'
     },
     {
         id: 2,
         title: 'Radha Kunj Villas',
-        subtitle: 'Exclusive Smart Villas',
-        location: 'Vrindavan, UP',
-        image: 'https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80', // Greenery luxury villa
+        subtitle: 'Vastu Villas — VIP Road, Vrindavan',
+        location: 'VIP Road, Vrindavan',
+        image: 'https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
         year: '2023'
     },
     {
@@ -42,8 +42,16 @@ const ProjectPanel = ({ project, index }) => {
     const ref = useRef(null);
     const { isMobile } = useIsMobile();
     const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-    const imgY = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
-    const textY = useTransform(scrollYProgress, [0, 1], ["40%", "-40%"]);
+
+    // Spring config: stiff + well-damped = zero perceptible lag at normal speed,
+    // but smooths out the Lenis/native-scroll desync jitter on first-load scroll
+    const springCfg = { stiffness: 120, damping: 30, restDelta: 0.001 };
+
+    const rawImgY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+    const rawTextY = useTransform(scrollYProgress, [0, 1], isMobile ? ["0%", "0%"] : ["20%", "-20%"]);
+
+    const imgY = useSpring(rawImgY, springCfg);
+    const textY = useSpring(rawTextY, springCfg);
 
     return (
         <div
@@ -64,7 +72,8 @@ const ProjectPanel = ({ project, index }) => {
                     position: 'absolute',
                     top: 0, left: 0, right: 0, bottom: 0,
                     y: imgY,
-                    height: '140%' // Extra height for parallax travel
+                    height: '140%',
+                    willChange: 'transform',
                 }}
             >
                 <img
@@ -87,7 +96,8 @@ const ProjectPanel = ({ project, index }) => {
                     y: textY,
                     color: 'var(--color-white)',
                     textAlign: 'center',
-                    textShadow: '0 10px 30px rgba(0,0,0,0.6)'
+                    textShadow: '0 10px 30px rgba(0,0,0,0.6)',
+                    willChange: 'transform',
                 }}
             >
                 <div style={{ fontSize: '1rem', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '1rem', fontFamily: 'var(--font-body)' }}>
@@ -137,7 +147,8 @@ const ProjectPanel = ({ project, index }) => {
 
 const Projects = () => {
     const { isMobile } = useIsMobile();
-    const [revealedIdx, setRevealedIdx] = useState(null);
+    const [revealedIdx, setRevealedIdx] = useState(null); // mobile tap toggle
+    const [hoveredIdx, setHoveredIdx] = useState(null); // desktop hover
     useEffect(() => { window.scrollTo(0, 0); }, []);
 
     return (
@@ -157,7 +168,7 @@ const Projects = () => {
                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                     style={{ fontSize: isMobile ? 'clamp(2.8rem, 11vw, 5rem)' : 'clamp(4rem, 8vw, 8rem)', marginBottom: '1rem', textAlign: 'center' }}
                 >
-                    Signature Works
+                    Signature <em>Works</em>
                 </motion.h1>
                 <motion.p
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
@@ -219,32 +230,41 @@ const Projects = () => {
 
                 <div className="projects-wrapper" style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', width: '100%', maxWidth: '1200px' }}>
                     {[
-                        { title: "Project [REDACTED]", subtitle: "Vrindavan \u2014 100+ Acre Mega-Township", badge: "Revealing Q4 2026", animBase: 3 },
-                        { title: "The Elysian Expanse", subtitle: "Govardhan \u2014 Ultra-Private Estates", badge: "By Invitation Only", animBase: 4 }
-                    ].map((proj, idx) => (
-                        <div
-                            key={idx}
-                            className={`upcoming-project${revealedIdx === idx ? ' revealed' : ''}`}
-                            onClick={() => setRevealedIdx(prev => prev === idx ? null : idx)}
-                        >
-                            <div className="upcoming-bg-glow"></div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.5rem', position: 'relative', zIndex: 2 }}>
-                                <div className="upcoming-content">
-                                    <h3 style={{ fontSize: isMobile ? 'clamp(1.5rem, 6vw, 2.5rem)' : 'clamp(2rem, 4vw, 3.5rem)', color: 'var(--color-white)', margin: '0 0 1rem 0', fontFamily: 'var(--font-heading)' }}>
-                                        <span className="gloom-wrap">
-                                            {proj.title.split('').map((char, i) => (
-                                                <span key={i} className="gloom-char" style={{ animationDelay: `${(i * 0.15) % 2}s`, animationDuration: `${proj.animBase + (i * 0.2) % 2}s` }}>
-                                                    {char === ' ' ? '\u00A0' : char}
-                                                </span>
-                                            ))}
-                                        </span>
-                                    </h3>
-                                    <p className="upcoming-subtitle" style={{ fontSize: isMobile ? '0.8rem' : '1.1rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '4px', textTransform: 'uppercase', margin: 0 }}>{proj.subtitle}</p>
+                        { title: "Girdhar Valley Farms", subtitle: "Vrindavan \u2014 11.5 Acres of Sacred Farmland", badge: "Coming Soon", animBase: 3 },
+                        { title: "Radha Kunj Villas", subtitle: "VIP Road, Vrindavan \u2014 4.5 Acres of Boutique Villas", badge: "By Invitation Only", animBase: 4 },
+                        { title: "Roopvan Mudhouse", subtitle: "Desi Atas, Vrindavan Road \u2014 11 Acres of Earth Living", badge: "Revealing Soon", animBase: 3.5 }
+                    ].map((proj, idx) => {
+                        const isRevealed = isMobile
+                            ? revealedIdx === idx          // mobile: tap
+                            : hoveredIdx === idx;         // desktop: cursor hover
+                        const isPeered = !isMobile && hoveredIdx !== null && hoveredIdx !== idx;
+                        return (
+                            <div
+                                key={idx}
+                                className={`upcoming-project${isRevealed ? ' revealed' : ''}${isPeered ? ' peered' : ''}`}
+                                onClick={() => isMobile && setRevealedIdx(prev => prev === idx ? null : idx)}
+                                onMouseEnter={() => !isMobile && setHoveredIdx(idx)}
+                                onMouseLeave={() => !isMobile && setHoveredIdx(null)}
+                            >
+                                <div className="upcoming-bg-glow"></div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.5rem', position: 'relative', zIndex: 2 }}>
+                                    <div className="upcoming-content">
+                                        <h3 style={{ fontSize: isMobile ? 'clamp(1.5rem, 6vw, 2.5rem)' : 'clamp(2rem, 4vw, 3.5rem)', color: 'var(--color-white)', margin: '0 0 1rem 0', fontFamily: 'var(--font-heading)' }}>
+                                            <span className="gloom-wrap">
+                                                {proj.title.split('').map((char, i) => (
+                                                    <span key={i} className="gloom-char" style={{ animationDelay: `${(i * 0.15) % 2}s`, animationDuration: `${proj.animBase + (i * 0.2) % 2}s` }}>
+                                                        {char === ' ' ? '\u00A0' : char}
+                                                    </span>
+                                                ))}
+                                            </span>
+                                        </h3>
+                                        <p className="upcoming-subtitle" style={{ fontSize: isMobile ? '0.8rem' : '1.1rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '4px', textTransform: 'uppercase', margin: 0 }}>{proj.subtitle}</p>
+                                    </div>
+                                    <span className="upcoming-badge">{proj.badge}</span>
                                 </div>
-                                <span className="upcoming-badge">{proj.badge}</span>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
 
                 <style>{`
@@ -255,24 +275,23 @@ const Projects = () => {
                         position: relative;
                         padding: 4rem 2rem;
                         border-bottom: 1px solid rgba(255,255,255,0.05);
-                        opacity: 0.4;
+                        opacity: 0.75;
                         transform: scale(0.98);
-                        /* Apple-esque buttery spring */
                         transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-                        filter: blur(6px) grayscale(100%);
+                        filter: blur(12px) grayscale(60%);
                         cursor: pointer;
                         border-radius: 16px;
                     }
-                    
-                    /* The peer dimming effect (Dim all others when container is hovered) */
-                    .projects-wrapper:hover .upcoming-project {
-                        opacity: 0.1;
-                        filter: blur(12px) grayscale(100%);
-                        transform: scale(0.95);
+
+                    /* JS-driven peer dimming */
+                    .upcoming-project.peered {
+                        opacity: 0.55;
+                        filter: blur(15px) grayscale(80%);
+                        transform: scale(0.96);
                     }
-                    
-                    /* The focus effect (Restore and elevate the exact hovered item) */
-                    .projects-wrapper .upcoming-project:hover {
+
+                    /* JS-driven reveal */
+                    .upcoming-project.revealed {
                         opacity: 1;
                         filter: blur(0px) grayscale(0%);
                         transform: scale(1) translateX(2rem);
@@ -357,9 +376,9 @@ const Projects = () => {
                         .projects-wrapper:hover .upcoming-project { opacity:1; filter:none; transform:none; }
                         .projects-wrapper .upcoming-project:hover { transform:none; }
                         /* Lightweight static blur on all 3 elements — no continuous animation */
-                        .gloom-char { animation:none; opacity:0.65; filter:blur(5px); will-change:auto; transition: filter 0.5s ease, opacity 0.5s ease; }
-                        .upcoming-subtitle { filter:blur(8px); opacity:0.5; transition: filter 0.5s ease, opacity 0.5s ease, color 0.5s ease; }
-                        .upcoming-badge { font-size:0.75rem; letter-spacing:2px; padding:10px 16px; filter:blur(6px); opacity:0.4; transition: filter 0.5s ease, opacity 0.5s ease, background-color 0.5s ease, color 0.5s ease; }
+                        .gloom-char { animation:none; opacity:0.75; filter:blur(4px); will-change:auto; transition: filter 0.5s ease, opacity 0.5s ease; }
+                        .upcoming-subtitle { filter:blur(5px); opacity:0.65; transition: filter 0.5s ease, opacity 0.5s ease, color 0.5s ease; }
+                        .upcoming-badge { font-size:0.75rem; letter-spacing:2px; padding:10px 16px; filter:blur(4px); opacity:0.55; transition: filter 0.5s ease, opacity 0.5s ease, background-color 0.5s ease, color 0.5s ease; }
                         /* Tap to reveal — all blur fades out smoothly together */
                         .upcoming-project.revealed .gloom-char { filter:blur(0px) !important; opacity:1 !important; letter-spacing:1px; color:var(--color-white); text-shadow: 0 0 20px rgba(255,255,255,0.3); }
                         .upcoming-project.revealed .upcoming-subtitle { filter:blur(0px) !important; opacity:1 !important; color:rgba(255,255,255,0.9) !important; }

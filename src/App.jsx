@@ -41,7 +41,7 @@ const AppInner = () => {
       {isLoading && <Preloader onLoadingComplete={() => setIsLoading(false)} />}
 
       <Router>
-        <ReactLenis root options={{ lerp: 0.05, duration: 1.5, smoothTouch: true }}>
+        <ReactLenis root options={{ lerp: 0.075, smoothTouch: true, touchMultiplier: 1.2 }}>
           <ScrollToTop />
           <div className="app-wrapper relative" style={{ opacity: isLoading ? 0 : 1, transition: 'opacity 0.8s ease' }}>
             <Navigation />

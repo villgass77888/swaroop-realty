@@ -56,7 +56,7 @@ const Hero = () => {
             }}
         >
             {/* Background video */}
-            <motion.div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, y: backgroundY, scale, zIndex: 0 }}>
+            <motion.div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, y: backgroundY, scale, zIndex: 0, willChange: 'transform' }}>
                 <video
                     autoPlay loop muted playsInline
                     style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.55) contrast(1.1) grayscale(20%)' }}
@@ -141,7 +141,8 @@ const Hero = () => {
                 style={{
                     position: 'relative', zIndex: 3, y: textY, opacity,
                     width: '100%', display: 'flex',
-                    justifyContent: isMobile ? 'center' : 'flex-start'
+                    justifyContent: isMobile ? 'center' : 'flex-start',
+                    willChange: 'transform, opacity',
                 }}
                 variants={containerVars}
                 initial="hidden"

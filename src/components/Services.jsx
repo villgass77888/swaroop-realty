@@ -48,10 +48,11 @@ const ServiceCard = ({ svc, idx }) => {
     );
 };
 
-// Desktop service row (unchanged)
+// Desktop service row
 const ServiceRow = ({ svc, idx, setIsListHovered }) => {
     const rowRef = useRef(null);
     const [isHovered, setIsHovered] = useState(false);
+
     return (
         <motion.div
             ref={rowRef}
@@ -118,7 +119,7 @@ const Services = () => {
             {!isMobile && (
                 <motion.div
                     initial={{ opacity: 0, x: 200, scale: 0.95 }}
-                    animate={{ opacity: isInView ? (isListHovered ? 0.2 : 0.4) : 0, x: isInView ? 0 : 200, scale: isInView ? 1 : 0.95, filter: isListHovered ? 'blur(10px)' : 'blur(0px)' }}
+                    animate={{ opacity: isInView ? (isListHovered ? 0.2 : 0.4) : 0, x: isInView ? 0 : 200, scale: isInView ? 1 : 0.95 }}
                     transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
                     style={{
                         transformPerspective: 1200, rotateX: springRotateX, rotateY: springRotateY,
@@ -126,7 +127,10 @@ const Services = () => {
                         backgroundImage: 'url(/blueprint-bg.png)', backgroundSize: 'cover', backgroundPosition: 'left center',
                         WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
                         maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
-                        pointerEvents: 'none', zIndex: 0
+                        pointerEvents: 'none', zIndex: 0,
+                        willChange: 'transform, opacity',
+                        filter: isListHovered ? 'blur(10px)' : 'blur(0px)',
+                        transition: 'filter 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
                     }}
                 />
             )}
@@ -136,7 +140,7 @@ const Services = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ fontSize: 'clamp(2.2rem, 5vw, 5rem)', marginBottom: isMobile ? '2rem' : '4rem', textAlign: 'center', color: 'var(--color-primary)' }}
+                    style={{ fontSize: 'clamp(3rem, 5vw, 5rem)', marginBottom: isMobile ? '2rem' : '4rem', textAlign: 'center', color: 'var(--color-primary)' }}
                 >
                     <span>Our </span><span style={{ fontStyle: 'italic', fontFamily: 'var(--font-heading)' }}>Expertise</span>
                 </motion.h2>

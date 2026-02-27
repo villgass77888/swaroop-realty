@@ -58,7 +58,7 @@ const Contact = () => {
                                 lineHeight: 1.1, marginBottom: '0.5rem', color: 'var(--color-white)'
                             }}
                         >
-                            Initiate <br /> a dialogue.
+                            Initiate <br /><em>a dialogue.</em>
                         </motion.h1>
                     )}
 
@@ -132,7 +132,7 @@ const Contact = () => {
                                 fontSize: 'clamp(3rem,5vw,4.5rem)',
                                 lineHeight: 1.1, marginBottom: '2.5rem', color: 'var(--color-white)'
                             }}>
-                                Initiate <br /> a dialogue.
+                                Initiate <br /><em>a dialogue.</em>
                             </h1>
                         )}
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>

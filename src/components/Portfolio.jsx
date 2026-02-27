@@ -1,20 +1,21 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import useIsMobile from '../hooks/useIsMobile';
 
 const projects = [
     {
         id: 1,
-        title: 'Krishna Valley Estates',
-        subtitle: '50-Acre Luxury Villa Community',
+        title: 'Brij Garden Vrindavan',
+        subtitle: '10-Acre Land Plot — Jait, Vrindavan',
         image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80',
         type: 'large'
     },
     {
         id: 2,
         title: 'Radha Kunj Villas',
-        subtitle: 'Exclusive Smart Villas',
-        image: 'https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80', // Greenery luxury villa
+        subtitle: 'Vastu Villas — VIP Road, Vrindavan',
+        image: 'https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
         type: 'tall'
     },
     {
@@ -29,6 +30,7 @@ const projects = [
 const PortfolioItem = ({ project, index }) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-10%" });
+    const { isMobile } = useIsMobile();
     const { scrollYProgress } = useScroll({
         target: ref,
         offset: ["start end", "end start"]
@@ -44,12 +46,27 @@ const PortfolioItem = ({ project, index }) => {
         }
     };
 
+    // Mobile: simple opacity/y (clipPath is unreliable on WebKit)
+    // Desktop: cinematic clipPath wipe from bottom
+    const mobileAnim = {
+        initial: { opacity: 0, y: 40 },
+        whileInView: { opacity: 1, y: 0 },
+        transition: { duration: 1, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] },
+    };
+    const desktopAnim = {
+        initial: { clipPath: 'inset(100% 0 0 0)' },
+        whileInView: { clipPath: 'inset(0% 0 0 0)' },
+        transition: { duration: 1.4, delay: index * 0.18, ease: [0.77, 0, 0.175, 1] },
+    };
+    const anim = isMobile ? mobileAnim : desktopAnim;
+
     return (
         <motion.div
             ref={ref}
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 1.2, delay: index * 0.2, ease: [0.16, 1, 0.3, 1] }}
+            initial={anim.initial}
+            whileInView={anim.whileInView}
+            viewport={{ once: true, margin: '-5%' }}
+            transition={anim.transition}
             style={{
                 ...getGridSpan(project.type),
                 position: 'relative',
@@ -57,7 +74,8 @@ const PortfolioItem = ({ project, index }) => {
                 borderRadius: '8px',
                 height: '100%',
                 minHeight: '400px',
-                display: 'block'
+                display: 'block',
+                willChange: isMobile ? 'transform, opacity' : 'clip-path',
             }}
             className="portfolio-item"
         >
@@ -110,7 +128,8 @@ const PortfolioItem = ({ project, index }) => {
                     style={{
                         position: 'absolute',
                         top: '-20%', left: '-10%', right: '-10%', bottom: '-20%',
-                        y: imgY
+                        y: imgY,
+                        willChange: 'transform',
                     }}
                 >
                     <img
