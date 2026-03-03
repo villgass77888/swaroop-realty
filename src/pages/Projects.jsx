@@ -2,14 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import useIsMobile from '../hooks/useIsMobile';
+import SEOHead from '../components/SEOHead';
 
 const allProjects = [
     {
         id: 1,
         title: 'Brij Garden Vrindavan',
-        subtitle: '10-Acre Land Plot Project',
+        subtitle: '15-Acre Land Plot Project',
         location: 'Jait, Vrindavan',
-        image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
+        image: '/brij-garden.jpg',
         year: '2024'
     },
     {
@@ -59,7 +60,7 @@ const ProjectPanel = ({ project, index }) => {
             style={{
                 position: 'relative',
                 width: '100vw',
-                height: isMobile ? '70vh' : '100vh',
+                height: isMobile ? '100vh' : '100vh',
                 minHeight: isMobile ? '400px' : 'auto',
                 overflow: 'hidden',
                 display: 'flex',
@@ -153,15 +154,20 @@ const Projects = () => {
 
     return (
         <div style={{ backgroundColor: 'var(--color-primary)' }}>
+            <SEOHead
+                title="Real Estate Projects in Vrindavan — Vastu Plots, Villas & Farmland"
+                description="Explore Swaroop Realty's portfolio of premium real estate projects in Vrindavan, Govardhan & Braj. Vastu-compliant residential plots, luxury villas, and sacred farmland. Enquire today."
+                keywords="real estate projects Vrindavan, plots for sale Vrindavan, vastu villas Vrindavan, land for sale Braj, Brij Garden Vrindavan, Radha Kunj Villas, Govardhan plots, farmhouse Vrindavan, luxury plots Mathura, residential land Vrindavan"
+                canonical="/projects"
+            />
             {/* Intro */}
             <div style={{
                 position: 'relative',
-                height: isMobile ? 'auto' : '100vh',
-                minHeight: isMobile ? '60vh' : 'auto',
+                height: '100vh',
                 width: '100vw',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 backgroundColor: 'var(--color-bg)', color: 'var(--color-primary)',
-                flexDirection: 'column', padding: isMobile ? '130px 5% 80px' : '0'
+                flexDirection: 'column', padding: isMobile ? '0 5%' : '0'
             }}>
                 <motion.h1
                     initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}

@@ -14,8 +14,7 @@ const LegalPageShell = ({ title, lastUpdated, children }) => {
             {/* Hero */}
             <div style={{
                 position: 'relative',
-                height: isMobile ? 'auto' : '100vh',
-                minHeight: isMobile ? '60vh' : 'auto',
+                height: '100vh',
                 width: '100vw',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 overflow: 'hidden', backgroundColor: 'var(--color-primary)'

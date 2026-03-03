@@ -7,8 +7,8 @@ const projects = [
     {
         id: 1,
         title: 'Brij Garden Vrindavan',
-        subtitle: '10-Acre Land Plot — Jait, Vrindavan',
-        image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80',
+        subtitle: '15-Acre Land Plot — Jait, Vrindavan',
+        image: '/brij-garden.jpg',
         type: 'large'
     },
     {

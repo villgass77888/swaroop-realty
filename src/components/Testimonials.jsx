@@ -6,33 +6,33 @@ import useIsMobile from '../hooks/useIsMobile';
 const testimonialsData = [
     {
         id: 1,
-        name: 'Aarav Singhania',
-        text: '"Swaroop Realty didn\'t just find me a plot; they curated a sanctuary. The Vastu-compliant layout they recommended in Vrindavan brought an incredible sense of peace to our family. Their end-to-end execution was flawless."',
-        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80'
+        name: 'Naveen Raj Ghiraw',
+        text: '"I was searching for a reliable property in Vrindavan for a long time, and Best Realty truly exceeded my expectations. The team guided me at every step with complete transparency. From site visits to documentation, everything was smooth and professionally handled. I genuinely felt they cared about my investment. Highly recommended for anyone looking for trusted real estate services in Vrindavan."',
+        image: '/client-naveen.png'
     },
     {
         id: 2,
-        name: 'Priya Mehra',
-        text: '"From the very first consultation to handing over the keys of our bespoke villa, the team was extraordinary. The architecture perfectly blends traditional Indian aesthetics with modern resort-style luxury."',
-        image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80'
+        name: 'Akhilesh Kumar Chaturvedi',
+        text: '"Best Realty made my land purchase experience completely stress-free. Their knowledge of the Vrindavan market and clear communication gave me full confidence in my decision. They explained every detail patiently and ensured all legal formalities were properly managed. It\'s rare to find such honest and dedicated service."',
+        image: '/client-akhilesh.png'
     },
     {
         id: 3,
-        name: 'Rohan Desai',
-        text: '"Their deep understanding of the Vrindavan real estate landscape is unmatched. They handled all the complex legal vetting and environmental assessments seamlessly, making it a stress-free investment."',
-        image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80'
+        name: 'Rajesh Garg',
+        text: '"I appreciate the professionalism and commitment shown by the Best Realty team. They helped me choose the right plot according to my budget and future goals. What impressed me most was their transparency and timely updates throughout the process. I would definitely work with them again."',
+        image: '/client-rajesh.png'
     },
     {
         id: 4,
-        name: 'Kavita Verma',
-        text: '"As an NRI, I was worried about the turnkey execution, but Swaroop Realty delivered above and beyond. My home was handed over immaculate, fully landscaped, and beautifully furnished."',
-        image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80'
+        name: 'Anshima Sharma',
+        text: '"Buying property can be overwhelming, but Best Realty made it simple and comfortable for me. The team was approachable, supportive, and very responsive to all my queries. Their guidance helped me make a confident investment in Vrindavan. Truly a trustworthy real estate partner."',
+        image: '/client-anshima.png'
     },
     {
         id: 5,
-        name: 'Siddharth Reddy',
-        text: '"A truly premium experience. Their focus on exclusive parcels guarantees an appreciation potential that is hard to find anywhere else. I highly recommend their expertise."',
-        image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80'
+        name: 'Aishwarya Vashistha',
+        text: '"My experience with Best Realty has been excellent from start to finish. They understand client requirements deeply and suggest options that genuinely match your needs. The entire process was smooth, organized, and transparent. I\'m extremely satisfied with my purchase."',
+        image: '/client-aishwarya.png'
     }
 ];
 

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import useIsMobile from '../hooks/useIsMobile';
+import SEOHead from '../components/SEOHead';
 
 const Contact = () => {
     const { isMobile } = useIsMobile();
@@ -29,6 +30,12 @@ const Contact = () => {
             position: 'relative',
             overflow: 'hidden'
         }}>
+            <SEOHead
+                title="Contact — Real Estate Enquiries in Vrindavan, Braj"
+                description="Contact Swaroop Realty for real estate enquiries in Vrindavan. Call +91 83839 28784 or visit Near Jait Police Station, Vrindavan 281003. Enquire about vastu plots, villas, and farmland in Braj."
+                keywords="contact real estate Vrindavan, real estate agent Vrindavan, property enquiry Vrindavan, buy plot Vrindavan contact, Swaroop Realty contact, real estate office Vrindavan 281003, Braj property enquiry"
+                canonical="/contact"
+            />
             {/* Background decor — hidden on mobile to avoid overflow */}
             {!isMobile && (
                 <motion.div

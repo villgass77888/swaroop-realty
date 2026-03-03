@@ -7,10 +7,116 @@ import Press from '../components/Press';
 import Cta from '../components/Cta';
 import Testimonials from '../components/Testimonials';
 import ScrollProgressBar from '../components/ScrollProgressBar';
+import SEOHead from '../components/SEOHead';
+import FAQ from '../components/FAQ';
+
+const homeSchema = [
+    {
+        '@context': 'https://schema.org',
+        '@type': ['LocalBusiness', 'RealEstateAgent'],
+        name: 'Swaroop Realty',
+        description: 'Premium vastu-compliant real estate developer in Vrindavan, Braj. Specialising in residential plots, villas, and sacred farmland with 35+ years of trusted experience.',
+        url: 'https://swarooprealty.com',
+        logo: 'https://swarooprealty.com/logo-dark.png',
+        image: 'https://swarooprealty.com/vrindavan-sunrise.png',
+        telephone: '+918383928784',
+        email: 'contact@swarooprealty.com',
+        foundingDate: '1990',
+        address: {
+            '@type': 'PostalAddress',
+            streetAddress: 'Near Jait Police Station',
+            addressLocality: 'Vrindavan',
+            addressRegion: 'Uttar Pradesh',
+            postalCode: '281003',
+            addressCountry: 'IN',
+        },
+        geo: {
+            '@type': 'GeoCoordinates',
+            latitude: 27.5744,
+            longitude: 77.6987,
+        },
+        areaServed: [
+            { '@type': 'City', name: 'Vrindavan' },
+            { '@type': 'City', name: 'Mathura' },
+            { '@type': 'City', name: 'Govardhan' },
+            { '@type': 'AdministrativeArea', name: 'Braj Mandal' },
+        ],
+        openingHours: 'Mo-Sa 09:00-18:00',
+        priceRange: '₹₹₹',
+        sameAs: [],
+    },
+    {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'Swaroop Realty',
+        url: 'https://swarooprealty.com',
+        logo: 'https://swarooprealty.com/logo-dark.png',
+        contactPoint: {
+            '@type': 'ContactPoint',
+            telephone: '+918383928784',
+            contactType: 'sales',
+            areaServed: 'IN',
+            availableLanguage: ['English', 'Hindi'],
+        },
+    },
+    {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+            {
+                '@type': 'Question',
+                name: 'Is Vrindavan a good place to invest in real estate?',
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Yes. Vrindavan is one of India\'s fastest-growing spiritual and residential destinations. With increasing pilgrim footfall, government infrastructure development, and limited developable land, Vrindavan real estate offers strong long-term appreciation potential. Swaroop Realty has developed vastu-compliant estates in Vrindavan for over 35 years.',
+                },
+            },
+            {
+                '@type': 'Question',
+                name: 'What is vastu-compliant real estate in Vrindavan?',
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Vastu-compliant real estate aligns the layout, orientation, and design of a property with traditional Vastu Shastra principles — an ancient Indian science of spatial arrangement. Swaroop Realty integrates vastu principles at the master-planning stage for every plot and villa project in Vrindavan and Braj.',
+                },
+            },
+            {
+                '@type': 'Question',
+                name: 'What types of properties does Swaroop Realty offer in Vrindavan?',
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Swaroop Realty offers residential land plots, vastu-aligned luxury villas, and sacred farmland in Vrindavan, Govardhan, and the Braj Mandal region. All projects feature clear titles, structured documentation, and vastu-compliant master planning.',
+                },
+            },
+            {
+                '@type': 'Question',
+                name: 'How do I buy a plot in Vrindavan?',
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'You can contact Swaroop Realty directly at +91 83839 28784 or visit our office near Jait Police Station, Vrindavan 281003. Our team will guide you through site visits, documentation, and the complete purchase process with full transparency.',
+                },
+            },
+            {
+                '@type': 'Question',
+                name: 'Are plots near Govardhan or Mathura available?',
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Yes. Swaroop Realty operates across the Braj Mandal, including Vrindavan, Govardhan, and surrounding areas near Mathura. Projects like Govardhan Greens offer resort-style plot developments in the sacred Govardhan precinct.',
+                },
+            },
+        ],
+    },
+];
 
 const Home = () => {
     return (
         <>
+            <SEOHead
+                title="Best Vastu Plots & Real Estate in Vrindavan, Braj"
+                description="Swaroop Realty — 35+ years of trusted real estate in Vrindavan. Premium vastu-compliant plots, luxury villas & sacred farmland in Braj. Clear titles, transparent documentation. Call +91 83839 28784."
+                keywords="real estate in Vrindavan, best real estate Vrindavan, vastu plots Vrindavan, land for sale Vrindavan, Vrindavan property, Braj land investment, plots near Mathura, sacred land investment, spiritual real estate Vrindavan, real estate agent Vrindavan"
+                canonical="/"
+                schema={homeSchema}
+            />
             <ScrollProgressBar />
             <Hero />
             <Ethos />
@@ -18,9 +124,11 @@ const Home = () => {
             <Services />
             <Press />
             <Testimonials />
+            <FAQ />
             <Cta />
         </>
     );
 };
 
 export default Home;
+

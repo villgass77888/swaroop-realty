@@ -1,4 +1,5 @@
 import React from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import ReactLenis, { useLenis } from 'lenis/react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -67,9 +68,11 @@ const AppInner = () => {
 
 function App() {
   return (
-    <LoadingProvider>
-      <AppInner />
-    </LoadingProvider>
+    <HelmetProvider>
+      <LoadingProvider>
+        <AppInner />
+      </LoadingProvider>
+    </HelmetProvider>
   );
 }
 

@@ -2,15 +2,16 @@ import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useIsMobile from '../hooks/useIsMobile';
+import SEOHead from '../components/SEOHead';
 
 // Mock DB matching Projects array
 const allProjects = {
     '1': {
-        title: 'Brij Garden Vrindavan', subtitle: '10-Acre Land Plot Project', location: 'Jait, Vrindavan',
-        image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
+        title: 'Brij Garden Vrindavan', subtitle: '15-Acre Land Plot Project', location: 'Jait, Vrindavan',
+        image: '/brij-garden.jpg',
         plot: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        desc: 'Brij Garden Vrindavan is a thoughtfully planned 10-acre land plot development situated in Jait, on the outskirts of sacred Vrindavan. Conceived with Vastu-aligned master planning, the layout offers residentially zoned plots within a community shaped by discipline, green corridors, and the spiritual character of the Braj land. Each plot has been carefully demarcated to allow homeowners to build with intention — honouring both the sanctity of the soil and the practical needs of long-term living. With clear titles, direct approach roads, and phased infrastructure development, Brij Garden is designed for families who value land with roots.',
-        measurements: { area: '10 Acres Total', plotSizes: 'On Request', location: 'Jait, Vrindavan', status: 'Active Development' }
+        desc: 'Brij Garden Vrindavan is a thoughtfully planned 15-acre land plot development situated in Jait, on the outskirts of sacred Vrindavan. Conceived with Vastu-aligned master planning, the layout offers residentially zoned plots within a community shaped by discipline, green corridors, and the spiritual character of the Braj land. Each plot has been carefully demarcated to allow homeowners to build with intention — honouring both the sanctity of the soil and the practical needs of long-term living. With clear titles, direct approach roads, and phased infrastructure development, Brij Garden is designed for families who value land with roots.',
+        measurements: { area: '15 Acres Total', plotSizes: 'On Request', location: 'Jait, Vrindavan', status: 'Active Development' }
     },
     '2': {
         title: 'Radha Kunj Villas', subtitle: 'Vastu Villas — VIP Road, Vrindavan', location: 'VIP Road, Vrindavan',
@@ -47,18 +48,59 @@ const ProjectDetail = () => {
 
     if (!project) return <div style={{ paddingTop: '200px', textAlign: 'center' }}>Project Not Found</div>;
 
+    const projectSlug = project.title.toLowerCase().replace(/\s+/g, '-');
+    const projectSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        name: project.title,
+        description: project.desc,
+        url: `https://www.swarooprealty.com/projects/${projectSlug}`,
+        image: project.image,
+        address: {
+            '@type': 'PostalAddress',
+            addressLocality: project.location,
+            addressRegion: 'Uttar Pradesh',
+            addressCountry: 'IN',
+        },
+        offeredBy: {
+            '@type': 'RealEstateAgent',
+            name: 'Swaroop Realty',
+            url: 'https://www.swarooprealty.com',
+            telephone: '+918383928784',
+        },
+    };
+
     return (
         <div style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh', color: 'var(--color-primary)' }}>
+            <SEOHead
+                title={`${project.title} — ${project.subtitle} | Vrindavan Real Estate`}
+                description={`${project.title} by Swaroop Realty: ${project.desc.slice(0, 150)}... Located at ${project.location}. Enquire now.`}
+                keywords={`${project.title}, ${project.location}, vastu real estate Vrindavan, real estate plots Vrindavan, ${project.subtitle}`}
+                canonical={`/projects/${projectSlug}`}
+                image={project.image}
+                schema={projectSchema}
+            />
             {/* Hero Header */}
-            <div style={{ position: 'relative', width: '100vw', height: isMobile ? '55vh' : '80vh', overflow: 'hidden' }}>
+            <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
                 <motion.div initial={{ scale: 1.1 }} animate={{ scale: 1 }} transition={{ duration: 2, ease: "easeOut" }} style={{ width: '100%', height: '100%' }}>
                     <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </motion.div>
                 <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(to top, rgba(10,17,40,0.9), transparent)' }} />
-                <div style={{ position: 'absolute', bottom: '10%', left: '5%', color: 'var(--color-white)', maxWidth: isMobile ? '90%' : 'none' }}>
+                <div style={{
+                    position: 'absolute',
+                    bottom: isMobile ? 'auto' : '10%',
+                    top: isMobile ? '50%' : 'auto',
+                    left: isMobile ? '50%' : '5%',
+                    transform: isMobile ? 'translate(-50%, -50%)' : 'none',
+                    color: 'var(--color-white)',
+                    maxWidth: isMobile ? '90%' : 'none',
+                    textAlign: isMobile ? 'center' : 'left',
+                    width: isMobile ? '90%' : 'auto',
+                }}>
                     <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 1 }}>
                         <h1 style={{ fontSize: isMobile ? 'clamp(1.8rem,8vw,3rem)' : 'clamp(3rem,6vw,6rem)', lineHeight: 1, color: 'var(--color-white)' }}>{project.title}</h1>
-                        <p style={{ fontSize: isMobile ? '0.8rem' : '1.2rem', letterSpacing: '2px', textTransform: 'uppercase', marginTop: '1rem' }}>{project.location}</p>
+                        <p style={{ fontSize: isMobile ? '1rem' : '1.3rem', fontFamily: 'var(--font-heading)', fontStyle: 'italic', color: 'rgba(255,255,255,0.75)', marginTop: '0.75rem', letterSpacing: '-0.01em' }}>{project.subtitle}</p>
+                        <p style={{ fontSize: isMobile ? '0.75rem' : '0.85rem', letterSpacing: '3px', textTransform: 'uppercase', marginTop: '1rem', color: 'rgba(255,255,255,0.45)' }}>{project.location}</p>
                     </motion.div>
                 </div>
             </div>

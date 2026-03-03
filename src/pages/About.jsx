@@ -3,6 +3,7 @@ import { motion, useSpring, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import useIsMobile from '../hooks/useIsMobile';
+import SEOHead from '../components/SEOHead';
 
 /* ─── Animated Counter ────────────────────────────────────────────── */
 const Counter = ({ value, label, suffix = "" }) => {
@@ -119,15 +120,24 @@ const About = () => {
             transition={{ duration: 0.8 }}
             style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh', color: 'var(--color-primary)' }}
         >
+            <SEOHead
+                title="About Us — Trusted Real Estate Developer in Vrindavan Since 1990"
+                description="Swaroop Realty was founded in 1990 by Maniram Sharma with 35+ years of real estate expertise in Vrindavan. Vastu-compliant development, transparent documentation, and ethical investment in Braj's sacred land."
+                keywords="about Swaroop Realty, trusted real estate Vrindavan, real estate developer Vrindavan, Maniram Sharma Vrindavan, vastu compliant developer Braj, ethical real estate Vrindavan, real estate since 1990 Vrindavan, sacred land developer"
+                canonical="/about"
+            />
             {/* ── HERO ─────────────────────────────────────────────────── */}
             <div style={{
                 position: 'relative',
-                height: isMobile ? '72vh' : '100vh',
+                height: '100vh',
                 width: '100vw',
-                display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-start',
+                display: 'flex',
+                alignItems: isMobile ? 'center' : 'flex-end',
+                justifyContent: isMobile ? 'center' : 'flex-start',
                 overflow: 'hidden', backgroundColor: 'var(--color-primary)',
-                paddingBottom: isMobile ? '3rem' : '6rem',
-                paddingLeft: isMobile ? '6%' : '7%',
+                paddingBottom: isMobile ? 0 : '6rem',
+                paddingLeft: isMobile ? 0 : '7%',
+                paddingRight: isMobile ? 0 : 0,
             }}>
                 <motion.div
                     initial={{ scale: 1.08 }}
@@ -147,7 +157,7 @@ const About = () => {
 
                 {/* Hero text */}
                 <motion.div
-                    style={{ position: 'relative', zIndex: 2, textAlign: 'left', maxWidth: '700px' }}
+                    style={{ position: 'relative', zIndex: 2, textAlign: isMobile ? 'center' : 'left', maxWidth: isMobile ? '90%' : '700px' }}
                     initial="hidden"
                     animate="show"
                     variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.2, delayChildren: 0.4 } } }}
@@ -453,11 +463,11 @@ const About = () => {
                         transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
                         style={{ position: isMobile ? 'relative' : 'sticky', top: isMobile ? 'auto' : '7rem' }}
                     >
-                        <div style={{ position: 'relative', width: isMobile ? '100%' : '100%', aspectRatio: isMobile ? '4/3' : '3/4', overflow: 'hidden' }}>
+                        <div style={{ position: 'relative', width: isMobile ? '100%' : '100%', aspectRatio: '3/4', overflow: 'hidden' }}>
                             <img
-                                src="/founder-portrait.png"
+                                src="/founder-portrait.jpg"
                                 alt="Maniram Sharma, Founder — Swaroop Realty"
-                                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center', display: 'block', filter: 'grayscale(15%)' }}
+                                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block', filter: 'grayscale(15%)' }}
                             />
                             {/* Name plate */}
                             <div style={{
@@ -539,7 +549,7 @@ const About = () => {
                 }}>
                     <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} style={{ marginBottom: '2.5rem' }}>
                         <span style={sectionLabel}>Our Commitment</span>
-                        <h2 style={{ fontSize: isMobile ? '1.9rem' : '2.5rem', fontFamily: 'var(--font-heading)', lineHeight: 1.15, letterSpacing: '-0.02em', maxWidth: '620px' }}>
+                        <h2 style={{ fontSize: isMobile ? '1.9rem' : '2.5rem', fontFamily: 'var(--font-heading)', lineHeight: 1.15, letterSpacing: '-0.02em' }}>
                             Every project reflects what we stand for.
                         </h2>
                     </motion.div>
