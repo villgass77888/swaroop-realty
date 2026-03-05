@@ -20,7 +20,7 @@ const projects = [
     },
     {
         id: 3,
-        title: 'The Girdhar Valley Farms',
+        title: 'The Giridhar Valley Farms',
         subtitle: 'Exclusive Farm Retreat',
         image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
         type: 'wide'

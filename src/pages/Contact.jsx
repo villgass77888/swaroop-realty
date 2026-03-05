@@ -3,6 +3,35 @@ import { motion } from 'framer-motion';
 import useIsMobile from '../hooks/useIsMobile';
 import SEOHead from '../components/SEOHead';
 
+const contactSchema = [
+    {
+        '@context': 'https://schema.org',
+        '@type': 'ContactPage',
+        url: 'https://swarooprealty.com/contact',
+        name: 'Contact Swaroop Realty — Real Estate Enquiries in Vrindavan',
+        description: 'Contact Swaroop Realty for real estate enquiries in Vrindavan, Mathura, Govardhan and Braj. Call +91 83839 28784.',
+    },
+    {
+        '@context': 'https://schema.org',
+        '@type': 'LocalBusiness',
+        name: 'Swaroop Realty',
+        url: 'https://swarooprealty.com',
+        telephone: '+918383928784',
+        email: 'contact@swarooprealty.com',
+        address: {
+            '@type': 'PostalAddress',
+            streetAddress: 'Near Jait Police Station',
+            addressLocality: 'Vrindavan',
+            addressRegion: 'Uttar Pradesh',
+            postalCode: '281003',
+            addressCountry: 'IN',
+        },
+        geo: { '@type': 'GeoCoordinates', latitude: '27.5744', longitude: '77.6987' },
+        openingHours: 'Mo-Sa 09:00-18:00',
+        priceRange: '₹₹₹',
+    },
+];
+
 const Contact = () => {
     const { isMobile } = useIsMobile();
     useEffect(() => { window.scrollTo(0, 0); }, []);
@@ -35,6 +64,7 @@ const Contact = () => {
                 description="Contact Swaroop Realty for real estate enquiries in Vrindavan. Call +91 83839 28784 or visit Near Jait Police Station, Vrindavan 281003. Enquire about vastu plots, villas, and farmland in Braj."
                 keywords="contact real estate Vrindavan, real estate agent Vrindavan, property enquiry Vrindavan, buy plot Vrindavan contact, Swaroop Realty contact, real estate office Vrindavan 281003, Braj property enquiry"
                 canonical="/contact"
+                schema={contactSchema}
             />
             {/* Background decor — hidden on mobile to avoid overflow */}
             {!isMobile && (
@@ -159,6 +189,65 @@ const Contact = () => {
                     </motion.div>
                 </div>
             </div>
+
+            {/* ── MAP SECTION ── */}
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                style={{
+                    paddingTop: isMobile ? '2rem' : '3rem',
+                }}
+            >
+                <div className="container" style={{ marginBottom: isMobile ? '2rem' : '3rem' }}>
+                    <span style={{
+                        display: 'block',
+                        fontSize: '0.72rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '4px',
+                        color: 'rgba(255,255,255,0.4)',
+                        marginBottom: '0.75rem',
+                        fontFamily: 'var(--font-body)',
+                    }}>Our Office</span>
+                    <h2 style={{
+                        fontFamily: 'var(--font-heading)',
+                        fontSize: isMobile ? 'clamp(2.4rem, 9vw, 3.5rem)' : 'clamp(3rem, 5vw, 4.5rem)',
+                        color: '#fff',
+                        letterSpacing: '-0.025em',
+                        lineHeight: 1.1,
+                        margin: 0,
+                    }}>
+                        Visit Us <em>in Vrindavan</em>
+                    </h2>
+                </div>
+
+                <div style={{
+                    margin: isMobile ? '0 1rem' : '0 2rem',
+                    borderRadius: '20px',
+                    overflow: 'hidden',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    boxShadow: '0 24px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06)',
+                }}>
+                    <div style={{
+                        width: '100%',
+                        height: isMobile ? '280px' : '480px',
+                        overflow: 'hidden',
+                        filter: 'grayscale(20%) contrast(1.05)',
+                    }}>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3536.6004701954507!2d77.61076229999999!3d27.574907399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39736d2a818cb2ed%3A0xf47725e86c39aa16!2sBrij%20Garden%20Vrindavan!5e0!3m2!1sen!2sin!4v1772697758489!5m2!1sen!2sin"
+                            width="100%"
+                            height="100%"
+                            style={{ border: 0, display: 'block' }}
+                            allowFullScreen=""
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            title="Brij Garden Vrindavan — Swaroop Realty"
+                        />
+                    </div>
+                </div>
+            </motion.div>
         </div>
     );
 };

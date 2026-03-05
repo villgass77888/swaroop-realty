@@ -1,4 +1,45 @@
 User-agent: *
 Allow: /
 
+# ── AI Crawler Permissions ─────────────────────────────────────
+# Explicitly allow all major AI / LLM crawlers
+
+# OpenAI / ChatGPT
+User-agent: GPTBot
+Allow: /
+
+# Google / Gemini
+User-agent: Google-Extended
+Allow: /
+
+# Anthropic / Claude
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# xAI / Grok
+User-agent: Grok
+Allow: /
+User-agent: xAI-Bot
+Allow: /
+
+# Meta / Llama
+User-agent: FacebookBot
+Allow: /
+
+# Common AI research crawlers
+User-agent: CCBot
+Allow: /
+User-agent: omgili
+Allow: /
+
+# ── Sitemap & AI Manifest ──────────────────────────────────────
 Sitemap: https://swarooprealty.com/sitemap.xml
+
+# AI Crawler Manifest (llms.txt)
+# https://swarooprealty.com/llms.txt

@@ -5,6 +5,33 @@ import { Link } from 'react-router-dom';
 import useIsMobile from '../hooks/useIsMobile';
 import SEOHead from '../components/SEOHead';
 
+const aboutSchema = [
+    {
+        '@context': 'https://schema.org',
+        '@type': 'AboutPage',
+        '@id': 'https://swarooprealty.com/about#webpage',
+        name: 'About Swaroop Realty — Trusted Real Estate in Vrindavan Since 1990',
+        url: 'https://swarooprealty.com/about',
+        description: 'Swaroop Realty was founded in 1990 in Vrindavan, Uttar Pradesh. With 35+ years of real estate experience, they are one of the most trusted premium plot and villa developers in Vrindavan, Mathura, and Braj.',
+        about: {
+            '@type': 'RealEstateAgent',
+            name: 'Swaroop Realty',
+            url: 'https://swarooprealty.com',
+            foundingDate: '1990',
+            areaServed: 'Vrindavan, Mathura, Govardhan, Braj Mandal, Uttar Pradesh, India',
+        },
+    },
+    {
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: 'Maniram Sharma',
+        jobTitle: 'Founder, Swaroop Realty',
+        worksFor: { '@type': 'Organization', name: 'Swaroop Realty', url: 'https://swarooprealty.com' },
+        description: 'Maniram Sharma is the founder of Swaroop Realty, a premier real estate company in Vrindavan, Uttar Pradesh. A former Government Headmaster in Haryana with 35+ years of real estate expertise in the Braj region.',
+        knowsAbout: ['Vastu Shastra', 'Real estate in Vrindavan', 'Land investment in Uttar Pradesh', 'Braj Mandal property'],
+    },
+];
+
 /* ─── Animated Counter ────────────────────────────────────────────── */
 const Counter = ({ value, label, suffix = "" }) => {
     const [isInView, setIsInView] = useState(false);
@@ -125,6 +152,7 @@ const About = () => {
                 description="Swaroop Realty was founded in 1990 by Maniram Sharma with 35+ years of real estate expertise in Vrindavan. Vastu-compliant development, transparent documentation, and ethical investment in Braj's sacred land."
                 keywords="about Swaroop Realty, trusted real estate Vrindavan, real estate developer Vrindavan, Maniram Sharma Vrindavan, vastu compliant developer Braj, ethical real estate Vrindavan, real estate since 1990 Vrindavan, sacred land developer"
                 canonical="/about"
+                schema={aboutSchema}
             />
             {/* ── HERO ─────────────────────────────────────────────────── */}
             <div style={{
@@ -233,14 +261,14 @@ const About = () => {
                     height: isMobile ? 'auto' : '580px',
                 }}>
                     <RevealImage
-                        src="/vrindavan-sunrise.png"
-                        alt="Vrindavan temple skyline at sunrise"
+                        src="/luxury-villas.png"
+                        alt="Premium luxury villas by Swaroop Realty in Vrindavan"
                         style={{ height: isMobile ? '55vw' : '100%' }}
                         delay={0}
                     />
                     <RevealImage
-                        src="/aerial-land.png"
-                        alt="Vastu-aligned aerial plot layout"
+                        src="/vrindavan-landscape.png"
+                        alt="Sacred Vrindavan landscape and temples at sunset"
                         style={{ height: isMobile ? '55vw' : '100%' }}
                         delay={0.1}
                     />
@@ -480,14 +508,7 @@ const About = () => {
                             </div>
                         </div>
 
-                        {!isMobile && (
-                            <div style={{ marginTop: '1.5rem' }}>
-                                <p style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--color-text)', opacity: 0.45, marginBottom: '0.5rem' }}>Background</p>
-                                <p style={{ fontSize: '0.9rem', lineHeight: 1.7, color: 'var(--color-text)', opacity: 0.7 }}>Former Government Headmaster, Haryana</p>
-                                <p style={{ fontSize: '0.9rem', lineHeight: 1.7, color: 'var(--color-text)', opacity: 0.7 }}>35+ Years in Real Estate</p>
-                                <p style={{ fontSize: '0.9rem', lineHeight: 1.7, color: 'var(--color-text)', opacity: 0.7 }}>Vrindavan Development Expert</p>
-                            </div>
-                        )}
+
                     </motion.div>
 
                     {/* Message column */}
@@ -605,6 +626,71 @@ const About = () => {
                     `}</style>
                     <Link to="/projects" className="about-cta-link">
                         View Our Projects <span style={{ fontSize: '1.1rem' }}>&rarr;</span>
+                    </Link>
+                </motion.div>
+
+                {/* ── WHY VRINDAVAN LINK BAND ─────────────────── */}
+                <motion.div
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    style={{
+                        marginTop: isMobile ? '3rem' : '6rem',
+                        padding: isMobile ? '2.5rem 2rem' : '3.5rem 4rem',
+                        border: '1px solid var(--color-border)',
+                        display: 'flex',
+                        alignItems: isMobile ? 'flex-start' : 'center',
+                        justifyContent: 'space-between',
+                        flexDirection: isMobile ? 'column' : 'row',
+                        gap: '1.5rem',
+                    }}
+                >
+                    <div>
+                        <span style={{
+                            display: 'block',
+                            fontSize: '0.72rem',
+                            textTransform: 'uppercase',
+                            letterSpacing: '4px',
+                            color: 'var(--color-text)',
+                            opacity: 0.45,
+                            marginBottom: '0.6rem',
+                            fontFamily: 'var(--font-body)',
+                        }}>Investment Guide</span>
+                        <p style={{
+                            fontFamily: 'var(--font-heading)',
+                            fontSize: isMobile ? '1.4rem' : '1.8rem',
+                            color: 'var(--color-primary)',
+                            letterSpacing: '-0.02em',
+                            lineHeight: 1.2,
+                            margin: 0,
+                        }}>
+                            Why invest in <em>Vrindavan</em> real estate?
+                        </p>
+                    </div>
+                    <Link
+                        to="/why-vrindavan"
+                        style={{
+                            flexShrink: 0,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '10px',
+                            padding: '0.9rem 2rem',
+                            backgroundColor: 'var(--color-primary)',
+                            color: '#fff',
+                            fontFamily: 'var(--font-body)',
+                            fontSize: '0.82rem',
+                            fontWeight: 500,
+                            textTransform: 'uppercase',
+                            letterSpacing: '2px',
+                            textDecoration: 'none',
+                            transition: 'opacity 0.3s ease',
+                        }}
+                        onMouseEnter={e => (e.currentTarget.style.opacity = '0.8')}
+                        onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+                    >
+                        Read the Guide
+                        <span style={{ fontSize: '1.1rem' }}>→</span>
                     </Link>
                 </motion.div>
 

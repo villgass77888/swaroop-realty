@@ -9,6 +9,8 @@ import About from './pages/About';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
 import Contact from './pages/Contact';
+import WhyVrindavan from './pages/WhyVrindavan';
+import NotFound from './pages/NotFound';
 import Footer from './components/Footer';
 import Preloader from './components/Preloader';
 import { LoadingProvider, useLoading } from './context/LoadingContext';
@@ -53,9 +55,11 @@ const AppInner = () => {
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/projects/:slug" element={<ProjectDetail />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/why-vrindavan" element={<WhyVrindavan />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/disclaimer" element={<Disclaimer />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
             <Footer />

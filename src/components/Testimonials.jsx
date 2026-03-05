@@ -26,13 +26,13 @@ const testimonialsData = [
         id: 4,
         name: 'Anshima Sharma',
         text: '"Buying property can be overwhelming, but Best Realty made it simple and comfortable for me. The team was approachable, supportive, and very responsive to all my queries. Their guidance helped me make a confident investment in Vrindavan. Truly a trustworthy real estate partner."',
-        image: '/client-anshima.png'
+        image: '/client-anshima.png?cb=2'
     },
     {
         id: 5,
-        name: 'Aishwarya Vashistha',
+        name: 'Aishwary Vashishta',
         text: '"My experience with Best Realty has been excellent from start to finish. They understand client requirements deeply and suggest options that genuinely match your needs. The entire process was smooth, organized, and transparent. I\'m extremely satisfied with my purchase."',
-        image: '/client-aishwarya.png'
+        image: '/client-aishwarya.png?cb=2'
     }
 ];
 

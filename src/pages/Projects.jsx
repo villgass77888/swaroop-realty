@@ -23,7 +23,7 @@ const allProjects = [
     },
     {
         id: 3,
-        title: 'The Girdhar Valley Farms',
+        title: 'The Giridhar Valley Farms',
         subtitle: 'Exclusive Farm Retreat',
         location: 'Vrindavan, UP',
         image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
@@ -37,6 +37,28 @@ const allProjects = [
         image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
         year: '2025'
     }
+];
+
+const projectsSchema = [
+    {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        url: 'https://swarooprealty.com/projects',
+        name: 'Real Estate Projects — Swaroop Realty Vrindavan',
+        description: 'Premium vastu-compliant real estate projects by Swaroop Realty in Vrindavan, Govardhan, and Braj — residential plots, luxury villas, and farm estates.',
+        about: { '@type': 'RealEstateAgent', name: 'Swaroop Realty', url: 'https://swarooprealty.com' },
+    },
+    {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: 'Swaroop Realty Projects',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Brij Garden Vrindavan', url: 'https://swarooprealty.com/projects/brij-garden-vrindavan', description: '15-acre vastu residential plot project in Jait, Vrindavan.' },
+            { '@type': 'ListItem', position: 2, name: 'Radha Kunj Villas', url: 'https://swarooprealty.com/projects/radha-kunj-villas', description: 'Boutique vastu villas on VIP Road, Vrindavan.' },
+            { '@type': 'ListItem', position: 3, name: 'The Giridhar Valley Farms', url: 'https://swarooprealty.com/projects/the-giridhar-valley-farms', description: '11.5-acre exclusive farm retreat in Vrindavan, UP.' },
+            { '@type': 'ListItem', position: 4, name: 'Govardhan Greens', url: 'https://swarooprealty.com/projects/govardhan-greens', description: 'Resort-style plot development near sacred Govardhan Hill, UP.' },
+        ],
+    },
 ];
 
 const ProjectPanel = ({ project, index }) => {
@@ -101,9 +123,6 @@ const ProjectPanel = ({ project, index }) => {
                     willChange: 'transform',
                 }}
             >
-                <div style={{ fontSize: '1rem', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '1rem', fontFamily: 'var(--font-body)' }}>
-                    {project.location} &mdash; {project.year}
-                </div>
                 <h2 style={{
                     fontSize: isMobile ? 'clamp(2rem, 7vw, 3.5rem)' : 'clamp(4rem, 8vw, 8rem)',
                     margin: 0, lineHeight: 1, color: '#ffffff', mixBlendMode: 'overlay', opacity: 0.9
@@ -159,6 +178,7 @@ const Projects = () => {
                 description="Explore Swaroop Realty's portfolio of premium real estate projects in Vrindavan, Govardhan & Braj. Vastu-compliant residential plots, luxury villas, and sacred farmland. Enquire today."
                 keywords="real estate projects Vrindavan, plots for sale Vrindavan, vastu villas Vrindavan, land for sale Braj, Brij Garden Vrindavan, Radha Kunj Villas, Govardhan plots, farmhouse Vrindavan, luxury plots Mathura, residential land Vrindavan"
                 canonical="/projects"
+                schema={projectsSchema}
             />
             {/* Intro */}
             <div style={{
@@ -236,9 +256,9 @@ const Projects = () => {
 
                 <div className="projects-wrapper" style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', width: '100%', maxWidth: '1200px' }}>
                     {[
-                        { title: "Girdhar Valley Farms", subtitle: "Vrindavan \u2014 11.5 Acres of Sacred Farmland", badge: "Coming Soon", animBase: 3 },
+                        { title: "Giridhar Valley Farms", subtitle: "Vrindavan \u2014 11.5 Acres of Sacred Farmland", badge: "Coming Soon", animBase: 3 },
                         { title: "Radha Kunj Villas", subtitle: "VIP Road, Vrindavan \u2014 4.5 Acres of Boutique Villas", badge: "By Invitation Only", animBase: 4 },
-                        { title: "Roopvan Mudhouse", subtitle: "Desi Atas, Vrindavan Road \u2014 11 Acres of Earth Living", badge: "Revealing Soon", animBase: 3.5 }
+                        { title: "Roop Van MudHouse", subtitle: "Devi Atas, Vrindavan Road \u2014 11 Acres of Earth Living", badge: "Revealing Soon", animBase: 3.5 }
                     ].map((proj, idx) => {
                         const isRevealed = isMobile
                             ? revealedIdx === idx          // mobile: tap

@@ -21,10 +21,10 @@ const allProjects = {
         measurements: { area: '4.5 Acres', location: 'VIP Road, Vrindavan', planning: 'Vastu-Aligned', status: 'Active Development' }
     },
     '3': {
-        title: 'The Girdhar Valley Farms', subtitle: 'Exclusive Farm Retreat', location: 'Vrindavan, UP',
+        title: 'The Giridhar Valley Farms', subtitle: 'Exclusive Farm Retreat', location: 'Vrindavan, UP',
         image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
         plot: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        desc: 'Escape to a serene agricultural haven. The Girdhar Valley Farms offer expansive, verdant estates perfect for weekend getaways or permanent retreats. Reconnect with nature in a meticulously maintained environment that celebrates both high-end living and organic, sustainable farm life near the heart of Vrindavan.',
+        desc: 'Escape to a serene agricultural haven. The Giridhar Valley Farms offer expansive, verdant estates perfect for weekend getaways or permanent retreats. Reconnect with nature in a meticulously maintained environment that celebrates both high-end living and organic, sustainable farm life near the heart of Vrindavan.',
         measurements: { area: '25 Acres', plotSizes: '1000+ Sq.Yards', landscaping: 'Organic Orchards', amenities: 'Farmhouse & Stable' }
     },
     '4': {
