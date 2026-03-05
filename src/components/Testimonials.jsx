@@ -7,31 +7,31 @@ const testimonialsData = [
     {
         id: 1,
         name: 'Naveen Raj Ghiraw',
-        text: '"I was searching for a reliable property in Vrindavan for a long time, and Best Realty truly exceeded my expectations. The team guided me at every step with complete transparency. From site visits to documentation, everything was smooth and professionally handled. I genuinely felt they cared about my investment. Highly recommended for anyone looking for trusted real estate services in Vrindavan."',
+        text: '"I was searching for a reliable property in Vrindavan for a long time, and Swaroop Realty truly exceeded my expectations. The team guided me at every step with complete transparency. From site visits to documentation, everything was smooth and professionally handled. I genuinely felt they cared about my investment. Highly recommended for anyone looking for trusted real estate services in Vrindavan."',
         image: '/client-naveen.png'
     },
     {
         id: 2,
         name: 'Akhilesh Kumar Chaturvedi',
-        text: '"Best Realty made my land purchase experience completely stress-free. Their knowledge of the Vrindavan market and clear communication gave me full confidence in my decision. They explained every detail patiently and ensured all legal formalities were properly managed. It\'s rare to find such honest and dedicated service."',
+        text: '"Swaroop Realty made my land purchase experience completely stress-free. Their knowledge of the Vrindavan market and clear communication gave me full confidence in my decision. They explained every detail patiently and ensured all legal formalities were properly managed. It\'s rare to find such honest and dedicated service."',
         image: '/client-akhilesh.png'
     },
     {
         id: 3,
         name: 'Rajesh Garg',
-        text: '"I appreciate the professionalism and commitment shown by the Best Realty team. They helped me choose the right plot according to my budget and future goals. What impressed me most was their transparency and timely updates throughout the process. I would definitely work with them again."',
+        text: '"I appreciate the professionalism and commitment shown by the Swaroop Realty team. They helped me choose the right plot according to my budget and future goals. What impressed me most was their transparency and timely updates throughout the process. I would definitely work with them again."',
         image: '/client-rajesh.png'
     },
     {
         id: 4,
         name: 'Anshima Sharma',
-        text: '"Buying property can be overwhelming, but Best Realty made it simple and comfortable for me. The team was approachable, supportive, and very responsive to all my queries. Their guidance helped me make a confident investment in Vrindavan. Truly a trustworthy real estate partner."',
+        text: '"Buying property can be overwhelming, but Swaroop Realty made it simple and comfortable for me. The team was approachable, supportive, and very responsive to all my queries. Their guidance helped me make a confident investment in Vrindavan. Truly a trustworthy real estate partner."',
         image: '/client-anshima.png?cb=2'
     },
     {
         id: 5,
         name: 'Aishwary Vashishta',
-        text: '"My experience with Best Realty has been excellent from start to finish. They understand client requirements deeply and suggest options that genuinely match your needs. The entire process was smooth, organized, and transparent. I\'m extremely satisfied with my purchase."',
+        text: '"My experience with Swaroop Realty has been excellent from start to finish. They understand client requirements deeply and suggest options that genuinely match your needs. The entire process was smooth, organized, and transparent. I\'m extremely satisfied with my purchase."',
         image: '/client-aishwarya.png?cb=2'
     }
 ];
