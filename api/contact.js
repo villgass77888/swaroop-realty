@@ -164,11 +164,8 @@ export default async function handler(req, res) {
         : `New Inquiry from ${fullName}`;
 
     try {
-        // Respond immediately — user sees success right away
-        res.status(200).json({ success: true });
-
-        // Fire both emails in background — Vercel keeps the function alive until done
-        await Promise.all([
+        // Kick off both emails concurrently — don't await yet
+        const emailPromise = Promise.all([
             transporter.sendMail({
                 from: `"${fullName}" <${process.env.ZOHO_EMAIL}>`,
                 to: 'contact@swarooprealty.com',
@@ -183,8 +180,18 @@ export default async function handler(req, res) {
                 html: clientTemplate({ firstName, message }),
             }),
         ]);
+
+        // Respond immediately — user sees success in ~ms, not ~5s
+        res.status(200).json({ success: true });
+
+        // Await AFTER responding — keeps Vercel function alive until emails finish
+        await emailPromise;
+
     } catch (error) {
-        // Log only — response already sent, can't change it now
         console.error('Nodemailer/Zoho error:', error);
+        // Only send error response if we haven't responded yet
+        if (!res.headersSent) {
+            return res.status(500).json({ error: 'Failed to send email. Please try again.' });
+        }
     }
 }
