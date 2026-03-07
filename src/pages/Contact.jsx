@@ -1,15 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import emailjs from '@emailjs/browser';
 import useIsMobile from '../hooks/useIsMobile';
 import SEOHead from '../components/SEOHead';
 
-// ─── EmailJS Configuration ────────────────────────────────────────────────────
-// Replace these values with your EmailJS credentials:
-const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
-const ADMIN_TEMPLATE_ID = 'YOUR_ADMIN_TEMPLATE_ID';     // Sends to contact@swarooprealty.com
-const USER_TEMPLATE_ID = 'YOUR_USER_TEMPLATE_ID';       // Sends to user (info@swarooprealty.com as sender)
-const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+// ─── Web3Forms Configuration ─────────────────────────────────────────────────
+const WEB3FORMS_ACCESS_KEY = '3715a03a-05b0-4062-9477-cceb48ff2b9f';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const contactSchema = [
@@ -43,7 +38,6 @@ const contactSchema = [
 
 const Contact = () => {
     const { isMobile } = useIsMobile();
-    const formRef = useRef(null);
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -63,33 +57,35 @@ const Contact = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { firstName, lastName, email, subject, message } = formData;
-        if (!firstName || !email || !message) return; // basic guard
+        if (!firstName || !email || !message) return;
 
         setStatus('loading');
         try {
-            // 1. Send Inquiry Notification to Admin (contact@swarooprealty.com)
-            const adminPromise = emailjs.sendForm(
-                EMAILJS_SERVICE_ID,
-                ADMIN_TEMPLATE_ID,
-                formRef.current,
-                EMAILJS_PUBLIC_KEY
-            );
+            const payload = {
+                access_key: WEB3FORMS_ACCESS_KEY,
+                subject: subject || `New Inquiry from ${firstName} ${lastName}`,
+                from_name: `${firstName} ${lastName}`,
+                replyto: email,
+                // Auto-reply confirmation to the user
+                autoresponse_message: `Dear ${firstName},\n\nThank you for reaching out to Swaroop Realty. We have received your inquiry and will get back to you within 24 hours.\n\nWarm regards,\nSwaroop Realty\ncontact@swarooprealty.com | +91 83839 28784`,
+                message: `Name: ${firstName} ${lastName}\nEmail: ${email}\nSubject: ${subject || 'General Inquiry'}\n\nMessage:\n${message}`,
+            };
 
-            // 2. Send Confirmation Receipt to User (from info@swarooprealty.com)
-            const userPromise = emailjs.sendForm(
-                EMAILJS_SERVICE_ID,
-                USER_TEMPLATE_ID,
-                formRef.current,
-                EMAILJS_PUBLIC_KEY
-            );
+            const res = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                body: JSON.stringify(payload),
+            });
+            const data = await res.json();
 
-            // Wait for both to complete
-            await Promise.all([adminPromise, userPromise]);
-
-            setStatus('success');
-            setFormData({ firstName: '', lastName: '', email: '', subject: '', message: '' });
+            if (data.success) {
+                setStatus('success');
+                setFormData({ firstName: '', lastName: '', email: '', subject: '', message: '' });
+            } else {
+                throw new Error(data.message);
+            }
         } catch (err) {
-            console.error('EmailJS error:', err);
+            console.error('Web3Forms error:', err);
             setStatus('error');
         }
     };
@@ -174,7 +170,7 @@ const Contact = () => {
                             padding: isMobile ? '2rem 1.5rem' : '4rem',
                         }}
                     >
-                        <form ref={formRef} onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                        <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             <style>{`
                                 input:focus, textarea:focus { border-color:rgba(255,255,255,0.5)!important; background-color:rgba(255,255,255,0.08)!important; box-shadow:0 4px 20px rgba(255,255,255,0.05); }
                                 input:hover, textarea:hover { background-color:rgba(255,255,255,0.08); }
