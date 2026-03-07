@@ -63,11 +63,11 @@ const Contact = () => {
         try {
             const payload = {
                 access_key: WEB3FORMS_ACCESS_KEY,
-                subject: subject || `New Inquiry from ${firstName} ${lastName}`,
+                subject: subject ? `Inquiry: ${subject}` : `New Inquiry from ${firstName} ${lastName}`,
                 from_name: `${firstName} ${lastName}`,
-                replyto: email,
-                // Auto-reply confirmation to the user
-                autoresponse_message: `Dear ${firstName},\n\nThank you for reaching out to Swaroop Realty. We have received your inquiry and will get back to you within 24 hours.\n\nWarm regards,\nSwaroop Realty\ncontact@swarooprealty.com | +91 83839 28784`,
+                email: email,          // REQUIRED: Web3Forms uses this to send auto-reply to client
+                replyto: email,        // Sets reply-to header in admin notification
+                redirect: 'false',     // Stay on page after submission
                 message: `Name: ${firstName} ${lastName}\nEmail: ${email}\nSubject: ${subject || 'General Inquiry'}\n\nMessage:\n${message}`,
             };
 
