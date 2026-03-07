@@ -164,20 +164,21 @@ export default async function handler(req, res) {
         : `New Inquiry from ${fullName}`;
 
     try {
-        await transporter.sendMail({
-            from: `"${fullName}" <${process.env.ZOHO_EMAIL}>`,
-            to: 'contact@swarooprealty.com',
-            replyTo: email,
-            subject: emailSubject,
-            html: adminTemplate({ fullName, email, subject, message }),
-        });
-
-        await transporter.sendMail({
-            from: `"Swaroop Realty" <${process.env.ZOHO_EMAIL}>`,
-            to: email,
-            subject: 'Thank you for your inquiry — Swaroop Realty',
-            html: clientTemplate({ firstName, message }),
-        });
+        await Promise.all([
+            transporter.sendMail({
+                from: `"${fullName}" <${process.env.ZOHO_EMAIL}>`,
+                to: 'contact@swarooprealty.com',
+                replyTo: email,
+                subject: emailSubject,
+                html: adminTemplate({ fullName, email, subject, message }),
+            }),
+            transporter.sendMail({
+                from: `"Swaroop Realty" <${process.env.ZOHO_EMAIL}>`,
+                to: email,
+                subject: 'Thank you for your inquiry — Swaroop Realty',
+                html: clientTemplate({ firstName, message }),
+            }),
+        ]);
 
         return res.status(200).json({ success: true });
     } catch (error) {
