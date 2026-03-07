@@ -22,3 +22,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Sensitive files — never commit these
+RECOVERY-CODES*
+*.recovery
+*2fa*
+*.env
+*.env.local
+*.env.production
+credentials*.txt
+secrets*.txt
