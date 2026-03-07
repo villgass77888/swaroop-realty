@@ -1,7 +1,18 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 import useIsMobile from '../hooks/useIsMobile';
 import SEOHead from '../components/SEOHead';
+
+// ─── EmailJS Configuration ────────────────────────────────────────────────────
+// Replace these three values with your EmailJS credentials:
+//  1. Service ID  – EmailJS Dashboard → Email Services
+//  2. Template ID – EmailJS Dashboard → Email Templates
+//  3. Public Key  – EmailJS Dashboard → Account → General
+const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+// ─────────────────────────────────────────────────────────────────────────────
 
 const contactSchema = [
     {
@@ -34,7 +45,43 @@ const contactSchema = [
 
 const Contact = () => {
     const { isMobile } = useIsMobile();
+    const formRef = useRef(null);
+
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        subject: '',
+        message: '',
+    });
+    const [status, setStatus] = useState('idle'); // idle | loading | success | error
+
     useEffect(() => { window.scrollTo(0, 0); }, []);
+
+    const handleChange = (e) => {
+        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const { firstName, lastName, email, subject, message } = formData;
+        if (!firstName || !email || !message) return; // basic guard
+
+        setStatus('loading');
+        try {
+            await emailjs.sendForm(
+                EMAILJS_SERVICE_ID,
+                EMAILJS_TEMPLATE_ID,
+                formRef.current,
+                EMAILJS_PUBLIC_KEY
+            );
+            setStatus('success');
+            setFormData({ firstName: '', lastName: '', email: '', subject: '', message: '' });
+        } catch (err) {
+            console.error('EmailJS error:', err);
+            setStatus('error');
+        }
+    };
 
     const inputStyle = {
         width: '100%',
@@ -116,28 +163,98 @@ const Contact = () => {
                             padding: isMobile ? '2rem 1.5rem' : '4rem',
                         }}
                     >
-                        <form style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                        <form ref={formRef} onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             <style>{`
                                 input:focus, textarea:focus { border-color:rgba(255,255,255,0.5)!important; background-color:rgba(255,255,255,0.08)!important; box-shadow:0 4px 20px rgba(255,255,255,0.05); }
                                 input:hover, textarea:hover { background-color:rgba(255,255,255,0.08); }
                                 input::placeholder, textarea::placeholder { color:rgba(255,255,255,0.4); text-transform:uppercase; font-size:0.8rem; letter-spacing:2px; }
                             `}</style>
                             <div style={{ display: 'flex', gap: '1rem', flexDirection: isMobile ? 'column' : 'row' }}>
-                                <input type="text" placeholder="First Name" style={inputStyle} />
-                                <input type="text" placeholder="Last Name" style={inputStyle} />
+                                <input
+                                    type="text" name="firstName" placeholder="First Name" required
+                                    value={formData.firstName} onChange={handleChange} style={inputStyle}
+                                />
+                                <input
+                                    type="text" name="lastName" placeholder="Last Name"
+                                    value={formData.lastName} onChange={handleChange} style={inputStyle}
+                                />
                             </div>
-                            <input type="email" placeholder="Email Address" style={inputStyle} />
-                            <input type="text" placeholder="Subject of Inquiry" style={inputStyle} />
-                            <textarea placeholder="How may we assist you?" rows="4" style={{ ...inputStyle, resize: 'none' }} />
+                            <input
+                                type="email" name="email" placeholder="Email Address" required
+                                value={formData.email} onChange={handleChange} style={inputStyle}
+                            />
+                            <input
+                                type="text" name="subject" placeholder="Subject of Inquiry"
+                                value={formData.subject} onChange={handleChange} style={inputStyle}
+                            />
+                            <textarea
+                                name="message" placeholder="How may we assist you?" rows="4" required
+                                value={formData.message} onChange={handleChange}
+                                style={{ ...inputStyle, resize: 'none' }}
+                            />
+
+                            {/* Status feedback banner */}
+                            <AnimatePresence mode="wait">
+                                {status === 'success' && (
+                                    <motion.div
+                                        key="success"
+                                        initial={{ opacity: 0, y: 8 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -8 }}
+                                        transition={{ duration: 0.4 }}
+                                        style={{
+                                            padding: '1rem 1.25rem',
+                                            borderRadius: '10px',
+                                            backgroundColor: 'rgba(34,197,94,0.12)',
+                                            border: '1px solid rgba(34,197,94,0.4)',
+                                            color: '#4ade80',
+                                            fontSize: '0.9rem',
+                                            letterSpacing: '0.5px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '0.6rem'
+                                        }}
+                                    >
+                                        <span style={{ fontSize: '1.1rem' }}>✓</span>
+                                        Your inquiry has been sent. We'll be in touch shortly.
+                                    </motion.div>
+                                )}
+                                {status === 'error' && (
+                                    <motion.div
+                                        key="error"
+                                        initial={{ opacity: 0, y: 8 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -8 }}
+                                        transition={{ duration: 0.4 }}
+                                        style={{
+                                            padding: '1rem 1.25rem',
+                                            borderRadius: '10px',
+                                            backgroundColor: 'rgba(239,68,68,0.12)',
+                                            border: '1px solid rgba(239,68,68,0.4)',
+                                            color: '#f87171',
+                                            fontSize: '0.9rem',
+                                            letterSpacing: '0.5px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '0.6rem'
+                                        }}
+                                    >
+                                        <span style={{ fontSize: '1.1rem' }}>✕</span>
+                                        Something went wrong. Please try again or call us directly.
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
                             <motion.button
-                                type="button"
-                                whileTap={{ scale: 0.93, opacity: 0.85 }}
+                                type="submit"
+                                disabled={status === 'loading'}
+                                whileTap={status !== 'loading' ? { scale: 0.93, opacity: 0.85 } : {}}
                                 style={{
                                     marginTop: '1rem',
                                     padding: isMobile ? '1.3rem 0' : '1.5rem 4rem',
                                     width: isMobile ? '100%' : 'auto',
                                     alignSelf: isMobile ? 'stretch' : 'flex-start',
-                                    backgroundColor: 'rgba(59,130,246,0.2)',
+                                    backgroundColor: status === 'loading' ? 'rgba(59,130,246,0.1)' : 'rgba(59,130,246,0.2)',
                                     backdropFilter: 'blur(10px)',
                                     color: '#ffffff',
                                     border: '1px solid rgba(59,130,246,0.5)',
@@ -145,13 +262,26 @@ const Contact = () => {
                                     fontSize: '0.9rem',
                                     textTransform: 'uppercase',
                                     letterSpacing: '2px',
-                                    cursor: 'pointer',
+                                    cursor: status === 'loading' ? 'not-allowed' : 'pointer',
                                     fontFamily: 'var(--font-body)',
                                     fontWeight: 600,
                                     minHeight: '52px',
+                                    opacity: status === 'loading' ? 0.7 : 1,
+                                    transition: 'all 0.3s ease',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: '0.6rem',
                                 }}
                             >
-                                Submit Inquiry
+                                {status === 'loading' && (
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
+                                        style={{ animation: 'spin 0.8s linear infinite' }}>
+                                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                                        <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+                                    </svg>
+                                )}
+                                {status === 'loading' ? 'Sending…' : 'Submit Inquiry'}
                             </motion.button>
                         </form>
                     </motion.div>

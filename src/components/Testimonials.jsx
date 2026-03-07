@@ -138,8 +138,8 @@ const Testimonials = () => {
                     max-width: 450px;
                     min-height: 380px;
                     background: rgba(255, 255, 255, 0.75);
-                    backdrop-filter: blur(20px) saturate(180%);
-                    -webkit-backdrop-filter: blur(20px) saturate(180%);
+                    backdrop-filter: blur(8px) saturate(180%);
+                    -webkit-backdrop-filter: blur(8px) saturate(180%);
                     border: 1px solid rgba(255,255,255,0.4);
                     border-radius: 24px;
                     padding: 2rem 2.5rem;
@@ -150,6 +150,7 @@ const Testimonials = () => {
                     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
                     transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s cubic-bezier(0.16,1,0.3,1);
                     flex-shrink: 0;
+                    will-change: transform, opacity;
                 }
                 .testimonial-card:hover {
                     transform: translateY(-8px) scale(1.02);

@@ -39,7 +39,13 @@ const ServiceCard = ({ svc, idx }) => {
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                         style={{ overflow: 'hidden' }}
                     >
-                        <img src={svc.img} alt={svc.title} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }} />
+                        <img
+                            src={svc.img}
+                            alt={svc.title}
+                            loading="lazy"
+                            decoding="async"
+                            style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }}
+                        />
                         <p style={{ fontSize: '0.95rem', lineHeight: 1.7, color: 'var(--color-text)', paddingBottom: '1.5rem' }}>{svc.desc}</p>
                     </motion.div>
                 )}
@@ -73,7 +79,7 @@ const ServiceRow = ({ svc, idx, setIsListHovered }) => {
                             : idx === 2 ? { top: '75%', transform: 'translateY(-75%)' }
                                 : { top: 'auto', bottom: '2rem', transform: 'translateY(-10%)' })
                 }}>
-                    <img src={svc.img} alt={svc.title} className="svc-img" />
+                    <img src={svc.img} alt={svc.title} className="svc-img" loading="lazy" decoding="async" />
                     <p className="svc-desc">{svc.title}— {svc.desc}</p>
                 </div>
             </div>

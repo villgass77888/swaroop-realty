@@ -60,11 +60,18 @@ const CustomCursor = () => {
 
     useEffect(() => {
         let frame = 0;
+        let isScrolling = false;
+        let scrollTimeout = null;
         const lerp = (a, b, t) => a + (b - a) * t;
 
         const onMove = e => { mouseRef.current = { x: e.clientX, y: e.clientY }; };
         const onDown = () => setIsClick(true);
         const onUp = () => setIsClick(false);
+        const onScroll = () => {
+            isScrolling = true;
+            if (scrollTimeout) clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => { isScrolling = false; }, 150);
+        };
 
         const onOver = e => {
             const mEl = e.target.closest('[data-cursor-magnify]');
@@ -80,7 +87,6 @@ const CustomCursor = () => {
                 setIsHover(true);
         };
         const onOut = e => {
-            // For magnify: don't dismiss here — the rAF loop handles distance-based dismiss
             if (e.target.closest('a,button,[role="button"],input,textarea,select,label'))
                 setIsHover(false);
         };
@@ -90,6 +96,7 @@ const CustomCursor = () => {
         window.addEventListener('mouseup', onUp);
         window.addEventListener('mouseover', onOver);
         window.addEventListener('mouseout', onOut);
+        window.addEventListener('scroll', onScroll, { passive: true });
 
         const loop = () => {
             const { x, y } = mouseRef.current;
@@ -121,9 +128,6 @@ const CustomCursor = () => {
                 lensTextRef.current.style.transformOrigin = `${relX}px ${relY}px`;
             }
 
-            // ── Distance-based lens dismiss ────────────────────────────────
-            // No setTimeout — we check every frame whether the raw cursor is
-            // more than LINGER_PX pixels away from the element's bounding rect.
             if (isMagnifyRef.current && magnifyElRef.current) {
                 const rect = magnifyElRef.current.getBoundingClientRect();
                 const dist = distFromRect(x, y, rect);
@@ -134,7 +138,9 @@ const CustomCursor = () => {
                 }
             }
 
-            if (++frame % 4 === 0)
+            // ONLY run luminance check every 12 frames and ONLY if not scrolling
+            // This prevents massive layout-recalc lag during fast scroll.
+            if (++frame % 12 === 0 && !isScrolling)
                 setIsDark(luminance(getEffectiveBgColor(x, y)) < 0.35);
 
             rafRef.current = requestAnimationFrame(loop);
@@ -147,6 +153,8 @@ const CustomCursor = () => {
             window.removeEventListener('mouseup', onUp);
             window.removeEventListener('mouseover', onOver);
             window.removeEventListener('mouseout', onOut);
+            window.removeEventListener('scroll', onScroll);
+            if (scrollTimeout) clearTimeout(scrollTimeout);
             cancelAnimationFrame(rafRef.current);
         };
     }, []);

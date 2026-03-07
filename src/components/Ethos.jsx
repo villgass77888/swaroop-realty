@@ -83,7 +83,8 @@ const Ethos = () => {
 
                         <motion.div variants={fadeUp} style={{ width: '100%', height: '55vw', maxHeight: '380px', overflow: 'hidden' }}>
                             <img src="/vrindavan-sunrise.png" alt="Vrindavan temple skyline at sunrise"
-                                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+                                loading="lazy" decoding="async"
+                                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', willChange: 'transform' }} />
                         </motion.div>
 
                         <motion.p variants={fadeUp} style={{ fontSize: '1rem', lineHeight: 1.8, color: 'inherit' }}>
@@ -179,6 +180,8 @@ const Ethos = () => {
                                 <img
                                     src="/vrindavan-sunrise.png"
                                     alt="Vrindavan temple skyline at sunrise"
+                                    loading="lazy"
+                                    decoding="async"
                                     style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
                                 />
                             </motion.div>

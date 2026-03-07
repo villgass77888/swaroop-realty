@@ -58,8 +58,8 @@ const Hero = () => {
             {/* Background video */}
             <motion.div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, y: backgroundY, scale, zIndex: 0, willChange: 'transform' }}>
                 <video
-                    autoPlay loop muted playsInline
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.55) contrast(1.1) grayscale(20%)' }}
+                    autoPlay loop muted playsInline preload="auto"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.55) contrast(1.1) grayscale(20%)', willChange: 'filter' }}
                 >
                     <source src="https://cdn.pixabay.com/video/2021/08/04/83896-584742469_large.mp4" type="video/mp4" />
                     <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Architecture" />

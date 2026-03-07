@@ -135,6 +135,8 @@ const PortfolioItem = ({ project, index }) => {
                     <img
                         src={project.image}
                         alt={project.title}
+                        loading="lazy"
+                        decoding="async"
                         style={{
                             width: '100%',
                             height: '100%',
