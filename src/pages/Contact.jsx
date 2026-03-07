@@ -3,10 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import useIsMobile from '../hooks/useIsMobile';
 import SEOHead from '../components/SEOHead';
 
-// ─── Web3Forms Configuration ─────────────────────────────────────────────────
-const WEB3FORMS_ACCESS_KEY = '3715a03a-05b0-4062-9477-cceb48ff2b9f';
-// ─────────────────────────────────────────────────────────────────────────────
-
 const contactSchema = [
     {
         '@context': 'https://schema.org',
@@ -61,31 +57,21 @@ const Contact = () => {
 
         setStatus('loading');
         try {
-            const payload = {
-                access_key: WEB3FORMS_ACCESS_KEY,
-                subject: subject ? `Inquiry: ${subject}` : `New Inquiry from ${firstName} ${lastName}`,
-                from_name: `${firstName} ${lastName}`,
-                email: email,          // REQUIRED: Web3Forms uses this to send auto-reply to client
-                replyto: email,        // Sets reply-to header in admin notification
-                redirect: 'false',     // Stay on page after submission
-                message: `Name: ${firstName} ${lastName}\nEmail: ${email}\nSubject: ${subject || 'General Inquiry'}\n\nMessage:\n${message}`,
-            };
-
-            const res = await fetch('https://api.web3forms.com/submit', {
+            const res = await fetch('/api/contact', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                body: JSON.stringify(payload),
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ firstName, lastName, email, subject, message }),
             });
             const data = await res.json();
 
-            if (data.success) {
+            if (res.ok && data.success) {
                 setStatus('success');
                 setFormData({ firstName: '', lastName: '', email: '', subject: '', message: '' });
             } else {
-                throw new Error(data.message);
+                throw new Error(data.error || 'Submission failed');
             }
         } catch (err) {
-            console.error('Web3Forms error:', err);
+            console.error('Contact form error:', err);
             setStatus('error');
         }
     };
