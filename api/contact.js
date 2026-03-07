@@ -165,7 +165,7 @@ export default async function handler(req, res) {
 
     try {
         await transporter.sendMail({
-            from: `"Swaroop Realty" <${process.env.ZOHO_EMAIL}>`,
+            from: `"${fullName}" <${process.env.ZOHO_EMAIL}>`,
             to: 'contact@swarooprealty.com',
             replyTo: email,
             subject: emailSubject,
