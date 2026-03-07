@@ -88,19 +88,47 @@ const ProjectDetail = () => {
                 <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(to top, rgba(10,17,40,0.9), transparent)' }} />
                 <div style={{
                     position: 'absolute',
-                    bottom: isMobile ? 'auto' : '10%',
-                    top: isMobile ? '50%' : 'auto',
+                    bottom: isMobile ? '8%' : '10%',
+                    top: 'auto',
                     left: isMobile ? '50%' : '5%',
-                    transform: isMobile ? 'translate(-50%, -50%)' : 'none',
+                    transform: isMobile ? 'translateX(-50%)' : 'none',
                     color: 'var(--color-white)',
-                    maxWidth: isMobile ? '90%' : 'none',
+                    maxWidth: isMobile ? '88%' : 'none',
                     textAlign: isMobile ? 'center' : 'left',
-                    width: isMobile ? '90%' : 'auto',
+                    width: isMobile ? '88%' : 'auto',
                 }}>
                     <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 1 }}>
-                        <h1 style={{ fontSize: isMobile ? 'clamp(1.8rem,8vw,3rem)' : 'clamp(3rem,6vw,6rem)', lineHeight: 1, color: 'var(--color-white)' }}>{project.title}</h1>
-                        <p style={{ fontSize: isMobile ? '1rem' : '1.3rem', fontFamily: 'var(--font-heading)', fontStyle: 'italic', color: 'rgba(255,255,255,0.75)', marginTop: '0.75rem', letterSpacing: '-0.01em' }}>{project.subtitle}</p>
-                        <p style={{ fontSize: isMobile ? '0.75rem' : '0.85rem', letterSpacing: '3px', textTransform: 'uppercase', marginTop: '1rem', color: 'rgba(255,255,255,0.45)' }}>{project.location}</p>
+                        {/* Location tag — top pill on mobile */}
+                        <p style={{
+                            fontSize: isMobile ? '0.65rem' : '0.75rem',
+                            letterSpacing: '4px',
+                            textTransform: 'uppercase',
+                            marginBottom: isMobile ? '0.75rem' : '1rem',
+                            color: 'rgba(255,255,255,0.5)',
+                            fontFamily: 'var(--font-body)',
+                            fontWeight: 500,
+                        }}>{project.location}</p>
+
+                        {/* Main title — big and bold on mobile */}
+                        <h1 style={{
+                            fontSize: isMobile ? 'clamp(2.6rem, 11vw, 4rem)' : 'clamp(3rem,6vw,6rem)',
+                            lineHeight: isMobile ? 1.05 : 1,
+                            color: 'var(--color-white)',
+                            fontWeight: isMobile ? 700 : 500,
+                            letterSpacing: isMobile ? '-0.02em' : '-0.03em',
+                            marginBottom: isMobile ? '0.6rem' : '0',
+                        }}>{project.title}</h1>
+
+                        {/* Subtitle */}
+                        <p style={{
+                            fontSize: isMobile ? '1.1rem' : '1.3rem',
+                            fontFamily: 'var(--font-heading)',
+                            fontStyle: 'italic',
+                            color: 'rgba(255,255,255,0.7)',
+                            marginTop: isMobile ? '0.4rem' : '0.75rem',
+                            letterSpacing: '-0.01em',
+                            lineHeight: 1.4,
+                        }}>{project.subtitle}</p>
                     </motion.div>
                 </div>
             </div>
