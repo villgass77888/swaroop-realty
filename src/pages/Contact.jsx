@@ -5,12 +5,10 @@ import useIsMobile from '../hooks/useIsMobile';
 import SEOHead from '../components/SEOHead';
 
 // ─── EmailJS Configuration ────────────────────────────────────────────────────
-// Replace these three values with your EmailJS credentials:
-//  1. Service ID  – EmailJS Dashboard → Email Services
-//  2. Template ID – EmailJS Dashboard → Email Templates
-//  3. Public Key  – EmailJS Dashboard → Account → General
+// Replace these values with your EmailJS credentials:
 const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+const ADMIN_TEMPLATE_ID = 'YOUR_ADMIN_TEMPLATE_ID';     // Sends to contact@swarooprealty.com
+const USER_TEMPLATE_ID = 'YOUR_USER_TEMPLATE_ID';       // Sends to user (info@swarooprealty.com as sender)
 const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -69,12 +67,25 @@ const Contact = () => {
 
         setStatus('loading');
         try {
-            await emailjs.sendForm(
+            // 1. Send Inquiry Notification to Admin (contact@swarooprealty.com)
+            const adminPromise = emailjs.sendForm(
                 EMAILJS_SERVICE_ID,
-                EMAILJS_TEMPLATE_ID,
+                ADMIN_TEMPLATE_ID,
                 formRef.current,
                 EMAILJS_PUBLIC_KEY
             );
+
+            // 2. Send Confirmation Receipt to User (from info@swarooprealty.com)
+            const userPromise = emailjs.sendForm(
+                EMAILJS_SERVICE_ID,
+                USER_TEMPLATE_ID,
+                formRef.current,
+                EMAILJS_PUBLIC_KEY
+            );
+
+            // Wait for both to complete
+            await Promise.all([adminPromise, userPromise]);
+
             setStatus('success');
             setFormData({ firstName: '', lastName: '', email: '', subject: '', message: '' });
         } catch (err) {
