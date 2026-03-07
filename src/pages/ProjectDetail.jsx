@@ -88,7 +88,7 @@ const ProjectDetail = () => {
                 <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(to top, rgba(10,17,40,0.9), transparent)' }} />
                 <div style={{
                     position: 'absolute',
-                    bottom: isMobile ? '8%' : '10%',
+                    bottom: isMobile ? '18%' : '10%',
                     top: 'auto',
                     left: isMobile ? '50%' : '5%',
                     transform: isMobile ? 'translateX(-50%)' : 'none',
