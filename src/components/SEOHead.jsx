@@ -23,7 +23,7 @@ const SEOHead = ({
     image = DEFAULT_IMAGE,
     schema,
 }) => {
-    const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} | Premium Vastu Plots & Villas in Vrindavan, Braj`;
+    const fullTitle = title ? `${SITE_NAME}: ${title}` : `${SITE_NAME}: Premium Vastu Plots & Villas in Vrindavan, Braj`;
     const canonicalUrl = canonical ? `${BASE_URL}${canonical}` : BASE_URL;
 
     return (

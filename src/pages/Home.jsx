@@ -139,7 +139,7 @@ const Home = () => {
             <div id="faq" style={{ position: "absolute", top: "-100px" }} aria-hidden="true"></div>
 
             <SEOHead
-                title="Best Vastu Plots & Real Estate in Vrindavan, Braj"
+                title="Best Plots & Real Estate in Vrindavan"
                 description="Swaroop Realty — 35+ years of trusted real estate in Vrindavan. Premium vastu-compliant plots, luxury villas & sacred farmland in Braj. Clear titles, transparent documentation. Call +91 83839 28784."
                 keywords="real estate in Vrindavan, best real estate Vrindavan, vastu plots Vrindavan, land for sale Vrindavan, Vrindavan property, Braj land investment, plots near Mathura, sacred land investment, spiritual real estate Vrindavan, real estate agent Vrindavan, Plots in Vrindavan, Premium Plots for Sale in Vrindavan, 100 Gaj Plot in Vrindavan"
                 canonical="/"
