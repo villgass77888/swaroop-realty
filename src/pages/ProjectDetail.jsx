@@ -10,28 +10,28 @@ const allProjects = {
         title: 'Brij Garden Vrindavan', subtitle: '15-Acre Land Plot Project', location: 'Jait, Vrindavan',
         image: '/brij-garden.jpg',
         plot: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        desc: 'Brij Garden Vrindavan is a thoughtfully planned 15-acre land plot development situated in Jait, on the outskirts of sacred Vrindavan. Conceived with Vastu-aligned master planning, the layout offers residentially zoned plots within a community shaped by discipline, green corridors, and the spiritual character of the Braj land. Each plot has been carefully demarcated to allow homeowners to build with intention — honouring both the sanctity of the soil and the practical needs of long-term living. With clear titles, direct approach roads, and phased infrastructure development, Brij Garden is designed for families who value land with roots.',
+        desc: 'Explore the best plots in Vrindavan at Brij Garden Vrindavan — a thoughtfully planned 15-acre land development situated in Jait, on the outskirts of the sacred city. Conceived with Vastu-aligned master planning, the layout offers premium residential plots within a community shaped by discipline, green corridors, and the spiritual character of the Braj land. Each plot has been carefully demarcated to allow homeowners to build with intention. With clear titles, direct approach roads, and phased infrastructure development, Brij Garden is designed for those looking to buy & invest in premium plots with deep roots.',
         measurements: { area: '15 Acres Total', plotSizes: 'On Request', location: 'Jait, Vrindavan', status: 'Active Development' }
     },
     '2': {
         title: 'Radha Kunj Villas', subtitle: 'Vastu Villas — VIP Road, Vrindavan', location: 'VIP Road, Vrindavan',
         image: 'https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
         plot: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        desc: 'Set on VIP Road — one of Vrindavan\'s most sought-after addresses — Radha Kunj Villas is a 4.5-acre boutique villa community built around vastu-compliant design and refined Indian craftsmanship. Each villa has been oriented and planned to maximise light, airflow, and spiritual alignment with the sacred geography of Braj. The development is structured for families who seek both permanence and proximity to the divine — walking distance from the major temples and the Yamuna ghats, yet discreetly set within a gated, landscaped enclave. An enduring residence designed not merely to impress, but to belong.',
+        desc: 'Searching for premium plots for sale in Vrindavan? Set on VIP Road — one of the region\'s most sought-after addresses — Radha Kunj Villas is a 4.5-acre boutique villa community built around vastu-compliant design and refined Indian craftsmanship. Each villa has been oriented and planned to maximise light, airflow, and spiritual alignment. For those navigating the real estate in Vrindavan market, this development is structured for families who seek both permanence and proximity to the divine — walking distance from major temples, yet discreetly set within a gated enclave.',
         measurements: { area: '4.5 Acres', location: 'VIP Road, Vrindavan', planning: 'Vastu-Aligned', status: 'Active Development' }
     },
     '3': {
         title: 'The Giridhar Valley Farms', subtitle: 'Exclusive Farm Retreat', location: 'Vrindavan, UP',
         image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
         plot: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        desc: 'Escape to a serene agricultural haven. The Giridhar Valley Farms offer expansive, verdant estates perfect for weekend getaways or permanent retreats. Reconnect with nature in a meticulously maintained environment that celebrates both high-end living and organic, sustainable farm life near the heart of Vrindavan.',
+        desc: 'Discover your dream property in Vrindavan. Escape to a serene agricultural haven within the Braj Mandal. The Giridhar Valley Farms offer expansive, verdant estates perfect for weekend getaways or permanent retreats. If you are comparing a 100 gaj plot in Vrindavan for price and investment benefits against larger farmlands, Giridhar Valley provides unmatched natural scale. Reconnect with nature in a meticulously maintained environment that celebrates both high-end living and organic, sustainable farm life near the heart of the sacred city.',
         measurements: { area: '25 Acres', plotSizes: '1000+ Sq.Yards', landscaping: 'Organic Orchards', amenities: 'Farmhouse & Stable' }
     },
     '4': {
         title: 'Govardhan Greens', subtitle: 'Resort-Style Plot Development', location: 'Govardhan, UP',
         image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
         plot: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        desc: 'An investment like no other. Nestled peacefully in the holy precinct of Govardhan, this green-tech enabled plot development focuses on holistic living, organic community farming, and lush scenic beauty. Create a weekend getaway farm-villa or a permanent serene residence.',
+        desc: 'Trusted real estate property projects in Vrindavan and Govardhan are rare, but Govardhan Greens brings absolute transparency to the market. Nestled peacefully in the holy precinct of Govardhan, this green-tech enabled plot development focuses on holistic living, organic community farming, and lush scenic beauty. Connect with us for plots in Vrindavan and Govardhan that allow you to create a weekend getaway farm-villa or a permanent serene residence wrapped in absolute devotion and modern luxury.',
         measurements: { area: '30 Acres', plotSizes: '1000 - 5000 Sq.Yards', lifestyle: 'Organic Farm Zones', luxury: 'Resort Living' }
     }
 };
@@ -75,7 +75,7 @@ const ProjectDetail = () => {
             <SEOHead
                 title={`${project.title} — ${project.subtitle} | Vrindavan Real Estate`}
                 description={`${project.title} by Swaroop Realty: ${project.desc.slice(0, 150)}... Located at ${project.location}. Enquire now.`}
-                keywords={`${project.title}, ${project.location}, vastu real estate Vrindavan, real estate plots Vrindavan, ${project.subtitle}`}
+                keywords={`${project.title}, ${project.location}, vastu real estate Vrindavan, real estate plots Vrindavan, ${project.subtitle}, Premium plots for sale in Vrindavan, Best plots in Vrindavan, Buy & Invest in Premium Plots, 100 Gaj plot in Vrindavan price`}
                 canonical={`/projects/${projectSlug}`}
                 image={project.image}
                 schema={projectSchema}

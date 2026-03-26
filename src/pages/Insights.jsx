@@ -22,30 +22,111 @@ const insightsSchema = {
 const articles = [
     {
         id: 1,
-        title: "Is Vrindavan a good place to invest in real estate?",
-        category: "Market Trends",
+        title: "Explore the Best Plots in Vrindavan",
+        category: "Location Spotlight",
         date: "October 2023",
-        excerpt: "Vrindavan is one of India's fastest-growing spiritual destinations. With increasing pilgrim footfall and limited developable land, Vrindavan real estate offers strong long-term appreciation potential.",
-        image: "/vrindavan-sunrise.png",
+        excerpt: "If you want to explore the best plots in Vrindavan, Brij Garden offers a thoughtful 15-acre sanctuary. Finding land with clear titles and Vastu alignment is key for generational investing.",
+        image: "/brij-garden.jpg",
         readTime: "4 min read"
     },
     {
         id: 2,
-        title: "Cost breakdown of a 100 gaj plot in Braj",
+        title: "Premium Plots for Sale in Vrindavan: A Guide",
         category: "Investment Guide",
         date: "September 2023",
-        excerpt: "A 100 gaj plot in Vrindavan offers an excellent entry point. Prices vary based on proximity to key temples, but they yield high appreciation due to limited land availability and growing demand.",
-        image: "/vrindavan-landscape.png",
+        excerpt: "Searching for premium plots for sale in Vrindavan? Radha Kunj Villas and our other bespoke communities provide unmatched luxury, spiritual proximity, and world-class landscaping.",
+        image: "https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         readTime: "5 min read"
     },
     {
         id: 3,
-        title: "Vastu tips for buying property in Govardhan",
-        category: "Vastu Shastra",
+        title: "100 Gaj Plot in Vrindavan: Price and Investment Benefits",
+        category: "Market Trends",
+        date: "September 2023",
+        excerpt: "A 100 Gaj plot in Vrindavan offers an excellent entry point. Prices vary based on proximity to key temples, but they yield high appreciation due to limited land availability.",
+        image: "/vrindavan-landscape.png",
+        readTime: "4 min read"
+    },
+    {
+        id: 4,
+        title: "Discover Your Dream Property in Vrindavan",
+        category: "Property Showcase",
         date: "August 2023",
-        excerpt: "Vastu-compliant real estate aligns the orientation and design of a property with traditional ancient Indian science. Learn the 5 cardinal rules before buying land in the Braj Mandal.",
-        image: "/vastu-diagram.png", // Assuming this exists or falls back cleanly
+        excerpt: "Discover your dream property in Vrindavan by exploring The Giridhar Valley Farms. Expansive estates designed for weekend retreats and sustainable organic living in the Braj region.",
+        image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        readTime: "6 min read"
+    },
+    {
+        id: 5,
+        title: "Real Estate in Vrindavan | Buy & Invest in Premium Plots",
+        category: "Market Trends",
+        date: "August 2023",
+        excerpt: "Understanding real estate in Vrindavan requires local expertise. Buy & invest in premium plots developed by builders who prioritize Vastu Shastra and transparent documentation.",
+        image: "/vrindavan-sunrise.png",
+        readTime: "5 min read"
+    },
+    {
+        id: 6,
+        title: "Connect with Swaroop Realty for Plots in Vrindavan",
+        category: "Buyer's Guide",
+        date: "July 2023",
+        excerpt: "Connect with us for plots in Vrindavan. With 35 years of disciplined development, our team guides you seamlessly through site visits, clear titles, and the final purchase.",
+        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         readTime: "3 min read"
+    },
+    {
+        id: 7,
+        title: "Trusted Real Estate Property Projects in Vrindavan",
+        category: "Company Ethics",
+        date: "July 2023",
+        excerpt: "Finding trusted real estate property projects in Vrindavan is crucial. Learn how our 35-year legacy ensures your investment is legally secure and spiritually aligned.",
+        image: "/vastu-diagram.png",
+        readTime: "4 min read"
+    },
+    {
+        id: 8,
+        title: "Vastu Tips for Buying Sacred Farmland in Govardhan",
+        category: "Vastu Shastra",
+        date: "June 2023",
+        excerpt: "Before purchasing farmland, understand Vastu alignments. Projects like Govardhan Greens integrate these ancient cardinal rules naturally into organic, resort-style living.",
+        image: "https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=2",
+        readTime: "5 min read"
+    },
+    {
+        id: 9,
+        title: "Rising Demand for Luxury Villas on VIP Road",
+        category: "Location Spotlight",
+        date: "June 2023",
+        excerpt: "VIP Road has become the premier destination for high-end living. Discover how Radha Kunj Villas combines this prime location with bespoke Indian architectural aesthetics.",
+        image: "https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        readTime: "4 min read"
+    },
+    {
+        id: 10,
+        title: "Resort-Style Plot Developments: The Future of Braj Living",
+        category: "Lifestyle",
+        date: "May 2023",
+        excerpt: "Traditional plots are evolving. Discover how Govardhan Greens pioneer resort-style community living with eco-friendly infrastructure and organic farming zones.",
+        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        readTime: "6 min read"
+    },
+    {
+        id: 11,
+        title: "Understanding Clear Titles in Braj Real Estate",
+        category: "Legal Guide",
+        date: "May 2023",
+        excerpt: "A guide to navigating property documentation in UP. Ensure your investments are secure by working with developers who guarantee 100% clear titles and transparent transactions.",
+        image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        readTime: "5 min read"
+    },
+    {
+        id: 12,
+        title: "Long-Term Asset Appreciation in Mathura-Vrindavan",
+        category: "Investment Guide",
+        date: "April 2023",
+        excerpt: "As infrastructure rapidly expands to support spiritual tourism, the Mathura-Vrindavan belt is seeing unprecedented ROI. Learn why early adoption is key.",
+        image: "/vrindavan-landscape.png",
+        readTime: "7 min read"
     }
 ];
 
