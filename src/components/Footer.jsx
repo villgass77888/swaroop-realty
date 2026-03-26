@@ -62,8 +62,8 @@ const Footer = () => {
             }}>
                 <p>&copy; {new Date().getFullYear()} Swaroop Realty Group. All rights reserved.</p>
                 <div style={{ display: 'flex', gap: '1.5rem' }}>
-                    <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Instagram</a>
-                    <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>LinkedIn</a>
+                    <a href="https://instagram.com/swarooprealty" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>Instagram</a>
+                    <a href="https://linkedin.com/company/swarooprealty" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>LinkedIn</a>
                 </div>
             </div>
         </footer>

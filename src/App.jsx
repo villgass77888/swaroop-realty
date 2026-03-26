@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
+import Insights from './pages/Insights';
 import Contact from './pages/Contact';
 import WhyVrindavan from './pages/WhyVrindavan';
 import NotFound from './pages/NotFound';
@@ -57,6 +58,7 @@ const AppInner = () => {
                 <Route path="/about" element={<About />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/projects/:slug" element={<ProjectDetail />} />
+                <Route path="/insights" element={<Insights />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/why-vrindavan" element={<WhyVrindavan />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />

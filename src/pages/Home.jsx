@@ -58,6 +58,10 @@ const homeSchema = [
             areaServed: 'IN',
             availableLanguage: ['English', 'Hindi'],
         },
+        sameAs: [
+            'https://instagram.com/swarooprealty',
+            'https://linkedin.com/company/swarooprealty'
+        ]
     },
     {
         '@context': 'https://schema.org',
