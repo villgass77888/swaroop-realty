@@ -247,9 +247,10 @@ const Portfolio = () => {
                         marginBottom: '4rem',
                         textAlign: 'center'
                     }}
+                    aria-label="Featured Developments - Premium Plots for Sale in Vrindavan"
                 >
-                    <span>Featured </span>
-                    <span style={{ fontStyle: 'italic', fontFamily: 'var(--font-heading)' }}>Developments</span>
+                    <span aria-hidden="true">Featured </span>
+                    <span style={{ fontStyle: 'italic', fontFamily: 'var(--font-heading)' }} aria-hidden="true">Developments</span>
                 </motion.h2>
 
                 <div

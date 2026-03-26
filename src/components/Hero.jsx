@@ -154,16 +154,16 @@ const Hero = () => {
                     textAlign: isMobile ? 'center' : 'left',
                     maxWidth: isMobile ? '100%' : 'none'
                 }}>
-                    <h1 style={{
+                    <h1 aria-label="Where Spirituality Meets Luxury Premium Plots in Vrindavan" style={{
                         color: 'var(--color-white)',
                         fontSize: isMobile ? 'clamp(2.6rem, 10vw, 3.5rem)' : 'clamp(3.5rem, 6vw, 6.5rem)',
                         lineHeight: 1.1, marginBottom: '1.5rem',
                         letterSpacing: '-0.02em',
                         textShadow: '0 10px 30px rgba(0,0,0,0.5)'
                     }}>
-                        <motion.span variants={itemVars} style={{ display: 'block' }}>Where</motion.span>
-                        <motion.span variants={itemVars} style={{ display: 'block', fontStyle: 'italic', fontFamily: 'var(--font-heading)' }}>Spirituality</motion.span>
-                        <motion.span variants={itemVars} style={{ display: 'block' }}>Meets Luxury.</motion.span>
+                        <motion.span variants={itemVars} style={{ display: 'block' }} aria-hidden="true">Where</motion.span>
+                        <motion.span variants={itemVars} style={{ display: 'block', fontStyle: 'italic', fontFamily: 'var(--font-heading)' }} aria-hidden="true">Spirituality</motion.span>
+                        <motion.span variants={itemVars} style={{ display: 'block' }} aria-hidden="true">Meets Luxury.</motion.span>
                     </h1>
 
                     <motion.div variants={itemVars} style={{
@@ -191,6 +191,11 @@ const Hero = () => {
                         >
                             Explore Projects
                         </a>
+
+                        {/* Invisible SEO links for Sitelinks */}
+                        <a href="#pricing" style={{ position: 'absolute', opacity: 0, pointerEvents: 'none', width: '1px', height: '1px' }} aria-hidden="true">Pricing</a>
+                        <a href="#location" style={{ position: 'absolute', opacity: 0, pointerEvents: 'none', width: '1px', height: '1px' }} aria-hidden="true">Location</a>
+                        <a href="#faq" style={{ position: 'absolute', opacity: 0, pointerEvents: 'none', width: '1px', height: '1px' }} aria-hidden="true">FAQ</a>
                     </motion.div>
                 </div>
             </motion.div>

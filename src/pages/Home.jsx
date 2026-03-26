@@ -103,6 +103,30 @@ const homeSchema = [
                     text: 'Yes. Swaroop Realty operates across the Braj Mandal, including Vrindavan, Govardhan, and surrounding areas near Mathura. Projects like Govardhan Greens offer resort-style plot developments in the sacred Govardhan precinct.',
                 },
             },
+            {
+                '@type': 'Question',
+                name: 'What is the price and investment benefits of a 100 Gaj plot in Vrindavan?',
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'A 100 Gaj plot in Vrindavan offers an excellent entry point for long-term real estate investment in Braj. Prices vary based on location and proximity to key temples, but they yield high appreciation due to limited land availability and growing demand.',
+                },
+            },
+            {
+                '@type': 'Question',
+                name: 'Where can I discover my dream property in Vrindavan?',
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'You can explore premium vastu-compliant properties, plots, and luxury villas right here with Swaroop Realty. Contact us to schedule a site visit and find your ideal investment or spiritual home.',
+                },
+            },
+            {
+                '@type': 'Question',
+                name: 'Why buy premium plots for sale in Vrindavan?',
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Buying premium plots in Vrindavan secures your investment in one of India\'s fastest-developing spiritual hubs. Premium plots developed by trusted builders like Swaroop Realty ensure clear titles, gated security, array of amenities, and adherence to Vastu principles.',
+                },
+            },
         ],
     },
 ];
@@ -110,10 +134,14 @@ const homeSchema = [
 const Home = () => {
     return (
         <>
+            <div id="pricing" style={{ position: "absolute", top: "-100px" }} aria-hidden="true"></div>
+            <div id="location" style={{ position: "absolute", top: "-100px" }} aria-hidden="true"></div>
+            <div id="faq" style={{ position: "absolute", top: "-100px" }} aria-hidden="true"></div>
+
             <SEOHead
                 title="Best Vastu Plots & Real Estate in Vrindavan, Braj"
                 description="Swaroop Realty — 35+ years of trusted real estate in Vrindavan. Premium vastu-compliant plots, luxury villas & sacred farmland in Braj. Clear titles, transparent documentation. Call +91 83839 28784."
-                keywords="real estate in Vrindavan, best real estate Vrindavan, vastu plots Vrindavan, land for sale Vrindavan, Vrindavan property, Braj land investment, plots near Mathura, sacred land investment, spiritual real estate Vrindavan, real estate agent Vrindavan"
+                keywords="real estate in Vrindavan, best real estate Vrindavan, vastu plots Vrindavan, land for sale Vrindavan, Vrindavan property, Braj land investment, plots near Mathura, sacred land investment, spiritual real estate Vrindavan, real estate agent Vrindavan, Plots in Vrindavan, Premium Plots for Sale in Vrindavan, 100 Gaj Plot in Vrindavan"
                 canonical="/"
                 schema={homeSchema}
             />

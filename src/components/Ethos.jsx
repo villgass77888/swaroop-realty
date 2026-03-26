@@ -75,14 +75,14 @@ const Ethos = () => {
                             <motion.h4 variants={fadeUp} style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '5px', color: 'inherit', opacity: 0.55, marginBottom: '1.2rem' }}>
                                 Founded on Discipline
                             </motion.h4>
-                            <motion.h2 variants={fadeUp} style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', lineHeight: 1.1 }}>
-                                Built on Discipline.<br />
-                                <span style={{ fontStyle: 'italic' }}>Rooted in Trust.</span>
+                            <motion.h2 variants={fadeUp} style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', lineHeight: 1.1 }} aria-label="Built on Discipline. Rooted in Trust. Premium Plots in Vrindavan">
+                                <span aria-hidden="true">Built on Discipline.</span><br aria-hidden="true" />
+                                <span style={{ fontStyle: 'italic' }} aria-hidden="true">Rooted in Trust.</span>
                             </motion.h2>
                         </div>
 
                         <motion.div variants={fadeUp} style={{ width: '100%', height: '55vw', maxHeight: '380px', overflow: 'hidden' }}>
-                            <img src="/vrindavan-sunrise.png" alt="Vrindavan temple skyline at sunrise"
+                            <img src="/vrindavan-sunrise.png" alt="Vrindavan temple skyline at sunrise - Premium Plots for Sale in Vrindavan"
                                 loading="lazy" decoding="async"
                                 style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', willChange: 'transform' }} />
                         </motion.div>
@@ -179,7 +179,7 @@ const Ethos = () => {
                             >
                                 <img
                                     src="/vrindavan-sunrise.png"
-                                    alt="Vrindavan temple skyline at sunrise"
+                                    alt="Vrindavan temple skyline at sunrise - Premium Plots for Sale in Vrindavan"
                                     loading="lazy"
                                     decoding="async"
                                     style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
