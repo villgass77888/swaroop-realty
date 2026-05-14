@@ -6,6 +6,14 @@ import SEOHead from '../components/SEOHead';
 const contactSchema = [
     {
         '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://swarooprealty.com' },
+            { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://swarooprealty.com/contact' }
+        ]
+    },
+    {
+        '@context': 'https://schema.org',
         '@type': 'ContactPage',
         url: 'https://swarooprealty.com/contact',
         name: 'Contact Swaroop Realty — Real Estate Enquiries in Vrindavan',

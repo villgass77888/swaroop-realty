@@ -42,6 +42,14 @@ const allProjects = [
 const projectsSchema = [
     {
         '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://swarooprealty.com' },
+            { '@type': 'ListItem', position: 2, name: 'Projects', item: 'https://swarooprealty.com/projects' }
+        ]
+    },
+    {
+        '@context': 'https://schema.org',
         '@type': 'CollectionPage',
         url: 'https://swarooprealty.com/projects',
         name: 'Real Estate Projects — Swaroop Realty Vrindavan',

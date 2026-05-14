@@ -49,26 +49,61 @@ const ProjectDetail = () => {
     if (!project) return <div style={{ paddingTop: '200px', textAlign: 'center' }}>Project Not Found</div>;
 
     const projectSlug = project.title.toLowerCase().replace(/\s+/g, '-');
-    const projectSchema = {
-        '@context': 'https://schema.org',
-        '@type': 'RealEstateListing',
-        name: project.title,
-        description: project.desc,
-        url: `https://www.swarooprealty.com/projects/${projectSlug}`,
-        image: project.image,
-        address: {
-            '@type': 'PostalAddress',
-            addressLocality: project.location,
-            addressRegion: 'Uttar Pradesh',
-            addressCountry: 'IN',
+    const projectSchema = [
+        {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://swarooprealty.com' },
+                { '@type': 'ListItem', position: 2, name: 'Projects', item: 'https://swarooprealty.com/projects' },
+                { '@type': 'ListItem', position: 3, name: project.title, item: `https://swarooprealty.com/projects/${projectSlug}` }
+            ]
         },
-        offeredBy: {
-            '@type': 'RealEstateAgent',
-            name: 'Swaroop Realty',
-            url: 'https://www.swarooprealty.com',
-            telephone: '+918383928784',
-        },
-    };
+        {
+            '@context': 'https://schema.org',
+            '@type': 'RealEstateListing',
+            name: project.title,
+            description: project.desc,
+            url: `https://swarooprealty.com/projects/${projectSlug}`,
+            image: project.image.startsWith('http') ? project.image : `https://swarooprealty.com${project.image}`,
+            datePosted: '2026-03-03',
+            address: {
+                '@type': 'PostalAddress',
+                addressLocality: project.location,
+                addressRegion: 'Uttar Pradesh',
+                postalCode: '281003',
+                addressCountry: 'IN',
+            },
+            geo: {
+                '@type': 'GeoCoordinates',
+                latitude: '27.5744',
+                longitude: '77.6987',
+            },
+            floorSize: project.measurements?.area ? {
+                '@type': 'QuantitativeValue',
+                value: project.measurements.area,
+                unitCode: 'ACR'
+            } : undefined,
+            amenityFeature: [
+                { '@type': 'LocationFeatureSpecification', name: 'Vastu Compliant', value: true },
+                { '@type': 'LocationFeatureSpecification', name: 'Clear Title', value: true },
+                { '@type': 'LocationFeatureSpecification', name: 'RERA Registered', value: true },
+                { '@type': 'LocationFeatureSpecification', name: 'Gated Community', value: true },
+            ],
+            offeredBy: {
+                '@type': 'RealEstateAgent',
+                name: 'Swaroop Realty',
+                url: 'https://swarooprealty.com',
+                telephone: '+918383928784',
+                address: {
+                    '@type': 'PostalAddress',
+                    addressLocality: 'Vrindavan',
+                    addressRegion: 'Uttar Pradesh',
+                    addressCountry: 'IN',
+                }
+            },
+        }
+    ];
 
     return (
         <div style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh', color: 'var(--color-primary)' }}>

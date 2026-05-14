@@ -1,0 +1,21 @@
+{
+  "name": "Swaroop Realty",
+  "short_name": "Swaroop Realty",
+  "description": "Premium vastu-compliant plots & villas in Vrindavan, Braj — 35+ years of trusted real estate expertise.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A1128",
+  "theme_color": "#0A1128",
+  "orientation": "portrait-primary",
+  "lang": "en-IN",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "real estate", "lifestyle"]
+}

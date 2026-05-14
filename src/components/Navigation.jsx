@@ -33,12 +33,11 @@ const Navigation = () => {
         { label: 'About Us', path: '/about' },
         { label: 'Projects', path: '/projects' },
         { label: 'Insights', path: '/insights' },
-        { label: 'Contact Us', path: '/contact' }
     ];
 
     const legalPages = ['/privacy-policy', '/terms-of-service', '/disclaimer'];
-    const isDarkHeroPage = location.pathname === '/' || location.pathname === '/about' || location.pathname === '/contact' || location.pathname === '/why-vrindavan' || location.pathname === '/insights' || legalPages.includes(location.pathname);
-    const isNotFound = !['/', '/about', '/projects', '/contact', '/insights', '/why-vrindavan', ...legalPages].some(p => location.pathname === p || location.pathname.startsWith('/projects/'));
+    const isDarkHeroPage = location.pathname === '/' || location.pathname === '/about' || location.pathname === '/contact' || location.pathname === '/why-vrindavan' || location.pathname === '/insights' || location.pathname.startsWith('/insights/') || legalPages.includes(location.pathname);
+    const isNotFound = !['/', '/about', '/projects', '/contact', '/insights', '/why-vrindavan', ...legalPages].some(p => location.pathname === p || location.pathname.startsWith('/projects/') || location.pathname.startsWith('/insights/'));
     const isDarkThemePage = isDarkHeroPage;
     const textColor = (isScrolled || (isDarkThemePage && !isScrolled)) ? 'var(--color-white)' : 'var(--color-primary)';
     const borderColor = textColor === 'var(--color-white)' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(10, 17, 40, 0.3)';
@@ -93,7 +92,8 @@ const Navigation = () => {
                 {!isMobile && (
                     <nav style={{ display: 'flex', gap: '40px', alignItems: 'center' }}>
                         {menuItems.map((item, index) => {
-                            const isActive = location.pathname === item.path;
+                            const isActive = location.pathname === item.path ||
+                                (item.path !== '/' && location.pathname.startsWith(item.path + '/'));
                             return (
                                 <Link
                                     key={item.label}

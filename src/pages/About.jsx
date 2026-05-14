@@ -8,6 +8,14 @@ import SEOHead from '../components/SEOHead';
 const aboutSchema = [
     {
         '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://swarooprealty.com' },
+            { '@type': 'ListItem', position: 2, name: 'About Us', item: 'https://swarooprealty.com/about' }
+        ]
+    },
+    {
+        '@context': 'https://schema.org',
         '@type': 'AboutPage',
         '@id': 'https://swarooprealty.com/about#webpage',
         name: 'About Swaroop Realty — Trusted Real Estate in Vrindavan Since 1990',

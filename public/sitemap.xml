@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- Core Pages -->
   <url>
     <loc>https://swarooprealty.com/</loc>
     <lastmod>2026-03-05</lastmod>
@@ -57,6 +58,156 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Insights Listing -->
+  <url>
+    <loc>https://swarooprealty.com/insights</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Insights Articles -->
+  <url>
+    <loc>https://swarooprealty.com/insights/best-plots-vrindavan-2026-definitive-guide</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/best-plots-in-vrindavan-buyers-guide</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/vrindavan-real-estate-market-2026-report</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/nri-guide-plots-vrindavan-fema-rera</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/jewar-airport-vrindavan-property-prices</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/chhatikara-road-vip-road-jait-micro-markets</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/yamuna-expressway-vrindavan-plots-investment</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/national-brand-vs-local-developer-vrindavan</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/trustworthy-developer-vrindavan-7-checks</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/premium-plots-for-sale-vrindavan</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/100-gaj-plot-vrindavan-price-roi</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/real-estate-vrindavan-buy-invest-premium-plots</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/how-to-buy-plots-vrindavan-process</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/mathura-vrindavan-asset-appreciation-10-year</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/trusted-real-estate-projects-vrindavan</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/vip-road-vrindavan-premium-address</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/govardhan-greens-resort-living-braj</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/vastu-shastra-farmland-govardhan</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/farmland-retreat-estates-vrindavan</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://swarooprealty.com/insights/clear-titles-up-real-estate-guide</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Contact -->
   <url>
     <loc>https://swarooprealty.com/contact</loc>
     <lastmod>2026-03-03</lastmod>
@@ -64,6 +215,7 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Legal -->
   <url>
     <loc>https://swarooprealty.com/privacy-policy</loc>
     <lastmod>2026-03-03</lastmod>

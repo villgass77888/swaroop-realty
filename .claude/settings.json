@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:brajbhoomirealty.com)",
+      "WebFetch(domain:godrejplotvrindavan.com)"
+    ]
+  }
+}
